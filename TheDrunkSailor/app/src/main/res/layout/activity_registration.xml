@@ -109,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Password"
+                android:text="confirm Password"
                 android:id="@+id/textView3"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
@@ -171,7 +171,7 @@
                 android:layout_column="26"
                 android:layout_weight="1"
                 android:layout_gravity="top"
-                android:layout_marginLeft="30dp">
+                android:layout_marginLeft="90dp">
 
                 <RadioButton
                     android:layout_width="wrap_content"
