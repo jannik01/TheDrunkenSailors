@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="at.tugraz.thedrunksailor.MainActivity"
-    android:background="#fcca4c">
+    android:background="#ffb702">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -36,13 +36,15 @@
         android:layout_alignParentStart="true">
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="New Button"
-            android:id="@+id/button"
+            android:text="Register"
+            android:id="@+id/register"
             android:layout_gravity="center|bottom"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:background="#d3ad7a"
+            android:shadowColor="#080808" />
     </FrameLayout>
 
     <TableLayout
@@ -51,7 +53,8 @@
         android:layout_gravity="center"
         android:layout_above="@+id/frameLayout"
         android:layout_below="@+id/frameLayout2"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="#fff3d4">
 
         <TableRow
             android:layout_width="match_parent"
@@ -71,8 +74,9 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText2"
-                android:layout_column="26" />
+                android:id="@+id/username"
+                android:layout_column="26"
+                android:layout_marginLeft="20dp" />
 
         </TableRow>
 
@@ -95,8 +99,9 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText"
-                android:layout_column="26" />
+                android:id="@+id/password"
+                android:layout_column="26"
+                android:layout_marginLeft="20dp" />
         </TableRow>
 
         <TableRow
@@ -117,8 +122,9 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText4"
-                android:layout_column="26" />
+                android:id="@+id/passwordr"
+                android:layout_column="26"
+                android:layout_marginLeft="20dp" />
         </TableRow>
 
         <TableRow
@@ -139,11 +145,10 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:text="Name"
-                android:ems="10"
-                android:id="@+id/editText3"
-                android:layout_column="26" />
+                android:id="@+id/name"
+                android:layout_column="26"
+                android:layout_marginLeft="20dp" />
+
         </TableRow>
 
         <TableRow
@@ -166,10 +171,10 @@
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_column="1"
+                android:layout_column="26"
                 android:layout_weight="1"
-                android:layout_gravity="center"
-                android:layout_span="26">
+                android:layout_gravity="top"
+                android:layout_marginLeft="30dp">
 
                 <RadioButton
                     android:layout_width="wrap_content"
@@ -213,8 +218,9 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:ems="10"
-                android:id="@+id/editText6"
-                android:layout_column="26" />
+                android:id="@+id/age"
+                android:layout_column="26"
+                android:layout_marginLeft="20dp" />
         </TableRow>
 
         <TableRow
@@ -235,8 +241,9 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText7"
-                android:layout_column="26" />
+                android:id="@+id/job"
+                android:layout_column="26"
+                android:layout_marginLeft="20dp" />
         </TableRow>
 
     </TableLayout>
