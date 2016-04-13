@@ -33,18 +33,15 @@
         android:id="@+id/frameLayout"
         android:layout_gravity="bottom|center"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:background="#ebd2b2">
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Register"
-            android:id="@+id/register"
-            android:layout_gravity="center|bottom"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:background="#d3ad7a"
-            android:shadowColor="#080808" />
+            android:id="@+id/register" />
+
     </FrameLayout>
 
     <TableLayout
