@@ -33,5 +33,6 @@ public class MenuButtonTest extends ActivityInstrumentationTestCase2<MainActivit
         mySolo.clickOnButton("Search place");
         mySolo.clickOnButton("Search Person");
         mySolo.clickOnButton("Add place");
+        mySolo.clickOnButton("Add place");
     }
 }

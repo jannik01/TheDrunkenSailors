@@ -48,6 +48,7 @@
             android:layout_weight=".25"
             android:layout_height="wrap_content"
             android:text="Add place"
-            android:id="@+id/add_place_menu_button" />
+            android:id="@+id/add_place_menu_button"
+            android:clickable="true" />
     </LinearLayout>
 </RelativeLayout>
