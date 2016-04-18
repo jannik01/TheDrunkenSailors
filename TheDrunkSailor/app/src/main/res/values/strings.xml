@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TheDrunkSailor</string>
+    <string name="logout">Logout</string>
 </resources>
