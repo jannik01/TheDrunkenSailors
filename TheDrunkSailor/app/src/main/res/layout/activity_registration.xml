@@ -46,8 +46,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Register "
-            android:id="@+id/button"
-            android:layout_gravity="right" />
+            android:id="@+id/btnRegister"
+            android:layout_gravity="right"
+            android:onClick="doRegistration"
+            android:nestedScrollingEnabled="false" />
 
     </FrameLayout>
 
@@ -78,7 +80,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/username"
+                android:id="@+id/txtUsername"
                 android:layout_column="26"
                 android:layout_marginLeft="20dp" />
 
@@ -94,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Password*"
-                android:id="@+id/textView2"
+                android:id="@+id/txtPassword"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:textColor="#000000"
@@ -126,7 +128,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/passwordr"
+                android:id="@+id/txtPasswordRe"
                 android:layout_column="26"
                 android:layout_marginLeft="20dp" />
         </TableRow>
@@ -149,7 +151,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/name"
+                android:id="@+id/txtName"
                 android:layout_column="26"
                 android:layout_marginLeft="20dp" />
 
@@ -183,7 +185,7 @@
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/radioButton2"
+                    android:id="@+id/radioFemale"
                     android:checked="true"
                     android:layout_span="25"
                     android:text="female"
@@ -193,7 +195,7 @@
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/radioButton"
+                    android:id="@+id/radioMale"
                     android:layout_column="26"
                     android:checked="false"
                     android:text="male"
@@ -222,7 +224,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:ems="10"
-                android:id="@+id/age"
+                android:id="@+id/txtAge"
                 android:layout_column="26"
                 android:layout_marginLeft="20dp" />
         </TableRow>
@@ -245,7 +247,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/job"
+                android:id="@+id/txtJob"
                 android:layout_column="26"
                 android:layout_marginLeft="20dp" />
         </TableRow>
