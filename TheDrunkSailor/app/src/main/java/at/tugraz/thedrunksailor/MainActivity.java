@@ -10,6 +10,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        DatabaseInterface database_interface_object = new DatabaseInterface();
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -17,4 +19,6 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
+
+
 }
