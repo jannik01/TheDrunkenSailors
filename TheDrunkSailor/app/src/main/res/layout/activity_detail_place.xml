@@ -239,7 +239,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="5/5"
+                    android:text="3/5"
                     android:id="@+id/lbUse"
                     android:layout_column="41" />
             </TableRow>
@@ -285,8 +285,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="5/5"
-                    android:id="@+id/lblRank"
+                    android:text="3/5"
+                    android:id="@+id/lbRank"
                     android:layout_column="41" />
 
             </TableRow>
