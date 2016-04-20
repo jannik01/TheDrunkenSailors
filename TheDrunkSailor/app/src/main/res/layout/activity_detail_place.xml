@@ -163,6 +163,7 @@
                     android:id="@+id/textView22"
                     android:layout_column="26"
                     android:textColor="#000000" />
+
             </TableRow>
 
             <TableRow
@@ -218,6 +219,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:baselineAligned="false">
+
                 <TextView
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Your Opinion: "
@@ -227,14 +235,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <SeekBar
-                    android:layout_width="0dp"
+                <RatingBar
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/rngUse"
-                    android:layout_column="29"
-                    android:layout_weight="1"
-                    android:max="5"
-                    android:indeterminate="false" />
+                    android:id="@+id/ratingBar"
+                    android:layout_column="26"
+                    android:numStars="5"
+                    android:rating="3"
+                    android:scaleX="0.5"
+                    android:scaleY="0.5"
+                    android:transformPivotX="0dp"
+                    android:transformPivotY="0dp"
+                    android:stepSize="1"
+                    android:layout_weight="0.0"
+                    android:layout_marginBottom="-30dp"
+                    android:layout_gravity="top"
+                    android:layout_marginRight="-30dp" />
+
             </TableRow>
 
             <TableRow
@@ -265,14 +282,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <SeekBar
-                    android:layout_width="0dp"
+                <RatingBar
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/rngRanking"
-                    android:layout_column="28"
-                    android:layout_weight="1"
-                    android:max="5"
-                    android:indeterminate="false" />
+                    android:id="@+id/ratingBar2"
+                    android:layout_column="27"
+                    android:numStars="5"
+                    android:rating="3"
+                    android:scaleX="0.5"
+                    android:scaleY="0.5"
+                    android:transformPivotX="0dp"
+                    android:transformPivotY="0dp"
+                    android:stepSize="1"
+                    android:layout_weight="0.0"
+                    android:layout_marginBottom="-30dp"
+                    android:layout_gravity="top"
+                    android:layout_marginRight="-30dp" />
+
             </TableRow>
 
             <TableRow
