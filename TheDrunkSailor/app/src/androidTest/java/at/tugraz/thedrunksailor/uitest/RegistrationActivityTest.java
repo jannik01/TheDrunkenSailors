@@ -1,10 +1,12 @@
-package at.tugraz.thedrunksailor;
+package at.tugraz.thedrunksailor.uitest;
 
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.robotium.solo.Solo;
 
 import junit.framework.TestCase;
+
+import at.tugraz.thedrunksailor.RegistrationActivity;
 
 /**
  * Created by Clemens on 13.04.2016.

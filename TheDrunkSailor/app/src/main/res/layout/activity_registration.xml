@@ -81,6 +81,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtUsername"
+                android:maxLength="18"
+                android:maxLines="1"
                 android:layout_column="26"
                 android:layout_marginLeft="20dp" />
 
@@ -108,6 +110,8 @@
                 android:id="@+id/txtPassword"
                 android:layout_column="26"
                 android:layout_marginLeft="20dp"
+                android:maxLength="18"
+                android:maxLines="1"
                 android:inputType="textPassword"  />
         </TableRow>
 
@@ -132,6 +136,8 @@
                 android:inputType="textPassword"
                 android:id="@+id/txtPasswordRe"
                 android:layout_column="26"
+                android:maxLength="18"
+                android:maxLines="1"
                 android:layout_marginLeft="20dp" />
         </TableRow>
 
@@ -155,6 +161,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtName"
                 android:layout_column="26"
+                android:maxLength="18"
+                android:maxLines="1"
                 android:layout_marginLeft="20dp" />
 
         </TableRow>
@@ -226,6 +234,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:ems="10"
+                android:maxLength="3"
                 android:id="@+id/txtAge"
                 android:layout_column="26"
                 android:layout_marginLeft="20dp" />
@@ -251,6 +260,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtJob"
                 android:layout_column="26"
+                android:maxLength="18"
+                android:maxLines="1"
                 android:layout_marginLeft="20dp" />
         </TableRow>
 
@@ -270,13 +281,5 @@
         </TableRow>
 
     </TableLayout>
-
-    <MediaController
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/mediaController"
-        android:layout_above="@+id/frameLayout"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="101dp" />
 
 </RelativeLayout>
