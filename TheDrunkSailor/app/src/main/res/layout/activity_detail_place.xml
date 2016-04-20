@@ -78,9 +78,9 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="Adress:"
-                        android:id="@+id/textView25"
+                        android:id="@+id/lbAddress"
                         android:layout_marginTop="10dp"
-                        android:layout_marginLeft="50dp"
+                        android:layout_marginLeft="10dp"
                         android:textColor="#000000"
                         android:textSize="16dp"
                         android:layout_column="26" />
@@ -96,9 +96,9 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="PLZ:"
-                        android:id="@+id/textView26"
+                        android:id="@+id/lbPlz"
                         android:layout_marginTop="10dp"
-                        android:layout_marginLeft="50dp"
+                        android:layout_marginLeft="10dp"
                         android:textColor="#000000"
                         android:textSize="16dp"
                         android:layout_column="26" />
@@ -114,9 +114,9 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="Place:"
-                        android:id="@+id/textView27"
+                        android:id="@+id/lbPlace"
                         android:layout_marginTop="10dp"
-                        android:layout_marginLeft="50dp"
+                        android:layout_marginLeft="10dp"
                         android:textColor="#000000"
                         android:textSize="16dp"
                         android:layout_column="26" />
@@ -131,9 +131,9 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="Country:"
-                        android:id="@+id/textView28"
+                        android:id="@+id/lbCountry"
                         android:layout_marginTop="10dp"
-                        android:layout_marginLeft="50dp"
+                        android:layout_marginLeft="10dp"
                         android:textColor="#000000"
                         android:textSize="16dp"
                         android:layout_column="26" />
@@ -196,7 +196,7 @@
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="Medium TextMedium TextMedium TextMedium TextMedium TextMedium TextMedium TextMedium TextMedium TextMedium TextMedium TextMedium Text"
-                            android:id="@+id/textView21" />
+                            android:id="@+id/lbDescription" />
                     </ScrollView>
                 </TableRow>
             </FrameLayout>
@@ -229,9 +229,11 @@
                 <SeekBar
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/seekBar"
+                    android:id="@+id/rngUse"
                     android:layout_column="29"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:max="5"
+                    android:indeterminate="false" />
             </TableRow>
 
             <TableRow
@@ -265,9 +267,11 @@
                 <SeekBar
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/seekBar2"
+                    android:id="@+id/rngRanking"
                     android:layout_column="28"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:max="5"
+                    android:indeterminate="false" />
             </TableRow>
 
             <TableRow
@@ -303,7 +307,7 @@
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="Medium TextMedium TextMedium TextMedium TextMedium TextMedium TextMedium TextMedium TextMedium TextMedium TextMedium TextMedium Text"
-                            android:id="@+id/textView17" />
+                            android:id="@+id/lbFriends" />
                     </ScrollView>
                 </TableRow>
             </FrameLayout>
