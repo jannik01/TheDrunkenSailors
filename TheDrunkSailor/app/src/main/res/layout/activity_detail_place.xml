@@ -234,6 +234,14 @@
                     android:layout_weight="1"
                     android:max="5"
                     android:indeterminate="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="5/5"
+                    android:id="@+id/lbUse"
+                    android:layout_column="41" />
             </TableRow>
 
             <TableRow
@@ -268,10 +276,19 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/rngRanking"
-                    android:layout_column="28"
+                    android:layout_column="29"
                     android:layout_weight="1"
                     android:max="5"
                     android:indeterminate="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="5/5"
+                    android:id="@+id/lblRank"
+                    android:layout_column="41" />
+
             </TableRow>
 
             <TableRow
@@ -314,4 +331,10 @@
 
         </TableLayout>
     </RelativeLayout>
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar"
+        android:layout_gravity="right" />
 </LinearLayout>
