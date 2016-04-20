@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Password*"
-                android:id="@+id/txtPassword"
+                android:id="@+id/lblPassword"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:textColor="#000000"
@@ -105,9 +105,10 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/password"
+                android:id="@+id/txtPassword"
                 android:layout_column="26"
-                android:layout_marginLeft="20dp" />
+                android:layout_marginLeft="20dp"
+                android:inputType="textPassword"  />
         </TableRow>
 
         <TableRow
@@ -128,6 +129,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:inputType="textPassword"
                 android:id="@+id/txtPasswordRe"
                 android:layout_column="26"
                 android:layout_marginLeft="20dp" />
