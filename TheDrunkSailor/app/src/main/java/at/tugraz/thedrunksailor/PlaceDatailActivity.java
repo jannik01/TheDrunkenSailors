@@ -3,11 +3,11 @@ package at.tugraz.thedrunksailor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class RegistrationActivity extends AppCompatActivity {
+public class PlaceDatailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_place);
+        setContentView(R.layout.activity_place_datail);
     }
 }
