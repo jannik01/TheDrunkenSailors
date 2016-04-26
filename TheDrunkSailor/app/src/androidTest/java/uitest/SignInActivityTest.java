@@ -32,14 +32,24 @@ public class SignInActivityTest extends ActivityInstrumentationTestCase2<SignInA
 
     public void testButtons()
     {
-        //mySolo.searchButton("Sign in");
+        mySolo.searchButton("New? Register!");
+        mySolo.clickOnButton(1);
+        mySolo.searchButton("Sign in");
+        //mySolo.clickOnButton(0);
         //mySolo.clickOnButton("Sign in");
+    }
+
+    public void testInput()
+    {
+
         mySolo.clickOnText("UserName");
         mySolo.enterText(1, "asdf");
-        // mySolo.clickOnText("Password");
-        mySolo.enterText(0, "fghhj");
+
+        mySolo.enterText(0, "fghhjqwre");
         mySolo.clickOnText("asdf");
         mySolo.enterText(1, "asdf");
+        mySolo.clickOnText("fghhjqwre");
+        mySolo.enterText(0, "qwe");
 
         boolean actual = mySolo.searchText("asdf");
 

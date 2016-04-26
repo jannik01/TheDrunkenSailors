@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
-
 public class SignInActivity extends AppCompatActivity
 {
     EditText mEdit;
@@ -38,26 +37,48 @@ public class SignInActivity extends AppCompatActivity
 
         if (UserName.length() > 25 || UserName.length() < 5)
         {
-            asdf.setMessage("Bitte nur einen Usernamen zwischen 5 & 25 Zeichen eingeben!");
+            asdf.setMessage("Please use a username between 5 & 25 characters!");
             asdf.setTitle("Fail");
             asdf.show();
         }
 
         if (Password.length() > 25 || Password.length() < 8)
         {
-            asdf.setMessage("Bitte nur ein Passwort zwischen 8 & 25 Zeichen eingeben!");
+            asdf.setMessage("Please use a password between 8 & 25 characters!");
             asdf.setTitle("Fail");
             asdf.show();
         }
 
 
+        int count_underscore = 0;
         UserName = UserName.toUpperCase();
         int ascii = -1;
         for (int i = 0; i < UserName.length(); i++) {
             ascii = UserName.charAt(i);
-            if (((ascii > 65 && ascii < 90) || (ascii > 47 && ascii < 58) || ascii == 95) == false)
+
+            if(ascii == 95)
             {
-              asdf.setMessage("Bitte nur Buchstaben, Zahlen und _ verwenden!");
+                if (count_underscore > 0)
+                {
+                    asdf.setMessage("Please just use one underscore!");
+                    asdf.setTitle("Fail");
+                    asdf.show();
+                }
+                if (i == 0 || i == UserName.length()-1)
+                {
+                    asdf.setMessage("Please use underscore not at the beginning or end!");
+                    asdf.setTitle("Fail");
+                    asdf.show();
+                }
+
+                count_underscore++;
+
+
+
+            }
+            if (((ascii > 64 && ascii < 91) || (ascii > 47 && ascii < 58) || ascii == 95) == false)
+            {
+              asdf.setMessage("Please just use letters, numbers and underscore!");
               asdf.setTitle("Fail");
               asdf.show();
             }
