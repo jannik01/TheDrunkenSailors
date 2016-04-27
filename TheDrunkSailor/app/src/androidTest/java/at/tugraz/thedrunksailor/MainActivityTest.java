@@ -92,17 +92,69 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     }
     @Test
     public void testCreatePlace(){
-        boolean success = DatabaseInterface.createPlace("mcdonalds","big macs",1,"Test 123","North Korea","-");
+        boolean success = DatabaseInterface.createPlace("pizza hut","big pizza",3,"asdfga 123","South Korea","71824");
         assertEquals("create Place failed",true, success);
 
     }
+
+    @Test
     public void testSearchPlace() throws JSONException {
+
+
         JSONArray success = DatabaseInterface.searchPlace("",1,"","","",0.0,0.0,0.0,0.0);
+
+
+        System.out.println(success.length());
+        for (int i=0; i < success.length();i++){
+            assertEquals("test of sector id","1", success.getJSONObject(i).getString("sector_ID"));
+
+        }
+        JSONArray success2 = DatabaseInterface.searchPlace("mcdonalds",1,"","","",0.0,0.0,0.0,0.0);
+
+
+        System.out.println(success2.length());
+        for (int i=0; i < success2.length();i++){
+            assertEquals("name search","mcdonalds", success2.getJSONObject(i).getString("name"));
+
+        }
+        success2 = DatabaseInterface.searchPlace("dsfhjkb",1,"","","",0.0,0.0,0.0,0.0);
+
+
+
+            assertNull(success2);
+
+
+    }
+    @Test
+    public void testGetSectors(){
+        JSONArray success = DatabaseInterface.getSectors();
+        System.out.println(success);
+        assertEquals("create Place failed",true, success);
+
+    }
+    @Test
+    public void testStartPage() throws JSONException {
+
+
+        JSONArray success = DatabaseInterface.startPagePlaces(17);
+
+
+        System.out.println(success);
         for (int i = 0; i < success.length(); i++) {
+            assertEquals("", "Papa johns", success.getJSONObject(i).getString("name"));
 
-            String  item = success.getString(i);
+        }
+        System.out.println(success);
+        for (int i = 0; i < success.length(); i++) {
+            assertEquals( 4, success.getJSONObject(i).getDouble("current_use"),0);
 
-        assertEquals("","big macs", success.(""));
+        }
+        System.out.println(success);
+        for (int i = 0; i < success.length(); i++) {
+            assertEquals( 5, success.getJSONObject(i).getDouble("rating"),0);
+
+        }
+
 
     }
 }
