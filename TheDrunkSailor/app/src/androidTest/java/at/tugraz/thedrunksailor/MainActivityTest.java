@@ -1,5 +1,6 @@
 package at.tugraz.thedrunksailor;
 
+import android.provider.Settings;
 import android.test.ActivityInstrumentationTestCase2;
 
 import org.junit.After;
@@ -86,5 +87,15 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         boolean success = DatabaseInterface.login("god","ThereBeLight");
         assertEquals(false,success);
     }
+    @Test
+    public void testCreatePlace(){
+        boolean success = DatabaseInterface.createPlace("mcdonalds","big macs",1,"Test 123","North Korea","-");
+        assertEquals("create Place failed",true, success);
 
+    }
+    public void testSearchPlace(){
+        String success = DatabaseInterface.searchPlace("",1,"","","",0.0,0.0,0.0,0.0);
+        assertEquals(success,true, success);
+
+    }
 }

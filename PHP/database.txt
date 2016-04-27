@@ -1,0 +1,17 @@
+Places
+PID	Name	Description	Sector_ID	Adresse	Country	PLZ
+
+User
+UID 	Username	Salt	Password_Hash	Name 	Sex	Age	Job
+
+Rating
+PID	UID	Rating	timestamp
+
+current_use
+PID	UID 	current_use	timestamp
+
+Follower
+UID_Follower UID_Leader 
+
+Sector
+Sector_ID	Name

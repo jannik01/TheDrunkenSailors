@@ -1,0 +1,12 @@
+List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("user_name", userName));
+            params.add(new BasicNameValuePair("password_salt", passwordSalt));
+            params.add(new BasicNameValuePair("password_hash", passwordHash));
+            params.add(new BasicNameValuePair("name", name));
+            params.add(new BasicNameValuePair("sex", sex));
+            params.add(new BasicNameValuePair("age", age));
+            params.add(new BasicNameValuePair("job", job));
+            JSONObject json = jsonParser.makeHttpRequest(url_create_product,
+                    "POST", params);
+            Log.d("Create Response", json.toString());
+            int success = json.getInt(TAG_SUCCESS);
