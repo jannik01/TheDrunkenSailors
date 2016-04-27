@@ -59,14 +59,11 @@ xmlns:tools="http://schemas.android.com/tools"
         android:layout_below="@+id/menu_button_layout"
         android:layout_above="@+id/impressum_textfield">
 
-        <TableLayout
-            android:id="@+id/list_places_table"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            xmlns:android="http://schemas.android.com/apk/res/android">
-        </TableLayout>
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+        </ListView>
         <!--
         <include layout="@layout/list_places_main"/>
         -->
