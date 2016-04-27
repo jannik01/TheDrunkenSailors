@@ -60,6 +60,7 @@ xmlns:tools="http://schemas.android.com/tools"
         android:layout_above="@+id/impressum_textfield">
 
 
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_marginTop="5dp"
@@ -67,31 +68,30 @@ xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <android.support.v4.widget.Space
-                android:layout_width="48dp"
-                android:visibility="invisible"
-                android:layout_height="wrap_content" />
 
             <TextView
-                android:text="Name"
+                android:text="Lastly visited:"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="20dp"
                 />
 
             <TextView
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Cur. Use"
+                android:text="cur Use"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
                 android:layout_gravity="center" />
 
             <TextView
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_weight="1"
+                android:layout_marginLeft="15dp"
                 android:text="Avg Ratig"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
