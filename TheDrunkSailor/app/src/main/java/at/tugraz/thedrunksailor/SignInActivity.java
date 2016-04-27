@@ -23,30 +23,30 @@ public class SignInActivity extends AppCompatActivity
 
     public void signInLogic(View view)
     {
-        AlertDialog.Builder asdf = new AlertDialog.Builder(SignInActivity.this);
+        AlertDialog.Builder alert = new AlertDialog.Builder(SignInActivity.this);
 
         mEdit = (EditText)findViewById(R.id.text_user_name);
         mPassword = (EditText)findViewById(R.id.text_password);
 
 
-                asdf.setMessage("-----");
-                asdf.setIcon(android.R.drawable.ic_dialog_alert);
+                alert.setMessage("-----");
+                alert.setIcon(android.R.drawable.ic_dialog_alert);
 
         String UserName = mEdit.getText().toString();
         String Password = mPassword.getText().toString();
 
         if (UserName.length() > 25 || UserName.length() < 5)
         {
-            asdf.setMessage("Please use a username between 5 & 25 characters!");
-            asdf.setTitle("Fail");
-            asdf.show();
+            alert.setMessage("Please use a username between 5 & 25 characters!");
+            alert.setTitle("Fail");
+            alert.show();
         }
 
         if (Password.length() > 25 || Password.length() < 8)
         {
-            asdf.setMessage("Please use a password between 8 & 25 characters!");
-            asdf.setTitle("Fail");
-            asdf.show();
+            alert.setMessage("Please use a password between 8 & 25 characters!");
+            alert.setTitle("Fail");
+            alert.show();
         }
 
 
@@ -60,15 +60,15 @@ public class SignInActivity extends AppCompatActivity
             {
                 if (count_underscore > 0)
                 {
-                    asdf.setMessage("Please just use one underscore!");
-                    asdf.setTitle("Fail");
-                    asdf.show();
+                    alert.setMessage("Please just use one underscore!");
+                    alert.setTitle("Fail");
+                    alert.show();
                 }
                 if (i == 0 || i == UserName.length()-1)
                 {
-                    asdf.setMessage("Please use underscore not at the beginning or end!");
-                    asdf.setTitle("Fail");
-                    asdf.show();
+                    alert.setMessage("Please use underscore not at the beginning or end!");
+                    alert.setTitle("Fail");
+                    alert.show();
                 }
 
                 count_underscore++;
@@ -78,9 +78,9 @@ public class SignInActivity extends AppCompatActivity
             }
             if (((ascii > 64 && ascii < 91) || (ascii > 47 && ascii < 58) || ascii == 95) == false)
             {
-              asdf.setMessage("Please just use letters, numbers and underscore!");
-              asdf.setTitle("Fail");
-              asdf.show();
+              alert.setMessage("Please just use letters, numbers and underscore!");
+              alert.setTitle("Fail");
+              alert.show();
             }
         }
 
