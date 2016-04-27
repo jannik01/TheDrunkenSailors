@@ -1,5 +1,7 @@
 package at.tugraz.thedrunksailor;
 
+import android.util.Log;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
@@ -25,12 +27,20 @@ public class DatabaseInterface {
         params.add(new BasicNameValuePair("user_name",user_name));
         params.add(new BasicNameValuePair("password",password));
         JSONObject json=jsonParser.makeHttpRequest(url_login_user,"POST",params);
-        String success=json.toString();
+        Integer success = 0;
+        try {
+            success = json.getInt("success");
+        }
+        catch(Exception e){
+            Log.e("[ERROR]", "can't get string from json.");
+        }
 
-        if(success=="1"){
-            return true;
+        if(success == 1){
+            Log.e("[DEBUG]", "DB-Interface success = " + success.toString());
+            return(true);
 
         }
+        Log.e("[DEBUG]", "DB-Interface success = " + success.toString() + " - considered as false");
         return(false);
     }
 
@@ -48,7 +58,6 @@ public class DatabaseInterface {
         JSONObject json = jsonParser.makeHttpRequest(url_create_user,
                 "POST", params);
 
-            //Log.d("Create Response", json.toString());
         int success = 0;
         try {
             success = json.getInt(TAG_SUCCESS);
@@ -70,14 +79,20 @@ public class DatabaseInterface {
         params.add(new BasicNameValuePair("user_name",user_name));
         params.add(new BasicNameValuePair("password",password));
         JSONObject json=jsonParser.makeHttpRequest(url_delete_user,"POST",params);
-        String success=json.toString();
-        if(success=="1"){
-            return true;
+
+        Integer success = 0;
+        try {
+            success = json.getInt("success");
+        }
+        catch(Exception e){
+            Log.e("[ERROR]", "can't get string from json.");
+        }
+
+        if(success == 1){
+            Log.e("[DEBUG]", "DB-Interface success = " + success.toString());
+            return(true);
 
         }
-        else{
-            return false;
-        }
-
+        return(false);
     }
 }

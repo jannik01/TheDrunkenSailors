@@ -19,7 +19,6 @@ if (isset($_POST["user_name"])&&isset($_POST["password"]) ) {
     // mysql get data from db
 	$logged_in = false;
     $sql = "Select user_name,password_hash FROM ".DB_DATABASE.".Users WHERE user_name=\"".$sane_user_name."\"";
-    //$sql = "SELECT user_name,password_hash FROM ".DB_DATABASE.".Users WHERE user_name=\"".$user_name."\"";
 	
 	$sql_result = mysqli_query($db,$sql);
 	
@@ -52,9 +51,17 @@ if (isset($_POST["user_name"])&&isset($_POST["password"]) ) {
  ///////////////////////////////
     // check if row inserted or not
     if ($logged_in) {
-        // successfully inserted into database
-        $response["success"] = "1";
-        $response["message"] = "Username and password valid.";
+        
+		$sql = "DELETE FROM ".DB_DATABASE.".Users WHERE user_name=\"".$sane_user_name."\"";
+	
+		$sql_result = mysqli_query($db,$sql);
+		if($sql_result){
+			$response["success"] = "1";
+			$response["message"] = "User deleted.";
+		} else {
+			$response["success"] = "0";
+			$response["message"] = "Database error.";
+		}
  
         // echoing JSON response
         echo json_encode($response);

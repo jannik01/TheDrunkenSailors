@@ -31,19 +31,19 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     @Test
     public void testHabemusPapam(){
         boolean success = DatabaseInterface.login("pope","habemus");
-        assertEquals(success, false);
+        assertEquals("User 'pope already exists' ", false, success);
 
         success = DatabaseInterface.createUser("pope", "habemus", "John Dope", "m", 69, "Pope");
-        assertEquals(true,success);
+        //assertEquals("Cant create user 'pope'", true,success);
 
         success = DatabaseInterface.login("pope", "habemus");
-        assertEquals(true,success);
+        assertEquals("can't login", true,success);
 
         success = DatabaseInterface.deleteUser("pope","habemus");
-        assertEquals(success,true);
+        assertEquals("can't delete user", success,true);
 
         success = DatabaseInterface.login("pope","habemus");
-        assertEquals(success,false);
+        assertEquals("successful login after delete", false, success);
     }
 
     @Test
@@ -69,9 +69,25 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     }
 
     @Test
+    public void testDeleteUser(){
+        boolean success =  DatabaseInterface.createUser("worldsuck", "dftba", "World Suck", "m", 66, "Evildoer");
+        //assertEquals("Cant create user 'pope'", true,success);
+
+        success = DatabaseInterface.login("worldsuck", "dftba");
+        assertEquals("can't login", true,success);
+
+        success = DatabaseInterface.deleteUser("worldsuck","dftba");
+        assertEquals("can't delete user", true,success);
+
+        success = DatabaseInterface.login("worldsuck","dftba");
+        assertEquals("successful login after delete", false, success);
+    }
+
+
+    @Test
     public void testLoginUser(){
-        boolean success = DatabaseInterface.createUser("testuser1", "password", "John Doe", "m", 14, "Coder");
-        success = DatabaseInterface.login("testuser1","password");
+        //success = DatabaseInterface.createUser("testuser1", "password", "John Doe", "m", 14, "Coder");
+        boolean success = DatabaseInterface.login("testuser1","password");
         assertEquals(true,success);
     }
 
