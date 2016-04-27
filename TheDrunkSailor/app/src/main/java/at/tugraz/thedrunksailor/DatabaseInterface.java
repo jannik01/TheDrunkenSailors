@@ -4,6 +4,7 @@ import android.util.Log;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
 import java.util.ArrayList;
@@ -116,12 +117,12 @@ public class DatabaseInterface {
     }
 
 
-    public static String searchPlace(String place_name, Integer sector_id, String address, String country, String zipcode, Double min_use, Double max_use, Double min_rating, Double max_rating) {
+    public static JSONArray searchPlace(String place_name, Integer sector_ID, String address, String country, String zipcode, Double min_use, Double max_use, Double min_rating, Double max_rating) {
         JSONParser jsonParser = new JSONParser();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         if (min_use==0)
         params.add(new BasicNameValuePair("place_name", place_name));
-        params.add(new BasicNameValuePair("sector_id", sector_id.toString()));
+        params.add(new BasicNameValuePair("sector_ID", sector_ID.toString()));
         params.add(new BasicNameValuePair("address", address));
         params.add(new BasicNameValuePair("country", country));
         params.add(new BasicNameValuePair("zipcode", zipcode));
@@ -145,8 +146,25 @@ public class DatabaseInterface {
 
         try {
             int success = json.getInt(TAG_SUCCESS);
-            String places = json.getString("place_string");
-            if (success == 1) {
+            //JSONObject places_object=json.getJSONObject("place_string");
+            JSONArray places =json.getJSONArray("place_string");
+            /*for (int i = 0; i < places.length(); ++i) {
+                places_object = places.getJSONObject(i);
+                String place_name = places_object.getString("place_name");
+                String loc = places.getString("loc");
+
+            //JSONObject places = json.("place_string");
+
+            /*for (int i = 0; i < places.length(); i++) {
+
+                JSONObject item = places.getJSONObject(i);
+
+                String name = item.getString("name");
+                boolean isFruit = item.getBoolean("isFruit");
+
+            }*/
+
+        if (success == 1) {
                 return places;
 
             } else {
@@ -154,9 +172,9 @@ public class DatabaseInterface {
             }
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+        return null;
 
         }
-        return "";
-    }
 
-}
+    }

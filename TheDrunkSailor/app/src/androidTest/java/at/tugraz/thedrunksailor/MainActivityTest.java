@@ -3,6 +3,9 @@ package at.tugraz.thedrunksailor;
 import android.provider.Settings;
 import android.test.ActivityInstrumentationTestCase2;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -93,9 +96,13 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         assertEquals("create Place failed",true, success);
 
     }
-    public void testSearchPlace(){
-        String success = DatabaseInterface.searchPlace("",1,"","","",0.0,0.0,0.0,0.0);
-        assertEquals(success,true, success);
+    public void testSearchPlace() throws JSONException {
+        JSONArray success = DatabaseInterface.searchPlace("",1,"","","",0.0,0.0,0.0,0.0);
+        for (int i = 0; i < success.length(); i++) {
+
+            String  item = success.getString(i);
+
+        assertEquals("","big macs", success.(""));
 
     }
 }
