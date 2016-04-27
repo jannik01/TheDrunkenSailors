@@ -31,7 +31,9 @@ class NewProductActivity extends Activity {
     EditText inputDesc;
 
     // url to create new product
-    private static String url_create_product = "http://drunkensailors.robert-thomann.at/login_user.php";
+    private static String url_create_user = "http://drunkensailors.robert-thomann.at/create_user.php";
+    private static String url_login_user = "http://drunkensailors.robert-thomann.at/login_user.php";
+    private static String url_create_place = "http://drunkensailors.robert-thomann.at/create_place.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
@@ -75,13 +77,18 @@ class NewProductActivity extends Activity {
          * Creating product
          * */
         protected String doInBackground(String... args) {
-            String userName = "pope";//inputUserName.getText().toString();
+            /*String userName = "pope";//inputUserName.getText().toString();
             String password = "$2y$10$TCaTynz76mfHAzGzfsmwhuoS6n.EiFZDr3dqJBhXtmKP2gqIa1nWu";//inputPasswordSalt.getText().toString();
-            /*String name = "popo";//inputName.getText().toString();
+            String name = "popo";//inputName.getText().toString();
             String sex  = "m";//inputSex.getText().toString();
             String age = "80";//inputAge.getText().toString();
             String job = "pope";//inputJob.getText().toString();*/
-
+            String place_name = "pope";//inputUserName.getText().toString();
+            String password = "$2y$10$TCaTynz76mfHAzGzfsmwhuoS6n.EiFZDr3dqJBhXtmKP2gqIa1nWu";//inputPasswordSalt.getText().toString();
+            String name = "popo";//inputName.getText().toString();
+            String sex  = "m";//inputSex.getText().toString();
+            String age = "80";//inputAge.getText().toString();
+            String job = "pope";//inputJob.getText().toString();
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("user_name", userName));
