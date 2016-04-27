@@ -59,11 +59,52 @@ xmlns:tools="http://schemas.android.com/tools"
         android:layout_below="@+id/menu_button_layout"
         android:layout_above="@+id/impressum_textfield">
 
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v4.widget.Space
+                android:layout_width="48dp"
+                android:visibility="invisible"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="Name"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                />
+
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Cur. Use"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_weight="1"
+                android:text="Avg Ratig"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+        </LinearLayout>
+
         <ListView
             android:id="@+id/listview"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" >
         </ListView>
+
         <!--
         <include layout="@layout/list_places_main"/>
         -->
