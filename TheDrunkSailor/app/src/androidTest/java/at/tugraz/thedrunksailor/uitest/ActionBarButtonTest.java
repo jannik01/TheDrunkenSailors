@@ -30,7 +30,7 @@ public class ActionBarButtonTest extends ActivityInstrumentationTestCase2<MainAc
     }
 
     public void testButtons() {
-
+        
         mySolo.clickOnView(getActivity().findViewById(R.id.logout));
         mySolo.clickOnView(getActivity().findViewById(R.id.logout));
         mySolo.clickOnView(getActivity().findViewById(R.id.logout));
