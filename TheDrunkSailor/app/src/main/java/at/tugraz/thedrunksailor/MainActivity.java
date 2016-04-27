@@ -23,19 +23,14 @@ public class MainActivity extends AppCompatActivity {
         final ListView listview = (ListView) findViewById(R.id.listview);
 
         if (listview != null) {
-            listview.setAdapter(new PlaceItemAdapter(this, new String[]{"data1",
-                    "data2"}));
+            listview.setAdapter(new PlaceItemAdapter(this, createDummyList()));
 
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
 
-                    Object obj = listview.getAdapter().getItem(position);
+                    view.getTag();
 
-
-//
-//                    Toast toast = Toast.makeText(context, text, duration);
-//                    toast.show();
                 }
             });
 
@@ -50,6 +45,26 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+
+    public String[][] createDummyList() {
+
+        String[][] place = {
+            {"1", "Place1", "3", "5"},
+            {"2", "Place2", "3", "3"},
+            {"3", "Place3", "5", "2.3"},
+            {"4", "Place4", "1", "2.7"},
+            {"5", "Place5", "3", "4"},
+            {"6", "Place6", "2", "1.2"},
+            {"7", "Place7", "3", "3"},
+            {"15", "Place8", "5", "2.3"},
+            {"9", "Place9", "1", "2.7"},
+            {"10", "Place10", "3", "4"},
+            {"11", "Place11", "2", "1.2"},
+        };
+
+        return place;
+
+    }
 
     public void makeDummyEntries() {
         Place tmp = new Place("Place 1", 3.4, 7);

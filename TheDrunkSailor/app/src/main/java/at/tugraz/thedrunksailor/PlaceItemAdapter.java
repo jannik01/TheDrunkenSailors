@@ -20,11 +20,11 @@ import at.tugraz.thedrunksailor.R;
 class PlaceItemAdapter extends BaseAdapter {
 
     Context context;
-    String[] data;
+    String[][] data;
     final static String TAG="LIST LOGGER";
     private static LayoutInflater inflater = null;
 
-    public PlaceItemAdapter(Context context, String[] data) {
+    public PlaceItemAdapter(Context context, String[][] data) {
         // TODO Auto-generated constructor stub
         this.context = context;
         this.data = data;
@@ -41,7 +41,7 @@ class PlaceItemAdapter extends BaseAdapter {
     @Override
     public Object getItem(int position) {
         // TODO Auto-generated method stub
-        Log.d(TAG, data[position]);
+//        Log.d(TAG, data[position]);
         return data[position];
     }
 
@@ -57,8 +57,16 @@ class PlaceItemAdapter extends BaseAdapter {
         View vi = convertView;
         if (vi == null)
             vi = inflater.inflate(R.layout.place_row_item, null);
-        TextView text = (TextView) vi.findViewById(R.id.text);
-        text.setText(data[position]);
+
+        vi.setTag(data[position][0]);
+        TextView name = (TextView) vi.findViewById(R.id.name);
+        TextView currentUse = (TextView) vi.findViewById(R.id.current_use);
+        TextView average = (TextView) vi.findViewById(R.id.average);
+
+        name.setText(data[position][1]);
+        currentUse.setText(data[position][2]);
+        average.setText(data[position][3]);
+
         return vi;
     }
 }
