@@ -149,7 +149,7 @@ xmlns:tools="http://schemas.android.com/tools"
 
                 <EditText
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:id="@+id/nameText"
                     android:maxLength="18"
                     android:maxLines="1"
@@ -175,7 +175,7 @@ xmlns:tools="http://schemas.android.com/tools"
 
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:id="@+id/editText3"
                     android:layout_column="26"
                     android:layout_marginLeft="20dp"
@@ -201,7 +201,7 @@ xmlns:tools="http://schemas.android.com/tools"
 
                 <EditText
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:inputType="textPassword"
                     android:id="@+id/editText4"
                     android:layout_column="26"
@@ -211,28 +211,28 @@ xmlns:tools="http://schemas.android.com/tools"
             </TableRow>
 
             <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_width="wrap_content"
+                android:layout_height="5dp" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="min curr Use"
+                    android:text="occupied min"
                     android:id="@+id/textView14"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:textColor="#000000"
                     android:textSize="16dp" />
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/editText5"
-                    android:layout_column="26"
-                    android:maxLength="18"
-                    android:maxLines="1"
-                    android:layout_marginLeft="20dp" />
+                <RatingBar
+                    android:layout_width="5dp"
+                    android:layout_height="40dp"
+                    android:scaleX="0.6"
+                    android:scaleY="0.6"
+                    android:id="@+id/ratingBar"
+                    android:layout_column="26" />
+
             </TableRow>
 
             <TableRow
@@ -243,22 +243,21 @@ xmlns:tools="http://schemas.android.com/tools"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="max curr Use"
+                    android:text="occupied max"
                     android:id="@+id/textView16"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:textColor="#000000"
                     android:textSize="16dp" />
 
-                <EditText
+                <RatingBar
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:ems="10"
-                    android:maxLength="3"
-                    android:id="@+id/editText6"
-                    android:layout_column="26"
-                    android:layout_marginLeft="20dp" />
+                    android:layout_height="40dp"
+                    android:scaleX="0.6"
+                    android:scaleY="0.6"
+                    android:id="@+id/ratingBar3"
+                    android:layout_column="26" />
+
             </TableRow>
 
             <TableRow
@@ -269,21 +268,21 @@ xmlns:tools="http://schemas.android.com/tools"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="min Bewer"
+                    android:text="min ranking"
                     android:id="@+id/textView17"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:textColor="#000000"
                     android:textSize="16dp" />
 
-                <EditText
+                <RatingBar
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/editText7"
-                    android:layout_column="26"
-                    android:maxLength="18"
-                    android:maxLines="1"
-                    android:layout_marginLeft="20dp" />
+                    android:layout_height="40dp"
+                    android:scaleX="0.6"
+                    android:scaleY="0.6"
+                    android:id="@+id/ratingBar2"
+                    android:layout_column="26" />
+
             </TableRow>
 
             <TableRow
@@ -294,21 +293,21 @@ xmlns:tools="http://schemas.android.com/tools"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="max Bewer"
+                    android:text="max ranking"
                     android:id="@+id/textView3"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:textColor="#000000"
                     android:textSize="16dp" />
 
-                <EditText
+                <RatingBar
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/editText8"
-                    android:layout_column="26"
-                    android:maxLength="18"
-                    android:maxLines="1"
-                    android:layout_marginLeft="20dp" />
+                    android:layout_height="40dp"
+                    android:scaleX="0.6"
+                    android:scaleY="0.6"
+                    android:id="@+id/ratingBar4"
+                    android:layout_column="26" />
+
             </TableRow>
 
             <TableRow
@@ -326,14 +325,6 @@ xmlns:tools="http://schemas.android.com/tools"
                     android:textColor="#000000"
                     android:textSize="16dp" />
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/editText9"
-                    android:layout_column="26"
-                    android:maxLength="18"
-                    android:maxLines="1"
-                    android:layout_marginLeft="20dp" />
             </TableRow>
 
             <TableRow
