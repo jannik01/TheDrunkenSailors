@@ -120,7 +120,7 @@ xmlns:tools="http://schemas.android.com/tools"
                 android:text="Search"
                 android:id="@+id/searchbutton"
                 android:layout_gravity="right"
-                android:onClick="doRegistration"
+                android:onClick="searchPlaceLogic"
                 android:nestedScrollingEnabled="false" />
         </FrameLayout>
 
@@ -181,7 +181,8 @@ xmlns:tools="http://schemas.android.com/tools"
                     android:maxLength="18"
                     android:maxLines="1"
                     android:layout_column="26"
-                    android:layout_marginLeft="20dp" />
+                    android:layout_marginLeft="20dp"
+                    android:inputType="numberSigned" />
 
             </TableRow>
 

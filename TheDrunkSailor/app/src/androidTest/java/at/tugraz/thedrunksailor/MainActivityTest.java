@@ -27,7 +27,6 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         super.setUp();
         mySolo = new Solo(getInstrumentation(), getActivity());
 
-
     }
 
     public void tearDown() throws Exception {
@@ -36,53 +35,39 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
 
     @Test
-    public void testButtons() {
+    public void testButtons() throws InterruptedException {
+
         mySolo.clickOnButton("Search");
+        mySolo.sleep(5000);
+
+        // TODO testDropdownList - Sector
 
     }
 
-
-//    public void testTextFields() {
-//
-//
-//        mySolo.clickOnEditText(0);
-//
-//        String strInput = "Sample code 1";
-//
-//        mySolo.enterText(0, strInput);
-//
-//        boolean actual = mySolo.searchEditText(strInput);
-//
-//        assertEquals("text entered is not matching", true, actual);
-//
-//
-//        mySolo.clearEditText(0);
-//
-//
-//        strInput = "Sample code 2";
-//        mySolo.typeText(0, strInput);
-//        actual = mySolo.searchEditText(strInput);
-//
-//        assertEquals("text entered is not matching", true, actual);
-//
-//    }
-
-    public void testWrongPassword() throws InterruptedException {
+    public void testTextInput() throws InterruptedException {
 
         mySolo.enterText(1,"name");
         mySolo.enterText(2,"8020");
         mySolo.enterText(3,"place");
 
         mySolo.clickOnButton("Search");
+        mySolo.sleep(5000);
 
     }
 
-    public void testRatingBar() throws InterruptedException {
+    public void testRatingBars() throws InterruptedException {
 
-        mySolo.clickOnActionBarItem(1);
+        mySolo.setProgressBar(0, 1);
+        mySolo.sleep(3000);
+        mySolo.setProgressBar(1, 2);
+        mySolo.sleep(3000);
+        mySolo.setProgressBar(2, 5);
+        mySolo.sleep(3000);
+        mySolo.setProgressBar(3, 4);
+        mySolo.sleep(3000);
+
         mySolo.clickOnButton("Search");
-
+        mySolo.sleep(5000);
     }
-
 
 }
