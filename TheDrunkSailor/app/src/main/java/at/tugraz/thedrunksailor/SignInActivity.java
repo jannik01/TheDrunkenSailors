@@ -43,7 +43,7 @@ public class SignInActivity extends AppCompatActivity
         String Password = mPassword.getText().toString();
         Boolean isAllAlright = true;
 
-        if (UserName.length() > 25 || UserName.length() < 5)
+        /*if (UserName.length() > 25 || UserName.length() < 5)
         {
             alert.setMessage("Please use a username between 5 & 25 characters!");
             alert.setTitle("Fail");
@@ -57,7 +57,7 @@ public class SignInActivity extends AppCompatActivity
             alert.setTitle("Fail");
             alert.show();
             isAllAlright=false;
-        }
+        }*/
 
 
         int count_underscore = 0;

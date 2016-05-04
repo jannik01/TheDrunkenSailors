@@ -192,6 +192,7 @@ public class DatabaseInterface {
 
         JSONParser jsonParser = new JSONParser();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
+        //params.add(new BasicNameValuePair("user_ID", user_id.toString()));
         params.add(new BasicNameValuePair("user_ID", "17"));
         JSONObject json = jsonParser.makeHttpRequest(url_start_page_places,
                 "POST", params);
@@ -200,6 +201,12 @@ public class DatabaseInterface {
         try {
             int success = json.getInt(TAG_SUCCESS);
             JSONArray places = json.getJSONArray("last_places");
+            /*if(places == null)
+            {
+                JSONArray nullarray = new JSONArray();
+                nullarray.put("");
+                places =nullarray;
+            }*/
 
             if (success == 1) {
                 return places;
