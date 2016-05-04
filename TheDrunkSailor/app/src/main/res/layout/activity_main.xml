@@ -11,46 +11,7 @@ xmlns:tools="http://schemas.android.com/tools"
     tools:context="at.tugraz.thedrunksailor.MainActivity">
 
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/menu_button_layout">
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight=".25"
-            android:layout_height="wrap_content"
-            android:text="Welcome XY"
-            android:id="@+id/welcome_menu_button"
-            android:clickable="true" />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight=".25"
-            android:layout_height="wrap_content"
-            android:text="Search place"
-            android:id="@+id/search_place_menu_button"
-            android:clickable="true" />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight=".25"
-            android:layout_height="wrap_content"
-            android:text="Search Person"
-            android:id="@+id/search_person_menu_button"
-            android:clickable="true" />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight=".25"
-            android:layout_height="wrap_content"
-            android:text="Add place"
-            android:id="@+id/add_place_menu_button"
-            android:clickable="true" />
-    </LinearLayout>
+    <include layout="@layout/navigation" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"

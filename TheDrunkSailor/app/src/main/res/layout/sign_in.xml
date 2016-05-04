@@ -58,23 +58,12 @@
         android:height="50dp" />
 
     <ImageView
+        android:id="@+id/sign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="58dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="LOGO"
-        android:id="@+id/textView"
-        android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true"
-        android:height="200dp"
-        android:textSize="100dp"
-        android:layout_above="@+id/editText2" />
+        android:src="@drawable/sign"
+        android:adjustViewBounds="true"
+        android:height="1dp"
+        android:layout_above="@+id/text_user_name" />
 
 </RelativeLayout>
