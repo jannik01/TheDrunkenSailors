@@ -31,7 +31,7 @@ public class ActivityAddPlace extends AppCompatActivity {
         EditText Country = (EditText)findViewById(R.id.txtCountry);
         EditText Description = (EditText)findViewById(R.id.txtDescription);
 
-        if(!Name.getText().toString().isEmpty() && !Address.getText().toString().isEmpty() && !Zip.getText().toString().isEmpty() && !Sector.getText().toString().isEmpty() && Zip.length() >= 3 && Zip.length() <= 5) {
+        if(!Name.getText().toString().isEmpty() && !Address.getText().toString().isEmpty() && !Zip.getText().toString().isEmpty() && !Sector.getText().toString().isEmpty() && Zip.length() >= 3 && Zip.length() <= 5 && Integer.parseInt(Sector.getText().toString()) >= 0) {
 
             String[] params = new String []{Name.getText().toString(), Description.getText().toString(), Sector.getText().toString(), Address.getText().toString(), Country.getText().toString(), Zip.getText().toString(), Town.getText().toString()};
 
