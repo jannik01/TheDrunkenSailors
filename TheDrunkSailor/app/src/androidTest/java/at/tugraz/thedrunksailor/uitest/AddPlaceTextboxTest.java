@@ -23,7 +23,7 @@ public class AddPlaceTextboxTest extends ActivityInstrumentationTestCase2<Activi
 
     }
 
-    
+
     public void testTextInput() throws InterruptedException {
 
         mySolo.enterText(0,"Franz");
