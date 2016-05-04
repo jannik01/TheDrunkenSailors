@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|top"
             android:layout_weight="0.11"
-            android:background="#f0d9ae"
+            android:background="#ffd55c"
             android:id="@+id/frameLayout4" >
 
             <TextView
@@ -36,7 +36,8 @@
             android:layout_gravity="top"
             android:id="@+id/linearLayout"
             android:layout_below="@+id/frameLayout4"
-            android:layout_alignParentEnd="true">
+            android:layout_alignParentEnd="true"
+            android:background="#fff3d4">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -328,6 +329,7 @@
             </FrameLayout>
 
         </TableLayout>
+
     </RelativeLayout>
 
     <FrameLayout
@@ -336,7 +338,7 @@
         android:id="@+id/frameLayout3"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:background="#ebd2b2" >
+        android:background="#ffd55c" >
 
         <ImageButton
             android:layout_width="wrap_content"
