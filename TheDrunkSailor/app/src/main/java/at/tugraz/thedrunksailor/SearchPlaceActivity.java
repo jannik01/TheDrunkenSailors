@@ -1,6 +1,7 @@
 package at.tugraz.thedrunksailor;
 
 
+import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,7 +31,7 @@ public class SearchPlaceActivity extends AppCompatActivity implements AdapterVie
         DatabaseInterface database_interface_object = new DatabaseInterface();
 
         spinner = (Spinner) findViewById(R.id.static_spinner);
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(this,R.array.days,android.R.layout.simple_spinner_item);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(this,R.array.Sectors,android.R.layout.simple_spinner_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
@@ -63,6 +64,8 @@ public class SearchPlaceActivity extends AppCompatActivity implements AdapterVie
     }
 
 
+    // ---------------------------------------------------------------------------------------------
+    // Used for Dropdown menu -- Sector
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         TextView myText = (TextView) view;
@@ -73,4 +76,13 @@ public class SearchPlaceActivity extends AppCompatActivity implements AdapterVie
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+    // ---------------------------------------------------------------------------------------------
+
+//    class doTask extends AsyncTask<String, String, Boolean> {
+//        protected Boolean doInBackground(String... args) {
+//            DatabaseInterface.getSectors();
+//
+//            return success;
+//        }
+//    }
 }

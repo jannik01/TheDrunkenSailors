@@ -1,13 +1,14 @@
 <resources>
     <string name="app_name">TheDrunkSailor</string>
     <string name="logout">Logout</string>
-    <string-array name="days">
-        <item>Sunday</item>
-        <item>Susdfgy</item>
-        <item>Suasdf</item>
-        <item>Sqwreay</item>
-        <item>sdfgay</item>
-        <item>ewrtay</item>
+    <string-array name="Sectors">
+        <item>Restaurant</item>
+        <item>Opera</item>
+        <item>Theater</item>
+        <item>Cinema</item>
+        <item>Museum</item>
+        <item>Bar</item>
+        <item>Club</item>
 
     </string-array>
 </resources>
