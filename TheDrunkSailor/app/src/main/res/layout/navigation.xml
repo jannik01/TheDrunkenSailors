@@ -7,7 +7,7 @@
     android:layout_alignParentTop="true"
     android:layout_alignParentStart="true"
     android:id="@+id/menu_button_layout"
-    tools:showIn="@layout/activity_activity_add_place">
+    tools:showIn="@layout/activity_add_place">
 
     <Button
         android:layout_width="0dp"
