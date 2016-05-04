@@ -38,7 +38,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         assertEquals("User 'pope already exists' ", false, success);
 
         success = DatabaseInterface.createUser("pope", "habemus", "John Dope", "m", 69, "Pope");
-        //assertEquals("Cant create user 'pope'", true,success);
+        assertEquals("Cant create user 'pope'", true,success);
 
         success = DatabaseInterface.login("pope", "habemus");
         assertEquals("can't login", true,success);
