@@ -49,20 +49,20 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     @Test
     public void testHighlander(){
         boolean success = DatabaseInterface.login("Connor","MacLeod");
-        assertEquals(success, false);
+        assertEquals("User doesn't exist.",false,success);
 
         success = DatabaseInterface.createUser("Connor", "MacLeod", "Connor MacLeod", "m", 999, "Highlander");
-        assertEquals(true,success);
+        assertEquals("Create user failed.",true,success);
 
         success = DatabaseInterface.login("Connor", "MacLeod");
-        assertEquals(true,success);
+        assertEquals("Login failed.",true,success);
 
         success = DatabaseInterface.createUser("Connor", "MacLeod", "Connor MacLeod", "m", 999, "Highlander");
-        assertEquals(false,success);
+        assertEquals("There can be only one.",false,success);
 
 
         success = DatabaseInterface.deleteUser("Connor", "MacLeod");
-        assertEquals(success,true);
+        assertEquals("Delete user failed.",true,success);
 
         success = DatabaseInterface.login("Connor", "MacLeod");
         assertEquals(success,false);
@@ -86,7 +86,8 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
     @Test
     public void testLoginUser(){
-        //success = DatabaseInterface.createUser("testuser1", "password", "John Doe", "m", 14, "Coder");
+        //success =
+        DatabaseInterface.createUser("testuser1", "password", "John Doe", "m", 14, "Coder");
         boolean success = DatabaseInterface.login("testuser1","password");
         assertEquals(true,success);
     }

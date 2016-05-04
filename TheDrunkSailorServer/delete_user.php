@@ -35,13 +35,11 @@ if (isset($_POST["user_name"])&&isset($_POST["password"]) ) {
 			
 			
 			$password_from_db = $credentials[0];
-			$password_from_db = $password_from_db['password_hash'];
-	
-			//$password_hash_from_db = $row[1];
-
+			$password_hash_from_db = $password_from_db['password_hash'];
+			
+			
 			// compare hash with hash from database
-			//if(password_verify($password,$password_hash)){
-			if($password==$password_from_db){
+			if(password_verify($password,$password_hash_from_db)){
 				$logged_in = true;
 			}
 		}

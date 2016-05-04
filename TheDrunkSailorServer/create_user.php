@@ -10,7 +10,6 @@ if (isset($_POST["user_name"],$_POST["password"], $_POST["name"],$_POST["sex"],$
  
     $user_name = mysqli_real_escape_string($db_connection, $_POST['user_name']);
     $password = $_POST['password'];
-    //$password_hash = mysqli_real_escape_string($db_connection, $_POST['password_hash']);
     $name = mysqli_real_escape_string($db_connection, $_POST['name']);
     $sex = mysqli_real_escape_string($db_connection, $_POST['sex']);
     $age = mysqli_real_escape_string($db_connection, $_POST['age']);
@@ -31,8 +30,7 @@ if (isset($_POST["user_name"],$_POST["password"], $_POST["name"],$_POST["sex"],$
         echo json_encode($response);
     }
 	
-	//$password_hash = password_hash($password , PASSWORD_BCRYPT );
-	$password_hash=$password;
+	$password_hash = password_hash($password , PASSWORD_BCRYPT );
 	
     $sql = "INSERT INTO ".DB_DATABASE.".Users(user_name, password_hash, name, sex, age, job) VALUES('$user_name', '$password_hash','$name','$sex','$age','$job')";
 
