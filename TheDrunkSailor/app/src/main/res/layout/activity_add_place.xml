@@ -268,8 +268,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:nestedScrollingEnabled="false"
-                    android:text="Register "
-                    android:onClick="buttonOnClick" />
+                    android:text="+"
+                    android:onClick="buttonOnClick"
+                    android:textSize="26dp" />
 
             </FrameLayout>
         </RelativeLayout>

@@ -24,16 +24,16 @@ public class ActivityAddPlace extends AppCompatActivity {
     public void buttonOnClick(View v){
 
         EditText Name = (EditText)findViewById(R.id.txtName);
-        EditText Adress = (EditText)findViewById(R.id.txtAdress);
+        EditText Address = (EditText)findViewById(R.id.txtAdress);
         EditText Town = (EditText)findViewById(R.id.txtTown);
         EditText Sector = (EditText)findViewById(R.id.txtSector);
         EditText Zip = (EditText)findViewById(R.id.txtZip);
         EditText Country = (EditText)findViewById(R.id.txtCountry);
         EditText Description = (EditText)findViewById(R.id.txtDescription);
 
-        if(!Name.getText().toString().isEmpty() && !Adress.getText().toString().isEmpty() && !Zip.getText().toString().isEmpty() && !Sector.getText().toString().isEmpty()) {
+        if(!Name.getText().toString().isEmpty() && !Address.getText().toString().isEmpty() && !Zip.getText().toString().isEmpty() && !Sector.getText().toString().isEmpty() && Zip.length() >= 3 && Zip.length() <= 5) {
 
-            String[] params = new String []{Name.getText().toString(), Description.getText().toString(), Sector.getText().toString(), Adress.getText().toString(), Country.getText().toString(), Zip.getText().toString(), Town.getText().toString()};
+            String[] params = new String []{Name.getText().toString(), Description.getText().toString(), Sector.getText().toString(), Address.getText().toString(), Country.getText().toString(), Zip.getText().toString(), Town.getText().toString()};
 
             try {
                 if(new doTask().execute(params).get()){
