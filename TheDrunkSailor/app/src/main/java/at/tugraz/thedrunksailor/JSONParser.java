@@ -89,10 +89,13 @@ public class JSONParser {
         // try parse the string to a JSON object
         try {
             Log.e("[DEBUG] decoding JSON: ", "["+json+"]");
+            Log.i("tagconvertstr", "["+json+"]");
             jObj = new JSONObject(json);
         } catch (JSONException e) {
             Log.e("JSON Parser", "Error parsing data " + e.toString());
         }
+
+
 
         // return JSON String
         return jObj;
