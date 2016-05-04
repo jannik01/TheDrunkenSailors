@@ -57,9 +57,9 @@ public class MainActivity extends AppCompatActivity {
     public String[][] createDummyList() {
 
         String[][] places_list = new String[0][];
-        String user_id="16";
+        String user_id="17";
         try {
-            places_list = new doTask().execute().get();
+            places_list = new doTask().execute(user_id).get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 {"11", "Place11", "2", "1.2"},
         };
 
-        return place;
+        return places_list;
 
     }
 
@@ -145,8 +145,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         protected String[][] doInBackground(String... args) {
-            //Integer uid_int=Integer.parseInt(String.valueOf(args));
-            JSONArray places = DatabaseInterface.startPagePlaces(16);
+            Integer uid_int=Integer.parseInt(args[0]);
+            System.out.print(uid_int);
+            JSONArray places = DatabaseInterface.startPagePlaces(uid_int);
             Integer places_length=places.length();
             String [][] places_list= new String[places_length][4];
             for (Integer i=0;places.length()>i;i++)

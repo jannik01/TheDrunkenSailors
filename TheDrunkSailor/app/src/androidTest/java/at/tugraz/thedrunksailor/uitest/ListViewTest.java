@@ -30,7 +30,7 @@ public class ListViewTest extends ActivityInstrumentationTestCase2<MainActivity>
     }
 
     public void testListClick() {
-        mySolo.clickInList(3);
-        mySolo.clickInList(3);
+        mySolo.clickInList(1);
+        mySolo.clickInList(1);
     }
 }

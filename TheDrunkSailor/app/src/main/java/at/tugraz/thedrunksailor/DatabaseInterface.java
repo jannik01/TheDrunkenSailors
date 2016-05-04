@@ -134,7 +134,7 @@ public class DatabaseInterface {
     }
 
 
-    public static JSONArray searchPlace(String place_name, Integer sector_ID, String address, String country, String zipcode, Double min_use, Double max_use, Double min_rating, Double max_rating) {
+    public static JSONArray searchPlace(String place_name, Integer sector_ID, String address, String country, String zipcode,String town, Double min_use, Double max_use, Double min_rating, Double max_rating) {
         JSONParser jsonParser = new JSONParser();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         if (min_use == 0)
@@ -143,6 +143,8 @@ public class DatabaseInterface {
         params.add(new BasicNameValuePair("address", address));
         params.add(new BasicNameValuePair("country", country));
         params.add(new BasicNameValuePair("zipcode", zipcode));
+        params.add(new BasicNameValuePair("town", town));
+
         if (min_use == 0)
             params.add(new BasicNameValuePair("min_use", ""));
         else
