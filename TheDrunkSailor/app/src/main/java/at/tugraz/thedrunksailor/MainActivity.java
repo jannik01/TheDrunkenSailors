@@ -1,9 +1,11 @@
 package at.tugraz.thedrunksailor;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -53,6 +55,19 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout:
+                Intent intent = new Intent(MainActivity.this, SignInActivity.class);
+                startActivity(intent);
+                return true;
+
+            default:
+                return false;
+
+        }
+    }
+
 
     public String[][] createDummyList() {
 
@@ -81,6 +96,23 @@ public class MainActivity extends AppCompatActivity {
 
         return places_list;
 
+    }
+    public void goToAddPlace(View view)
+    {
+        Intent intent = new Intent(MainActivity.this, ActivityAddPlace.class);
+        startActivity(intent);
+    }
+
+    public void goToSearchPlace(View view)
+    {
+        //Intent intent = new Intent(NavigationBarActivity.this, .class);
+        //startActivity(intent);
+    }
+
+    public void goToSearchPerson(View view)
+    {
+        //Intent intent = new Intent(NavigationBarActivity.this, .class);
+        //startActivity(intent);
     }
 
     public void makeDummyEntries() {

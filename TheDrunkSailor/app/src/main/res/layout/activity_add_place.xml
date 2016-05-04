@@ -65,7 +65,7 @@
                         android:textSize="16dp" />
 
                     <EditText
-                        android:id="@+id/txtUsername"
+                        android:id="@+id/txtName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
@@ -92,7 +92,7 @@
                         android:textSize="16dp" />
 
                     <EditText
-                        android:id="@+id/txtPassword"
+                        android:id="@+id/txtAdress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
@@ -111,19 +111,20 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="Town*"
+                        android:text="Zip Code*"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="#000000"
                         android:textSize="16dp" />
 
                     <EditText
-                        android:id="@+id/txtName"
+                        android:id="@+id/txtZip"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_weight="1"
                         android:maxLength="18"
-                        android:maxLines="1" />
+                        android:maxLines="1"
+                        android:inputType="number" />
 
                 </TableRow>
 
@@ -143,12 +144,11 @@
                         android:textSize="16dp" />
 
                     <EditText
-                        android:id="@+id/txtPasswordRe"
+                        android:id="@+id/txtSector"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_weight="1"
-                        android:inputType="textPassword"
                         android:maxLength="18"
                         android:maxLines="1" />
                 </TableRow>
@@ -165,19 +165,18 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="Zip Code"
+                        android:text="Town"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="#000000"
                         android:textSize="16dp" />
 
                     <EditText
-                        android:id="@+id/txtAge"
+                        android:id="@+id/txtTown"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_weight="1"
-                        android:ems="10"
-                        android:inputType="number" />
+                        android:ems="10" />
                 </TableRow>
 
                 <TableRow
@@ -196,7 +195,7 @@
                         android:textSize="16dp" />
 
                     <EditText
-                        android:id="@+id/txtJob"
+                        android:id="@+id/txtCountry"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
@@ -257,19 +256,15 @@
                 android:layout_gravity="bottom|center"
                 android:background="#ebd2b2">
 
-                <ImageButton
-                    android:id="@+id/back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@android:drawable/ic_menu_revert" />
-
                 <Button
-                    android:id="@+id/btnRegister"
+                    android:id="@+id/btnAddPlace"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:nestedScrollingEnabled="false"
-                    android:text="Register " />
+                    android:text="+"
+                    android:onClick="buttonOnClick"
+                    android:textSize="26dp" />
 
             </FrameLayout>
         </RelativeLayout>

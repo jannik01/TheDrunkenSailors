@@ -48,7 +48,7 @@ public class DatabaseInterface {
             Log.e("[DEBUG]", "DB-Interface success = " + success.toString());
             try {
                 String test = json.getString("uid");
-                System.out.print(test);
+                Log.e("[ERROR]",test);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
