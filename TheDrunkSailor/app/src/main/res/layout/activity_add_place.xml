@@ -123,7 +123,8 @@
                         android:layout_marginLeft="20dp"
                         android:layout_weight="1"
                         android:maxLength="18"
-                        android:maxLines="1" />
+                        android:maxLines="1"
+                        android:inputType="number" />
 
                 </TableRow>
 
@@ -175,8 +176,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_weight="1"
-                        android:ems="10"
-                        android:inputType="number" />
+                        android:ems="10" />
                 </TableRow>
 
                 <TableRow

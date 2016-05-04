@@ -33,18 +33,18 @@ public class ActivityAddPlace extends AppCompatActivity {
 
         if(!Name.getText().toString().isEmpty() && !Adress.getText().toString().isEmpty() && !Zip.getText().toString().isEmpty() && !Sector.getText().toString().isEmpty()) {
 
+            String[] params = new String []{Name.getText().toString(), Description.getText().toString(), Sector.getText().toString(), Adress.getText().toString(), Country.getText().toString(), Zip.getText().toString(), Town.getText().toString()};
+
             try {
-                new doTask().execute(Name, Description, Sector_ID, Address, Country, Zipcode, Town).get();
+                if(new doTask().execute(params).get()){
+                    Intent intent = new Intent(this, MainActivity.class);
+                    startActivity(intent);
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
-
-            DatabaseInterface.createPlace(Name.getText().toString(), Description.getText().toString(), Integer.parseInt(Sector.getText().toString()), Adress.getText().toString(), Country.getText().toString(), Zip.getText().toString());
-
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
         }
         else
         {
@@ -66,8 +66,8 @@ public class ActivityAddPlace extends AppCompatActivity {
         }
     }
 }
-class doTask extends AsyncTask<String, String, Boolean> {
 
+class doTask extends AsyncTask<String, String, Boolean> {
 
     protected Boolean doInBackground(String... args) {
         boolean success = DatabaseInterface.createPlace(args[0], args[1], Integer.parseInt(args[2]), args[3], args[4], args[5],args[6]);
