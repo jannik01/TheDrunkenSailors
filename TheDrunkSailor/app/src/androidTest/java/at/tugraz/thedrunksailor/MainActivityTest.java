@@ -109,7 +109,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     }
     @Test
     public void testCreatePlace(){
-        boolean success = DatabaseInterface.createPlace("pizza hut","big pizza",3,"asdfga 123","South Korea","71824");
+        boolean success = DatabaseInterface.createPlace("pizza hut","big pizza",3,"asdfga 123","South Korea","71824","");
         assertEquals("create Place failed",false, success);
 
     }
