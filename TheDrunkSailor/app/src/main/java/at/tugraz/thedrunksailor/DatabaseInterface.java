@@ -80,7 +80,7 @@ public class DatabaseInterface {
 
     }
 
-    public static boolean createPlace(String place_name, String description, Integer sector_id, String address, String country, String zipcode) {
+    public static boolean createPlace(String place_name, String description, Integer sector_id, String address, String country, String zipcode, String town) {
 
         JSONParser jsonParser = new JSONParser();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -90,6 +90,8 @@ public class DatabaseInterface {
         params.add(new BasicNameValuePair("address", address));
         params.add(new BasicNameValuePair("country", country));
         params.add(new BasicNameValuePair("zipcode", zipcode));
+        params.add(new BasicNameValuePair("town", town));
+
         JSONObject json = jsonParser.makeHttpRequest(url_create_place,
                 "POST", params);
 
