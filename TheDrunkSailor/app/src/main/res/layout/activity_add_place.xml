@@ -262,13 +262,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:nestedScrollingEnabled="false"
-<<<<<<< HEAD:TheDrunkSailor/app/src/main/res/layout/activity_activity_add_place.xml
-                    android:text="Add Place" />
-=======
                     android:text="+"
                     android:onClick="buttonOnClick"
                     android:textSize="26dp" />
->>>>>>> fb_addPlace_logic:TheDrunkSailor/app/src/main/res/layout/activity_add_place.xml
 
             </FrameLayout>
         </RelativeLayout>
