@@ -1,16 +1,25 @@
 package at.tugraz.thedrunksailor;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-public class ActivityAddPlace extends AppCompatActivity {
+/**
+ * Created by Sami on 04/05/2016.
+ */
+public class NavigationBarActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_activity_add_place);
+        setContentView(R.layout.activity_main);
+    }
+
+    public void goToHome(View view)
+    {
+        Intent intent = new Intent(NavigationBarActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 
     public void goToSearchPlace(View view)
@@ -25,9 +34,9 @@ public class ActivityAddPlace extends AppCompatActivity {
         //startActivity(intent);
     }
 
-    public void goToHome(View view)
+    public void goToAddPlace(View view)
     {
-        Intent intent = new Intent(ActivityAddPlace.this, MainActivity.class);
+        Intent intent = new Intent(NavigationBarActivity.this, ActivityAddPlace.class);
         startActivity(intent);
     }
 }

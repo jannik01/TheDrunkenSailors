@@ -1,5 +1,6 @@
 package at.tugraz.thedrunksailor;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -81,6 +82,23 @@ public class MainActivity extends AppCompatActivity {
 
         return places_list;
 
+    }
+    public void goToAddPlace(View view)
+    {
+        Intent intent = new Intent(MainActivity.this, ActivityAddPlace.class);
+        startActivity(intent);
+    }
+
+    public void goToSearchPlace(View view)
+    {
+        //Intent intent = new Intent(NavigationBarActivity.this, .class);
+        //startActivity(intent);
+    }
+
+    public void goToSearchPerson(View view)
+    {
+        //Intent intent = new Intent(NavigationBarActivity.this, .class);
+        //startActivity(intent);
     }
 
     public void makeDummyEntries() {
