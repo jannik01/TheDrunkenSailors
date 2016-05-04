@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">TheDrunkSailor</string>
     <string name="logout">Logout</string>
+    <string-array name="days">
+        <item>Sunday</item>
+        <item>Susdfgy</item>
+        <item>Suasdf</item>
+        <item>Sqwreay</item>
+        <item>sdfgay</item>
+        <item>ewrtay</item>
+
+    </string-array>
 </resources>

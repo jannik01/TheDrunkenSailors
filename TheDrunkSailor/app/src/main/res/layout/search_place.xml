@@ -7,7 +7,7 @@ xmlns:tools="http://schemas.android.com/tools"
     android:paddingBottom="0px"
     android:paddingRight="0px"
     android:paddingTop="0px"
-    tools:context="at.tugraz.thedrunksailor.MainActivity">
+    tools:context=".SearchPlaceActivity">
 
 
     <LinearLayout
@@ -336,9 +336,10 @@ xmlns:tools="http://schemas.android.com/tools"
                 <Spinner
                     android:id="@+id/static_spinner"
                     android:layout_width="fill_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="50dp"
                     android:layout_marginBottom="0dp"
                     android:layout_column="26"
+                    style = "@style/Base.Widget.AppCompat.Spinner.Underlined"
                     android:layout_marginTop="5dp"
                     android:layout_marginLeft="20dp"/>
 
