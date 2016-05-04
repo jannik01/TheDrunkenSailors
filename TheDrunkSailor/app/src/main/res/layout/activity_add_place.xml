@@ -65,7 +65,7 @@
                         android:textSize="16dp" />
 
                     <EditText
-                        android:id="@+id/txtUsername"
+                        android:id="@+id/txtName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
@@ -92,7 +92,7 @@
                         android:textSize="16dp" />
 
                     <EditText
-                        android:id="@+id/txtPassword"
+                        android:id="@+id/txtAdress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
@@ -117,7 +117,7 @@
                         android:textSize="16dp" />
 
                     <EditText
-                        android:id="@+id/txtName"
+                        android:id="@+id/txtTown"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
@@ -143,12 +143,11 @@
                         android:textSize="16dp" />
 
                     <EditText
-                        android:id="@+id/txtPasswordRe"
+                        android:id="@+id/txtSector"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_weight="1"
-                        android:inputType="textPassword"
                         android:maxLength="18"
                         android:maxLines="1" />
                 </TableRow>
@@ -171,7 +170,7 @@
                         android:textSize="16dp" />
 
                     <EditText
-                        android:id="@+id/txtAge"
+                        android:id="@+id/txtZip"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
@@ -196,7 +195,7 @@
                         android:textSize="16dp" />
 
                     <EditText
-                        android:id="@+id/txtJob"
+                        android:id="@+id/txtCountry"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
@@ -269,7 +268,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:nestedScrollingEnabled="false"
-                    android:text="Register " />
+                    android:text="Register "
+                    android:onClick="buttonOnClick" />
 
             </FrameLayout>
         </RelativeLayout>
