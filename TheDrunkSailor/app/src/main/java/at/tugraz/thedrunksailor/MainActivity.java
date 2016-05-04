@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
-
+    public static int uid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     public String[][] createDummyList() {
 
         String[][] places_list = new String[0][];
-        String user_id="17";
+        String user_id= String.valueOf(uid);
         try {
             places_list = new doTask().execute(user_id).get();
         } catch (InterruptedException e) {

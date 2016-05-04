@@ -1,5 +1,6 @@
 package at.tugraz.thedrunksailor;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,11 @@ import android.view.View;
 import android.content.Intent;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.concurrent.ExecutionException;
 
 
 public class SignInActivity extends AppCompatActivity
@@ -55,7 +61,6 @@ public class SignInActivity extends AppCompatActivity
 
 
         int count_underscore = 0;
-        UserName = UserName.toUpperCase();
         int ascii = -1;
         for (int i = 0; i < UserName.length(); i++) {
             ascii = UserName.charAt(i);
@@ -93,8 +98,20 @@ public class SignInActivity extends AppCompatActivity
 
         if(isAllAlright)
         {
-            //DatabaseInterface.login(UserName, Password);
-            boolean loginSuccessful = DatabaseInterface.login("firsttest","pwdfirsttest");
+            Integer userid=0;
+            try {
+                 userid = new doTask().execute(UserName, Password).get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+            MainActivity.uid=  userid;
+            if (MainActivity.uid>0)
+            {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+            }
         }
     }
 
@@ -102,5 +119,22 @@ public class SignInActivity extends AppCompatActivity
     {
         Intent intent = new Intent(SignInActivity.this, RegistrationActivity.class);
         startActivity(intent);
+    }
+    class doTask extends AsyncTask<String, String, Integer> {
+
+
+
+
+
+        protected Integer doInBackground(String... args) {
+            Integer user_id = DatabaseInterface.login(args[0],args[1]);
+
+
+            return user_id;
+        }
+
+
+
+
     }
 }

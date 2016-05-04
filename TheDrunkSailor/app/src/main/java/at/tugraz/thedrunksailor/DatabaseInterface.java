@@ -30,7 +30,7 @@ public class DatabaseInterface {
     private static String url_start_page_places = "http://drunkensailors.robert-thomann.at/start_page_places.php";
 
 
-    public static boolean login(String user_name, String password) {
+    public static Integer login(String user_name, String password) {
 
         JSONParser jsonParser = new JSONParser();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -46,11 +46,16 @@ public class DatabaseInterface {
 
         if (success == 1) {
             Log.e("[DEBUG]", "DB-Interface success = " + success.toString());
-            return (true);
+            try {
+                String test = json.getString("uid");
+                System.out.print(test);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
         }
         Log.e("[DEBUG]", "DB-Interface success = " + success.toString() + " - considered as false");
-        return (false);
+        return (0);
     }
 
     public static boolean createUser(String user_name, String password, String name, String sex, Integer age, String job) {

@@ -2,7 +2,9 @@ package at.tugraz.thedrunksailor;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.BoolRes;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,6 +12,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import java.util.concurrent.ExecutionException;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -65,7 +69,20 @@ public class RegistrationActivity extends AppCompatActivity {
 
         if(isAllAlright)
         {
-            DatabaseInterface.createUser(username,password,name,gender,age,job);
+            boolean success=false;
+            try {
+                String[] params=new String[]{username, password, name,  gender,ageText.getText().toString(), job};
+                success = new doTask().execute(params).get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+            if (success==true)
+            {
+                Intent intent = new Intent(this, SignInActivity.class);
+                startActivity(intent);
+            }
         }
 
     }
@@ -87,6 +104,23 @@ public class RegistrationActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(RegistrationActivity.this, SignInActivity.class);
         startActivity(intent);
+    }
+    class doTask extends AsyncTask<String, String, Boolean> {
+
+
+
+
+
+        protected Boolean doInBackground(String... args) {
+            boolean success = DatabaseInterface.createUser(args[0],args[1],args[2],args[3],Integer.parseInt(args[4]),args[5]);
+
+
+            return success;
+        }
+
+
+
+
     }
 
 
