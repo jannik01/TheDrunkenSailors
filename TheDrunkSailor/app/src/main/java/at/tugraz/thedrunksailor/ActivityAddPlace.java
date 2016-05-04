@@ -1,11 +1,17 @@
 package at.tugraz.thedrunksailor;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.provider.Settings;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.concurrent.ExecutionException;
 
 public class ActivityAddPlace extends AppCompatActivity {
 
@@ -25,13 +31,47 @@ public class ActivityAddPlace extends AppCompatActivity {
         EditText Country = (EditText)findViewById(R.id.txtCountry);
         EditText Description = (EditText)findViewById(R.id.txtDescription);
 
-        //DatabaseInterface.createPlace(Name.getText().toString(), Description.getText().toString(), Integer.parseInt(Sector.getText().toString()), Adress.getText().toString(), Country.getText().toString(), Zip.getText().toString());
+        if(!Name.getText().toString().isEmpty() && !Adress.getText().toString().isEmpty() && !Zip.getText().toString().isEmpty() && !Sector.getText().toString().isEmpty()) {
 
+            try {
+                new doTask().execute(Name, Description, Sector_ID, Address, Country, Zipcode, Town).get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
 
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+            DatabaseInterface.createPlace(Name.getText().toString(), Description.getText().toString(), Integer.parseInt(Sector.getText().toString()), Adress.getText().toString(), Country.getText().toString(), Zip.getText().toString());
+
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+        else
+        {
+            new AlertDialog.Builder(this)
+                    .setTitle("wrong input")
+                    .setMessage("Please fill all the required fields")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // continue with delete
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+        }
     }
+}
+class doTask extends AsyncTask<String, String, Boolean> {
 
 
+    protected Boolean doInBackground(String... args) {
+        boolean success = DatabaseInterface.createPlace(args[0], args[1], Integer.parseInt(args[2]), args[3], args[4], args[5],args[6]);
 
+        return success;
+    }
 }
