@@ -1,4 +1,4 @@
-package uitest;
+package at.tugraz.thedrunksailor.uitest;
 
 import android.test.ActivityInstrumentationTestCase2;
 import com.robotium.solo.Solo;

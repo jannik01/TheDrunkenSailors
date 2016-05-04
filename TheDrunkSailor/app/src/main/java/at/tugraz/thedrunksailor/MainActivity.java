@@ -1,5 +1,6 @@
 package at.tugraz.thedrunksailor;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -16,6 +17,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,45 +55,31 @@ public class MainActivity extends AppCompatActivity {
 
 
     public String[][] createDummyList() {
-    /*
-        JSONArray places = DatabaseInterface.startPagePlaces(16);
-        Integer places_length=places.length();
-        String [][] places_list= new String[places_length][4];
-        for (Integer i=0;places.length()>i;i++)
-        {
-            places_list[i][0]=i.toString();
-            try {
-                places_list[i][1]=places.getJSONObject(i).getString("name");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            try {
-                places_list[i][2]=places.getJSONObject(i).getString("current_use");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            try {
-                places_list[i][3]=places.getJSONObject(i).getString("rating");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+
+        String[][] places_list = new String[0][];
+        String user_id="17";
+        try {
+            places_list = new doTask().execute(user_id).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
-        */
         String[][] place = {
-            {"1", "Place1", "3", "5"},
-            {"2", "Place2", "3", "3"},
-            {"3", "Place3", "5", "2.3"},
-            {"4", "Place4", "1", "2.7"},
-            {"5", "Place5", "3", "4"},
-            {"6", "Place6", "2", "1.2"},
-            {"7", "Place7", "3", "3"},
-            {"15", "Place8", "5", "2.3"},
-            {"9", "Place9", "1", "2.7"},
-            {"10", "Place10", "3", "4"},
-            {"11", "Place11", "2", "1.2"},
+                {"1", "Place1", "3", "5"},
+                {"2", "Place2", "3", "3"},
+                {"3", "Place3", "5", "2.3"},
+                {"4", "Place4", "1", "2.7"},
+                {"5", "Place5", "3", "4"},
+                {"6", "Place6", "2", "1.2"},
+                {"7", "Place7", "3", "3"},
+                {"15", "Place8", "5", "2.3"},
+                {"9", "Place9", "1", "2.7"},
+                {"10", "Place10", "3", "4"},
+                {"11", "Place11", "2", "1.2"},
         };
 
-        return place;
+        return places_list;
 
     }
 
@@ -149,6 +137,49 @@ public class MainActivity extends AppCompatActivity {
             }
             tl.addView(row, i);
         }
+    }
+    class doTask extends AsyncTask<String, String, String[][]> {
+
+
+
+
+
+        protected String[][] doInBackground(String... args) {
+            Integer uid_int=Integer.parseInt(args[0]);
+            System.out.print(uid_int);
+            JSONArray places = DatabaseInterface.startPagePlaces(uid_int);
+            Integer places_length=places.length();
+            String [][] places_list= new String[places_length][4];
+            for (Integer i=0;places.length()>i;i++)
+            {
+                try {
+                    places_list[i][0]=places.getJSONObject(i).getString("place_ID");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    places_list[i][1]=places.getJSONObject(i).getString("name");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    places_list[i][2]=places.getJSONObject(i).getString("current_use");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    places_list[i][3]=places.getJSONObject(i).getString("rating");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return places_list;
+        }
+
+
+
+
     }
 }
 
