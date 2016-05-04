@@ -28,6 +28,10 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".ActivityAddPlace"></activity>
+        <activity android:name=".PlaceDetailActivity"></activity>
+        <activity android:name=".SignInActivity"></activity>
+        <activity android:name=".ListPlaces"></activity>
+        <activity android:name=".RegistrationActivity"></activity>
     </application>
 
 </manifest>
