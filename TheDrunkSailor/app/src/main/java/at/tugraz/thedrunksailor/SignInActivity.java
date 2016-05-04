@@ -4,6 +4,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.content.Intent;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -34,12 +35,14 @@ public class SignInActivity extends AppCompatActivity
 
         String UserName = mEdit.getText().toString();
         String Password = mPassword.getText().toString();
+        Boolean isAllAlright = true;
 
         if (UserName.length() > 25 || UserName.length() < 5)
         {
             alert.setMessage("Please use a username between 5 & 25 characters!");
             alert.setTitle("Fail");
             alert.show();
+            isAllAlright=false;
         }
 
         if (Password.length() > 25 || Password.length() < 8)
@@ -47,6 +50,7 @@ public class SignInActivity extends AppCompatActivity
             alert.setMessage("Please use a password between 8 & 25 characters!");
             alert.setTitle("Fail");
             alert.show();
+            isAllAlright=false;
         }
 
 
@@ -63,12 +67,14 @@ public class SignInActivity extends AppCompatActivity
                     alert.setMessage("Please just use one underscore!");
                     alert.setTitle("Fail");
                     alert.show();
+                    isAllAlright=false;
                 }
                 if (i == 0 || i == UserName.length()-1)
                 {
                     alert.setMessage("Please use underscore not at the beginning or end!");
                     alert.setTitle("Fail");
                     alert.show();
+                    isAllAlright=false;
                 }
 
                 count_underscore++;
@@ -81,8 +87,20 @@ public class SignInActivity extends AppCompatActivity
               alert.setMessage("Please just use letters, numbers and underscore!");
               alert.setTitle("Fail");
               alert.show();
+                isAllAlright=false;
             }
         }
 
+        if(isAllAlright)
+        {
+            //DatabaseInterface.login(UserName, Password);
+            boolean loginSuccessful = DatabaseInterface.login("firsttest","pwdfirsttest");
+        }
+    }
+
+    public void register(View view)
+    {
+        Intent intent = new Intent(SignInActivity.this, RegistrationActivity.class);
+        startActivity(intent);
     }
 }

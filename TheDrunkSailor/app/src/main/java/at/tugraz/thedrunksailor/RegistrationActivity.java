@@ -1,6 +1,7 @@
 package at.tugraz.thedrunksailor;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -38,6 +39,8 @@ public class RegistrationActivity extends AppCompatActivity {
         String job = jobText.getText().toString();
         String gender;
         int age = 0;
+        Boolean isAllAlright = true;
+
         RadioButton female = (RadioButton) findViewById(R.id.radioFemale);
         if (female.isSelected())
             gender = "f";
@@ -48,13 +51,22 @@ public class RegistrationActivity extends AppCompatActivity {
         if (!ageText.getText().toString().equals(""))
             age = Integer.parseInt(ageText.getText().toString());
 
-        if (!password.equals(passwordRe) || password.equals("") || passwordRe.equals("")) {
+        if (!password.equals(passwordRe) || password.equals("") || passwordRe.equals(""))
+        {
             showAlert("Password Failure", "Password not matching or empty");
+            isAllAlright=false;
         }
 
         if (username.equals("") || name.equals(""))
+        {
             showAlert("Empty Fields", "Not all required Fields are entered");
+            isAllAlright=false;
+        }
 
+        if(isAllAlright)
+        {
+            DatabaseInterface.createUser(username,password,name,gender,age,job);
+        }
 
     }
 
@@ -69,6 +81,12 @@ public class RegistrationActivity extends AppCompatActivity {
                     }
                 });
         alertDialog.show();
+    }
+
+    public void returnLogIn(View view)
+    {
+        Intent intent = new Intent(RegistrationActivity.this, SignInActivity.class);
+        startActivity(intent);
     }
 
 

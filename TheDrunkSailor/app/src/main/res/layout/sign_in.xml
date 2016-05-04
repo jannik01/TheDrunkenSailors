@@ -55,7 +55,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="37dp"
         android:textSize="25dp"
-        android:height="50dp" />
+        android:height="50dp"
+        android:onClick="register"/>
 
     <ImageView
         android:id="@+id/sign"
