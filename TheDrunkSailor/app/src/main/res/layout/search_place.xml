@@ -117,7 +117,7 @@ xmlns:tools="http://schemas.android.com/tools"
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Search"
+                android:text="Find"
                 android:id="@+id/searchbutton"
                 android:layout_gravity="right"
                 android:onClick="searchPlaceLogic"
@@ -176,13 +176,14 @@ xmlns:tools="http://schemas.android.com/tools"
 
                 <EditText
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:id="@+id/plz"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/editText"
                     android:maxLength="18"
                     android:maxLines="1"
                     android:layout_column="26"
-                    android:layout_marginLeft="20dp"
-                    android:inputType="numberSigned" />
+                    android:layout_marginLeft="20dp" />
 
             </TableRow>
 

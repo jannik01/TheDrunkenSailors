@@ -37,7 +37,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     @Test
     public void testButtons() throws InterruptedException {
 
-        mySolo.clickOnButton("Search");
+        mySolo.clickOnButton("Find");
         mySolo.sleep(5000);
 
         // TODO testDropdownList - Sector
@@ -50,7 +50,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         mySolo.enterText(2,"8020");
         mySolo.enterText(3,"place");
 
-        mySolo.clickOnButton("Search");
+        mySolo.clickOnButton("Find");
         mySolo.sleep(5000);
 
     }
@@ -66,7 +66,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         mySolo.setProgressBar(3, 4);
         mySolo.sleep(3000);
 
-        mySolo.clickOnButton("Search");
+        mySolo.clickOnButton("Find");
         mySolo.sleep(5000);
     }
 
