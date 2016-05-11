@@ -50,7 +50,7 @@ public class MyActivity extends Activity
 
         switch (position) {
             case 0:
-                objFragment = new menu1_Fragment();
+                objFragment = new LastVisitedPlace_Fragment();
                 break;
             case 1:
                 objFragment = new menu2_Fragment();

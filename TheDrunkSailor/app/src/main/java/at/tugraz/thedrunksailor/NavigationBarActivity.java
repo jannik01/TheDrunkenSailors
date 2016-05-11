@@ -13,14 +13,9 @@ public class NavigationBarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_last_places_visited);
     }
 
-    public void goToHome(View view)
-    {
-        Intent intent = new Intent(NavigationBarActivity.this, MainActivity.class);
-        startActivity(intent);
-    }
 
     public void goToSearchPlace(View view)
     {

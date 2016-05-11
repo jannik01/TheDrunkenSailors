@@ -80,8 +80,8 @@ public class RegistrationActivity extends AppCompatActivity {
             }
             if (success==true)
             {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);*/
             }
         }
 

@@ -1,11 +1,11 @@
 package at.tugraz.thedrunksailor;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TableLayout;
@@ -17,54 +17,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class LastVisitedPlaceActivity extends Fragment {
+public class LastVisitedPlace_Fragment extends android.app.Fragment {
     View rootview;
     public static int uid;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        final ListView listview = (ListView) findViewById(R.id.listview);
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        rootview = inflater.inflate(R.layout.activity_last_places_visited, container, false);
+        final ListView listview = (ListView) rootview.findViewById(R.id.listview);
 
         if (listview != null) {
-            listview.setAdapter(new PlaceItemAdapter(this, createDummyList()));
-
+            listview.setAdapter(new PlaceItemAdapter(getActivity(), createDummyList()));
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
-
                     view.getTag();
-
                 }
             });
-
         }
-
-
-
         DatabaseInterface database_interface_object = new DatabaseInterface();
-
-
+        return rootview;
     }
-
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu, menu);
-//        return true;
-//    }
-
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.logout:
-//                Intent intent = new Intent(MainActivity.this, SignInActivity.class);
-//                startActivity(intent);
-//                return true;
-//
-//            default:
-//                return false;
-//
-//        }
-//    }
 
 
     public String[][] createDummyList() {
@@ -91,27 +63,9 @@ public class LastVisitedPlaceActivity extends Fragment {
                 {"10", "Place10", "3", "4"},
                 {"11", "Place11", "2", "1.2"},
         };
-
         return places_list;
-
-    }
-    public void goToAddPlace(View view)
-    {
-        Intent intent = new Intent(LastVisitedPlaceActivity.this, ActivityAddPlace.class);
-        startActivity(intent);
     }
 
-    public void goToSearchPlace(View view)
-    {
-        //Intent intent = new Intent(NavigationBarActivity.this, .class);
-        //startActivity(intent);
-    }
-
-    public void goToSearchPerson(View view)
-    {
-        //Intent intent = new Intent(NavigationBarActivity.this, .class);
-        //startActivity(intent);
-    }
 
     public void makeDummyEntries() {
         Place tmp = new Place("Place 1", 3.4, 7);
@@ -122,14 +76,14 @@ public class LastVisitedPlaceActivity extends Fragment {
         tmp = new Place("Place 3", 6.1, 2.2);
         returnPlaces.add(tmp);
         JSONArray places = DatabaseInterface.startPagePlaces(16);
-        TableLayout tl = (TableLayout) findViewById(R.id.list_places_table);
+        TableLayout tl = (TableLayout) rootview.findViewById(R.id.list_places_table);
         for (int i = 0; i < places.length(); i++) {
-            TableRow row = new TableRow(this);
+            TableRow row = new TableRow(getActivity());
             TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
             row.setLayoutParams(lp);
             for (int j = 0; j < 4; j++) {
 
-                TextView tv = new TextView(this);
+                TextView tv = new TextView(getActivity());
                 tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                         TableRow.LayoutParams.WRAP_CONTENT));
                 //tv.setBackgroundResource(R.drawable.cell_shape);

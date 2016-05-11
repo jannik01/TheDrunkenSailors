@@ -106,12 +106,12 @@ public class SignInActivity extends AppCompatActivity
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
-            MainActivity.uid=  userid;
+            /*MainActivity.uid=  userid;
             if (MainActivity.uid>0)
             {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
-            }
+            }*/
         }
     }
 

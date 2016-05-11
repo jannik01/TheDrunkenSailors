@@ -54,11 +54,6 @@ public class ActivityAddPlace extends AppCompatActivity {
         //startActivity(intent);
     }
 
-    public void goToHome(View view)
-    {
-        Intent intent = new Intent(ActivityAddPlace.this, MainActivity.class);
-        startActivity(intent);
-    }
 
     public void buttonOnClick(View v) {
 
@@ -76,8 +71,8 @@ public class ActivityAddPlace extends AppCompatActivity {
 
             try {
                 if (new doTask().execute(params).get()) {
-                    Intent intent = new Intent(this, MainActivity.class);
-                    startActivity(intent);
+                    /*Intent intent = new Intent(this, MainActivity.class);
+                    startActivity(intent);*/
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
