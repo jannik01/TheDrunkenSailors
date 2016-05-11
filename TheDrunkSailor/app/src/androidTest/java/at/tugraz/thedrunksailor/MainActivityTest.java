@@ -33,58 +33,38 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     }
 
     @Test
-    public void testHabemusPapam(){
-        boolean success = DatabaseInterface.login("pope","habemus");
-        assertEquals("User 'pope already exists' ", false, success);
+    public void testCreateUser(){
+        int user_id = DatabaseInterface.login("pope","habemus");
+        assertTrue("User 'pope already exists' ", 0 == user_id);
 
-        success = DatabaseInterface.createUser("pope", "habemus", "John Dope", "m", 69, "Pope");
+        boolean success = DatabaseInterface.createUser("pope", "habemus", "John Dope", "m", 69, "Pope");
         assertEquals("Cant create user 'pope'", true,success);
 
-        success = DatabaseInterface.login("pope", "habemus");
-        assertEquals("can't login", true,success);
+        user_id = DatabaseInterface.login("pope", "habemus");
+        assertTrue("Failure login ", 0 != user_id);
+
+        success = DatabaseInterface.createUser("pope", "habemus", "John Dope", "m", 69, "Pope");
+        assertEquals("Duplicate creation fail", false, success);
 
         success = DatabaseInterface.deleteUser("pope","habemus");
         assertEquals("can't delete user", success,true);
 
-        success = DatabaseInterface.login("pope","habemus");
-        assertEquals("successful login after delete", false, success);
-    }
-
-    @Test
-    public void testHighlander(){
-        boolean success = DatabaseInterface.login("Connor","MacLeod");
-        assertEquals("User doesn't exist.",false,success);
-
-        success = DatabaseInterface.createUser("Connor", "MacLeod", "Connor MacLeod", "m", 999, "Highlander");
-        assertEquals("Create user failed.",true,success);
-
-        success = DatabaseInterface.login("Connor", "MacLeod");
-        assertEquals("Login failed.",true,success);
-
-        success = DatabaseInterface.createUser("Connor", "MacLeod", "Connor MacLeod", "m", 999, "Highlander");
-        assertEquals("There can be only one.",false,success);
-
-
-        success = DatabaseInterface.deleteUser("Connor", "MacLeod");
-        assertEquals("Delete user failed.",true,success);
-
-        success = DatabaseInterface.login("Connor", "MacLeod");
-        assertEquals(success,false);
+        user_id = DatabaseInterface.login("pope","habemus");
+        assertTrue("Sucessful login after delete user ", 0 == user_id);
     }
 
     @Test
     public void testDeleteUser(){
         boolean success =  DatabaseInterface.createUser("worldsuck", "dftba", "World Suck", "m", 66, "Evildoer");
-        //assertEquals("Cant create user 'pope'", true,success);
 
-        success = DatabaseInterface.login("worldsuck", "dftba");
-        assertEquals("can't login", true,success);
+        int user_id = DatabaseInterface.login("worldsuck", "dftba");
+        assertTrue("Failure login ", 0 != user_id);
 
         success = DatabaseInterface.deleteUser("worldsuck","dftba");
         assertEquals("can't delete user", true,success);
 
-        success = DatabaseInterface.login("worldsuck","dftba");
-        assertEquals("successful login after delete", false, success);
+        user_id = DatabaseInterface.login("worldsuck","dftba");
+        assertTrue("sucess login after user deletion ", 0 == user_id);
     }
 
 
@@ -92,20 +72,21 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     public void testLoginUser(){
         //success =
         DatabaseInterface.createUser("testuser1", "password", "John Doe", "m", 14, "Coder");
-        boolean success = DatabaseInterface.login("testuser1","password");
-        assertEquals(true,success);
+
+        int user_id = DatabaseInterface.login("testuser1","password");
+        assertTrue("Failure login ", 0 != user_id);
     }
 
     @Test
     public void testLoginUserWrongPass() {
-        boolean success = DatabaseInterface.login("testuser1","bruteforce");
-        assertEquals(false,success);
+        int user_id = DatabaseInterface.login("testuser1","bruteforce");
+        assertTrue("Failure login wrong password ", 0 == user_id);
     }
 
     @Test
     public void testLoginUserNotExists(){
-        boolean success = DatabaseInterface.login("god","ThereBeLight");
-        assertEquals(false,success);
+        int user_id = DatabaseInterface.login("god","ThereBeLight");
+        assertTrue("Failure login user exists ", 0 == user_id);
     }
     @Test
     public void testCreatePlace(){
@@ -137,12 +118,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
         }
         success2 = DatabaseInterface.searchPlace("mcdonalds",1,"","","","",0.0,2.0,0.0,0.0);
-
-
-
-            assertNull(success2);
-
-
+        assertNull(success2);
     }
     @Test
     public void testGetSectors(){
