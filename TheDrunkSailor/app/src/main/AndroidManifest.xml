@@ -38,6 +38,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ActivityAddPlace">
+
+        <activity android:name=".SearchPlaceActivity">
             <intent-filter>
                 <action android:name="android.intent.action.EDIT" />
 
