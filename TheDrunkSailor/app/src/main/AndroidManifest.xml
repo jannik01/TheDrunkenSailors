@@ -37,9 +37,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActivityAddPlace">
-
-        <activity android:name=".SearchPlaceActivity">
+        <activity android:name=".ActivityAddPlace"></activity>
+            <activity android:name=".SearchPlaceActivity">
             <intent-filter>
                 <action android:name="android.intent.action.EDIT" />
 
