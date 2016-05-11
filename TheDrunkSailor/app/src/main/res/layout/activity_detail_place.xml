@@ -300,6 +300,7 @@
                     android:layout_height="wrap_content"
                     android:text="Submit"
                     android:id="@+id/button"
+                    android:onClick="buttonOnClick"
                     android:layout_column="26"
                     android:layout_gravity="left" />
             </TableRow>
