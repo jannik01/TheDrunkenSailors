@@ -13,8 +13,9 @@
     </string-array>
 
 
-    <string name="title_section1">Menu 1</string>
-    <string name="title_section2">Menu 2</string>
+    <string name="title_section1">Last visited Places</string>
+    <string name="title_section2">Search Place</string>
+    <string name="title_section3">Add Place</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>

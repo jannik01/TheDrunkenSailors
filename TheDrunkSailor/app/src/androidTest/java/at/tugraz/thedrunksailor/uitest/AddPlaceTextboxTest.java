@@ -4,20 +4,23 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.robotium.solo.Solo;
 
-import at.tugraz.thedrunksailor.ActivityAddPlace;
+import at.tugraz.thedrunksailor.AddPlace_Fragment;
+import at.tugraz.thedrunksailor.FragmentManagerActivity;
 
 /**
  * Created by hueme on 04.05.2016.
  */
 
-public class AddPlaceTextboxTest extends ActivityInstrumentationTestCase2<ActivityAddPlace> {
+public class AddPlaceTextboxTest extends ActivityInstrumentationTestCase2<FragmentManagerActivity> {
 
+    private AddPlace_Fragment fragment;
     public AddPlaceTextboxTest() {
-        super(ActivityAddPlace.class);
+        super(FragmentManagerActivity.class);
     }
     private Solo mySolo;
-
+    
     public void setUp() throws Exception {
+
         super.setUp();
         mySolo = new Solo(getInstrumentation(), getActivity());
 
@@ -27,7 +30,7 @@ public class AddPlaceTextboxTest extends ActivityInstrumentationTestCase2<Activi
     public void testTextInput() throws InterruptedException {
 
         mySolo.enterText(0,"Franz");
-        mySolo.enterText(1,"Wienerstraße 27");
+        mySolo.enterText(1,"Wienerstraße");
         mySolo.enterText(2,"Graz");
         mySolo.enterText(3,"Sector");
         mySolo.enterText(4,"80200");

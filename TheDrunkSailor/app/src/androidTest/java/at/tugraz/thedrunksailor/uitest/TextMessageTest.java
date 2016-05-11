@@ -5,19 +5,19 @@ import android.widget.EditText;
 
 import com.robotium.solo.Solo;
 
-import at.tugraz.thedrunksailor.MainActivity;
+import at.tugraz.thedrunksailor.FragmentManagerActivity;
 
 import junit.framework.TestCase;
 
 /**
  * Created by hueme on 13.04.2016.
  */
-public class TextMessageTest extends ActivityInstrumentationTestCase2<MainActivity> {
+public class TextMessageTest extends ActivityInstrumentationTestCase2<FragmentManagerActivity> {
 
     private Solo mySolo;
 
     public TextMessageTest(){
-        super(MainActivity.class);
+        super(FragmentManagerActivity.class);
     }
 
 

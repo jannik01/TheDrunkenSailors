@@ -49,9 +49,12 @@
         <!--<activity android:name=".PlaceDetailActivity"></activity>-->
         <!--<activity android:name=".ListPlaces"></activity>-->
         <!--&lt;!&ndash;-->
+        <activity
+            android:name=".TestFragmentActivity">
+        </activity>
 
         <activity
-            android:name=".MyActivity"
+            android:name=".FragmentManagerActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

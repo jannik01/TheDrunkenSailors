@@ -1,12 +1,16 @@
 package at.tugraz.thedrunksailor;
 
 
+import android.app.Fragment;
 import android.os.AsyncTask;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -17,24 +21,24 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchPlaceActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class SearchPlace_Fragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
     EditText mPLZ;
     Spinner spinner;
 
-
-
+    View rootview;
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.search_place);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        rootview = inflater.inflate(R.layout.search_place, container, false);
         DatabaseInterface database_interface_object = new DatabaseInterface();
 
-        spinner = (Spinner) findViewById(R.id.static_spinner);
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(this,R.array.Sectors,android.R.layout.simple_spinner_item);
+        spinner = (Spinner) rootview.findViewById(R.id.static_spinner);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(getActivity(),R.array.Sectors,android.R.layout.simple_spinner_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
+        return rootview;
     }
 
 
@@ -47,8 +51,8 @@ public class SearchPlaceActivity extends AppCompatActivity implements AdapterVie
 
     public void searchPlaceLogic(View view)
     {
-        AlertDialog.Builder alerter = new AlertDialog.Builder(SearchPlaceActivity.this);
-        mPLZ = (EditText)findViewById(R.id.plz);
+        AlertDialog.Builder alerter = new AlertDialog.Builder(getActivity());
+        mPLZ = (EditText)rootview.findViewById(R.id.plz);
 
         alerter.setIcon(android.R.drawable.ic_dialog_alert);
 
@@ -69,7 +73,7 @@ public class SearchPlaceActivity extends AppCompatActivity implements AdapterVie
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         TextView myText = (TextView) view;
-        Toast.makeText(this,"You selected "+myText.getText(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),"You selected "+myText.getText(),Toast.LENGTH_SHORT).show();
     }
 
     @Override

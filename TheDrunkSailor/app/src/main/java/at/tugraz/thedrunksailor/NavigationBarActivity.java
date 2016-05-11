@@ -31,7 +31,7 @@ public class NavigationBarActivity extends AppCompatActivity {
 
     public void goToAddPlace(View view)
     {
-        Intent intent = new Intent(NavigationBarActivity.this, ActivityAddPlace.class);
+        Intent intent = new Intent(NavigationBarActivity.this, AddPlace_Fragment.class);
         startActivity(intent);
     }
 }

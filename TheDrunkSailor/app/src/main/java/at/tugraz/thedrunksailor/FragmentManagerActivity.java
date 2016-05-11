@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 
 
-public class MyActivity extends Activity
+public class FragmentManagerActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
@@ -53,7 +53,10 @@ public class MyActivity extends Activity
                 objFragment = new LastVisitedPlace_Fragment();
                 break;
             case 1:
-                objFragment = new menu2_Fragment();
+                objFragment = new SearchPlace_Fragment();
+                break;
+            case 2:
+                objFragment = new AddPlace_Fragment();
                 break;
         }
         // update the main content by replacing fragments
@@ -71,6 +74,10 @@ public class MyActivity extends Activity
                 break;
             case 2:
                 mTitle = getString(R.string.title_section2);
+                break;
+
+            case 3:
+                mTitle = getString(R.string.title_section3);
                 break;
         }
     }
@@ -146,7 +153,7 @@ public class MyActivity extends Activity
         @Override
         public void onAttach(Activity activity) {
             super.onAttach(activity);
-            ((MyActivity) activity).onSectionAttached(
+            ((FragmentManagerActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }

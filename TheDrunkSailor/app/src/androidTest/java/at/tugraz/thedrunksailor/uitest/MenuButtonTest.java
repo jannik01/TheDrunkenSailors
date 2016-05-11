@@ -6,17 +6,17 @@ import com.robotium.solo.Solo;
 
 import junit.framework.TestCase;
 
-import at.tugraz.thedrunksailor.MainActivity;
+import at.tugraz.thedrunksailor.FragmentManagerActivity;
 
 /**
  * Created by Sami on 13/04/2016.
  */
-public class MenuButtonTest extends ActivityInstrumentationTestCase2<MainActivity> {
+public class MenuButtonTest extends ActivityInstrumentationTestCase2<FragmentManagerActivity> {
 
     private Solo mySolo;
 
     public MenuButtonTest() {
-        super(MainActivity.class);
+        super(FragmentManagerActivity.class);
     }
 
     public void setUp() throws Exception {

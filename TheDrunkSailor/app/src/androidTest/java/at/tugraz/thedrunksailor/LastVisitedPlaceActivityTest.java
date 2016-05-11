@@ -15,10 +15,10 @@ import static org.junit.Assert.*;
 /**
  * Created by robert on 20.04.2016.
  */
-public class LastVisitedPlaceActivityTest extends ActivityInstrumentationTestCase2<LastVisitedPlaceActivity> {
+public class LastVisitedPlaceActivityTest extends ActivityInstrumentationTestCase2<FragmentManagerActivity> {
 
     public LastVisitedPlaceActivityTest(){
-        super(LastVisitedPlaceActivity.class);
+        super(FragmentManagerActivity.class);
     }
 
 

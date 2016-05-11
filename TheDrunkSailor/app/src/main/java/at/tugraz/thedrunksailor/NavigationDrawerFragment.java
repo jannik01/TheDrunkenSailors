@@ -84,7 +84,6 @@ public class NavigationDrawerFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         // Indicate that this fragment would like to influence the set of actions in the action bar.
         setHasOptionsMenu(true);
-
     }
 
     @Override
@@ -98,14 +97,14 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
-                getActivity(),
+                getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
                 new String[]{
                         getString(R.string.title_section1),
                         getString(R.string.title_section2),
+                        getString(R.string.title_section3),
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
