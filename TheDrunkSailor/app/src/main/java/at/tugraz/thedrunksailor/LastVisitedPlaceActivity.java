@@ -2,31 +2,23 @@ package at.tugraz.thedrunksailor;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
-
 import org.json.JSONArray;
 import org.json.JSONException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class MainActivity extends AppCompatActivity {
+public class LastVisitedPlaceActivity extends Fragment {
+    View rootview;
     public static int uid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void goToAddPlace(View view)
     {
-        Intent intent = new Intent(MainActivity.this, ActivityAddPlace.class);
+        Intent intent = new Intent(LastVisitedPlaceActivity.this, ActivityAddPlace.class);
         startActivity(intent);
     }
 
