@@ -21,14 +21,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class MainActivity extends AppCompatActivity {
-    public static int uid;
-    public static int pid;
-    public static JSONArray list;
+public class SearchDisplayActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_display_search);
         final ListView listview = (ListView) findViewById(R.id.listview);
 
         if (listview != null) {
@@ -60,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
-                Intent intent = new Intent(MainActivity.this, SignInActivity.class);
+                Intent intent = new Intent(SearchDisplayActivity.this, SignInActivity.class);
                 startActivity(intent);
                 return true;
 
@@ -74,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     public String[][] createDummyList() {
 
         String[][] places_list = new String[0][];
-        String user_id= String.valueOf(uid);
+        String user_id= String.valueOf(MainActivity.uid);
         try {
             places_list = new doTask().execute(user_id).get();
         } catch (InterruptedException e) {
@@ -101,13 +99,13 @@ public class MainActivity extends AppCompatActivity {
     }
     public void goToAddPlace(View view)
     {
-        Intent intent = new Intent(MainActivity.this, ActivityAddPlace.class);
+        Intent intent = new Intent(SearchDisplayActivity.this, ActivityAddPlace.class);
         startActivity(intent);
     }
 
     public void goToSearchPlace(View view)
     {
-        //Intent intent = new Intent(MainActivity.this, ActivitySearchPlace.class);
+        //Intent intent = new Intent(NavigationBarActivity.this, .class);
         //startActivity(intent);
     }
 
@@ -117,61 +115,7 @@ public class MainActivity extends AppCompatActivity {
         //startActivity(intent);
     }
 
-    public void makeDummyEntries() {
-        Place tmp = new Place("Place 1", 3.4, 7);
-        List<Place> returnPlaces = new ArrayList<Place>();
-        returnPlaces.add(tmp);
-        tmp = new Place("Place 2", 6.5, 2.2);
-        returnPlaces.add(tmp);
-        tmp = new Place("Place 3", 6.1, 2.2);
-        returnPlaces.add(tmp);
-        JSONArray places = DatabaseInterface.startPagePlaces(16);
-        TableLayout tl = (TableLayout) findViewById(R.id.list_places_table);
-        for (int i = 0; i < places.length(); i++) {
-            TableRow row = new TableRow(this);
-            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
-            row.setLayoutParams(lp);
-            for (int j = 0; j < 4; j++) {
 
-                TextView tv = new TextView(this);
-                tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                        TableRow.LayoutParams.WRAP_CONTENT));
-                //tv.setBackgroundResource(R.drawable.cell_shape);
-                tv.setPadding(5, 5, 5, 5);
-                String tmp_string = new String();
-                switch (j) {
-                    case 0:
-                        break;
-                    case 1:
-                        try {
-                            tmp_string = places.getJSONObject(i).getString("name");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case 2:
-                        try {
-                            tmp_string = places.getJSONObject(i).getString("current_use");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case 3:
-                        try {
-                            tmp_string = places.getJSONObject(i).getString("rating");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                }
-                tv.setText(tmp_string);
-
-                row.addView(tv);
-
-            }
-            tl.addView(row, i);
-        }
-    }
     class doTask extends AsyncTask<String, String, String[][]> {
 
 
