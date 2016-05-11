@@ -109,8 +109,8 @@ public class RegistrationActivityTest extends ActivityInstrumentationTestCase2<R
 
     public void testEnterAllFieldsCorrect() {
         mySolo.enterText(0,"username");
-        mySolo.enterText(1,"pwd");
-        mySolo.enterText(2,"pwd");
+        mySolo.enterText(1,"pwdqwert");
+        mySolo.enterText(2,"pwdqwert");
         mySolo.enterText(3,"name");
         mySolo.clickOnRadioButton(1);
         mySolo.enterText(4, "34");
