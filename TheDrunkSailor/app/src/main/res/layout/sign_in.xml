@@ -44,6 +44,7 @@
         android:textAlignment="center"
         android:layout_above="@+id/text_password"
         android:layout_alignStart="@+id/text_password"
+        android:singleLine="true"
         android:layout_alignEnd="@+id/text_password" />
 
     <Button
