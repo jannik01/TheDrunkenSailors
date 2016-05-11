@@ -238,4 +238,32 @@ public class DatabaseInterface {
         return null;
 
     }
+    public static boolean ratePlace(String rating , String current_use) {
+
+        JSONParser jsonParser = new JSONParser();
+        String url_rate_place = "http://drunkensailors.robert-thomann.at/rate_place.php";
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("user_id", Integer.toString(MainActivity.uid)));
+        params.add(new BasicNameValuePair("place_id", Integer.toString(MainActivity.pid)));
+        params.add(new BasicNameValuePair("rating", rating));
+        params.add(new BasicNameValuePair("current_use", current_use));
+
+        JSONObject json = jsonParser.makeHttpRequest(url_rate_place, "POST", params);
+
+        Integer success = 0;
+        try {
+            success = json.getInt("success");
+        } catch (Exception e) {
+            Log.e("[ERROR]", "can't get string from json.");
+
+        }
+
+
+        if (success == 1) {
+            Log.e("[DEBUG]", "DB-Interface success = " + success.toString());
+            return (true);
+
+        }
+        return (false);
+    }
 }
