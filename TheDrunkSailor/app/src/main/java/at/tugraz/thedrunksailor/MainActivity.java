@@ -28,6 +28,9 @@ import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
     public static int uid;
+    public static int pid;
+    public static JSONArray place_list;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,8 +114,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToSearchPlace(View view)
     {
-        //Intent intent = new Intent(NavigationBarActivity.this, .class);
-        //startActivity(intent);
+        Intent intent = new Intent(MainActivity.this, SearchPlaceActivity.class);
+        startActivity(intent);
     }
 
     public void goToSearchPerson(View view)

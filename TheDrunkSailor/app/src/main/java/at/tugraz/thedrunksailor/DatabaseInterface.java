@@ -141,30 +141,27 @@ public class DatabaseInterface {
     }
 
 
-    public static JSONArray searchPlace(String place_name, Integer sector_ID, String address, String country, String zipcode,String town, Double min_use, Double max_use, Double min_rating, Double max_rating) {
+    public static JSONArray searchPlace(String place_name, String sector_ID, String zipcode,String town, String min_use, String max_use, String min_rating, String max_rating) {
         JSONParser jsonParser = new JSONParser();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        if (min_use == 0)
-            params.add(new BasicNameValuePair("place_name", place_name));
-        params.add(new BasicNameValuePair("sector_ID", sector_ID.toString()));
-        params.add(new BasicNameValuePair("address", address));
-        params.add(new BasicNameValuePair("country", country));
+        params.add(new BasicNameValuePair("place_name", place_name));
+        params.add(new BasicNameValuePair("sector_ID", sector_ID));
         params.add(new BasicNameValuePair("zipcode", zipcode));
         params.add(new BasicNameValuePair("town", town));
 
-        if (min_use == 0)
+        if (min_use == "0.0")
             params.add(new BasicNameValuePair("min_use", ""));
         else
             params.add(new BasicNameValuePair("min_use", min_use.toString()));
-        if (max_use == 0)
+        if (max_use == "0.0")
             params.add(new BasicNameValuePair("max_use", ""));
         else
             params.add(new BasicNameValuePair("max_use", max_use.toString()));
-        if (min_rating == 0)
+        if (min_rating == "0.0")
             params.add(new BasicNameValuePair("min_rating", ""));
         else
             params.add(new BasicNameValuePair("min_rating", min_rating.toString()));
-        if (max_rating == 0)
+        if (max_rating == "0.0")
             params.add(new BasicNameValuePair("max_rating", ""));
         else
             params.add(new BasicNameValuePair("max_rating", max_rating.toString()));

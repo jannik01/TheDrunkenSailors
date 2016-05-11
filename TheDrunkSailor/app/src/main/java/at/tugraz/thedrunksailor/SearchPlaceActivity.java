@@ -1,23 +1,31 @@
 package at.tugraz.thedrunksailor;
 
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class SearchPlaceActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+
 
     EditText mPLZ;
     Spinner spinner;
@@ -60,7 +68,32 @@ public class SearchPlaceActivity extends AppCompatActivity implements AdapterVie
             alerter.setTitle("Fail");
             alerter.show();
         }
+        RatingBar minCBar = (RatingBar) findViewById(R.id.occmin);
+        RatingBar maxCBar = (RatingBar) findViewById(R.id.occmax);
+        RatingBar minRBar = (RatingBar) findViewById(R.id.rankmin);
+        RatingBar maxRBar = (RatingBar) findViewById(R.id.rankmax);
 
+        EditText mName = (EditText) findViewById(R.id.name);
+        EditText mTown = (EditText) findViewById(R.id.town);
+        String Name = mName.getText().toString();
+        String Town = mTown.getText().toString();
+        Float minC = minCBar.getRating();
+        Float maxC = maxCBar.getRating();
+        Float minR = minRBar.getRating();
+        Float maxR = maxRBar.getRating();
+        Integer sectorID= (int) (long)spinner.getSelectedItemId() +1;
+        String[] params = new String[]{Name, sectorID.toString(),plz,Town,minC.toString(),maxC.toString(),minR.toString(),maxR.toString() };
+
+        try {
+            if (new doTask().execute(params).get()) {
+                Intent intent = new Intent(this, SearchDisplayActivity.class);
+                startActivity(intent);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -76,13 +109,29 @@ public class SearchPlaceActivity extends AppCompatActivity implements AdapterVie
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-    // ---------------------------------------------------------------------------------------------
+    class doTask extends AsyncTask<String, String, Boolean> {
 
-//    class doTask extends AsyncTask<String, String, Boolean> {
-//        protected Boolean doInBackground(String... args) {
-//            DatabaseInterface.getSectors();
-//
-//            return success;
-//        }
-//    }
+
+
+
+
+        protected Boolean doInBackground(String... args) {
+            JSONArray places = DatabaseInterface.searchPlace(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7]);
+            if (places==null)
+            {
+                return false;
+            }
+            else
+            {
+                MainActivity.place_list=places;
+                return true;
+            }
+
+        }
+
+
+
+
+    }
 }
+
