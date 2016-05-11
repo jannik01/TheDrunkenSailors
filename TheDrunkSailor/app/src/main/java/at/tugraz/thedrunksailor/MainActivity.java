@@ -55,24 +55,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu, menu);
+//        return true;
+//    }
 
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.logout:
-                Intent intent = new Intent(MainActivity.this, SignInActivity.class);
-                startActivity(intent);
-                return true;
-
-            default:
-                return false;
-
-        }
-    }
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.logout:
+//                Intent intent = new Intent(MainActivity.this, SignInActivity.class);
+//                startActivity(intent);
+//                return true;
+//
+//            default:
+//                return false;
+//
+//        }
+//    }
 
 
     public String[][] createDummyList() {
