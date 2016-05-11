@@ -13,7 +13,6 @@ import at.tugraz.thedrunksailor.RegistrationActivity;
  */
 public class RegistrationActivityTest extends ActivityInstrumentationTestCase2<RegistrationActivity> {
 
-
     private Solo mySolo;
 
     public RegistrationActivityTest() {
@@ -119,6 +118,98 @@ public class RegistrationActivityTest extends ActivityInstrumentationTestCase2<R
 
         mySolo.clickOnButton("Register");
 
+    }
+
+//    public void testInputFailUsername()
+//    {
+//
+//        mySolo.enterText(0,"asdf");
+//        mySolo.enterText(1,"pwd");
+//        mySolo.enterText(2,"pwd");
+//        mySolo.enterText(3,"name");
+//
+//        mySolo.clickOnButton("Register");
+//
+//        boolean actual = mySolo.searchText("Please just use letters, numbers and underscore!");
+//
+//
+//        assertEquals("Fail", true, actual);
+//    }
+
+    public void testInputFailUsernamelength()
+    {
+        mySolo.enterText(0, "name");
+
+        mySolo.enterText(1, "password");
+        mySolo.enterText(2, "password");
+        mySolo.enterText(3, "name");
+
+        mySolo.clickOnButton("Register");
+
+        boolean actual = mySolo.searchText("Please use a username between 5 & 25 characters!");
+
+
+        assertEquals("Fail", true, actual);
+    }
+
+    public void testInputFailUsernameOneUnderscore()
+    {
+        mySolo.enterText(0, "name____123");
+
+        mySolo.enterText(1, "password");
+        mySolo.enterText(2, "password");
+        mySolo.enterText(3, "name");
+
+        mySolo.clickOnButton("Register");
+
+        boolean actual = mySolo.searchText("Please just use one underscore!");
+
+
+        assertEquals("Fail", true, actual);
+    }
+
+    public void testInputFailUsernamebeginnUnderscore()
+    {
+        mySolo.enterText(0, "_name00123");
+        mySolo.enterText(1, "password");
+        mySolo.enterText(2, "password");
+        mySolo.enterText(3, "name");
+
+        mySolo.clickOnButton("Register");
+
+        boolean actual = mySolo.searchText("Please use underscore not at the beginning or end!");
+
+
+        assertEquals("Fail", true, actual);
+    }
+
+    public void testInputFailUsernameEndUnderscore()
+    {
+        mySolo.enterText(0, "name00123_");
+        mySolo.enterText(1, "password");
+        mySolo.enterText(2, "password");
+        mySolo.enterText(3, "name");
+
+        mySolo.clickOnButton("Register");
+
+        boolean actual = mySolo.searchText("Please use underscore not at the beginning or end!");
+
+        assertEquals("Fail", true, actual);
+    }
+
+
+    public void testInputFailPasswordlength()
+    {
+        mySolo.enterText(0, "meinname");
+        mySolo.enterText(1, "kurz");
+        mySolo.enterText(2, "kurz");
+        mySolo.enterText(3, "name");
+
+        mySolo.clickOnButton("Register");
+
+        boolean actual = mySolo.searchText("Please use a password between 8 & 25 characters!");
+
+        assertEquals("Fail", true, actual);
     }
 
 }
