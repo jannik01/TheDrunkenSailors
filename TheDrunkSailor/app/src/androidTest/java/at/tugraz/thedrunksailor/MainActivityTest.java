@@ -89,9 +89,9 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         assertTrue("Failure login user exists ", 0 == user_id);
     }
     @Test
-    public void testCreatePlace(){
-        boolean success = DatabaseInterface.createPlace("pizza asdads","big sad",2,"das 123","asdsda dd","8f8","asads");
-        assertEquals("create Place failed",true, success);
+    public void testPlaceAlreadyExists(){
+        boolean success = DatabaseInterface.createPlace("pizza hut","big sad",2,"das 123","asdsda dd","8010","asads");
+        assertEquals("create Place failed",false, success);
 
     }
 
@@ -99,7 +99,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     public void testSearchPlace() throws JSONException {
 
 
-        JSONArray success = DatabaseInterface.searchPlace("",1,"","","","",0.0,0.0,0.0,0.0);
+        JSONArray success = DatabaseInterface.searchPlace("","1","","","","","","");
 
 
         System.out.println(success.length());
@@ -108,7 +108,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
             assertEquals("test of sector id","1", success.getJSONObject(i).getString("sector_ID"));
 
         }
-        JSONArray success2 = DatabaseInterface.searchPlace("mcdonalds",1,"","","","",0.0,4.0,0.0,0.0);
+        JSONArray success2 = DatabaseInterface.searchPlace("mcdonalds","1","","","","","","");
 
 
         System.out.println(success2.length());
@@ -117,7 +117,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
             assertEquals("name search","mcdonalds", success2.getJSONObject(i).getString("name"));
 
         }
-        success2 = DatabaseInterface.searchPlace("mcdonalds",1,"","","","",0.0,2.0,0.0,0.0);
+        success2 = DatabaseInterface.searchPlace("mcdonalds","","","","","2","","");
         assertNull(success2);
     }
     @Test

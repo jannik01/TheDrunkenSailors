@@ -189,8 +189,7 @@ public class DatabaseInterface {
 
         JSONParser jsonParser = new JSONParser();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        //params.add(new BasicNameValuePair("user_ID", user_id.toString()));
-        params.add(new BasicNameValuePair("user_ID", "17"));
+        params.add(new BasicNameValuePair("user_ID", user_id.toString()));
         JSONObject json = jsonParser.makeHttpRequest(url_start_page_places,
                 "POST", params);
 

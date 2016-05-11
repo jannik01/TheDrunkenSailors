@@ -27,8 +27,8 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
-    public static int uid=16;
-    public static int pid=26;
+    public static int uid=79;
+    public static int pid=1;
     public static JSONArray place_list;
 
     @Override
