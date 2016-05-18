@@ -3,7 +3,6 @@ package at.tugraz.thedrunksailor;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
@@ -32,7 +31,7 @@ public class FragmentManagerActivity extends FragmentActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
-        setContentView(R.layout.activity_my);
+        setContentView(R.layout.main_fragment_manager);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -147,7 +146,7 @@ public class FragmentManagerActivity extends FragmentActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_my, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_manager_file, container, false);
             return rootView;
         }
 

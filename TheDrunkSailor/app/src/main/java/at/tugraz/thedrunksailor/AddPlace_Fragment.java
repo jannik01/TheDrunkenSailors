@@ -2,32 +2,15 @@ package at.tugraz.thedrunksailor;
 
 
 import android.support.v4.app.Fragment;
-import android.content.Intent;
 
-import android.os.AsyncTask;
-import android.support.annotation.BoolRes;
-
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Toast;
 
 
 import java.util.concurrent.ExecutionException;
@@ -36,7 +19,7 @@ public class AddPlace_Fragment extends Fragment {
     View rootview;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootview = inflater.inflate(R.layout.activity_add_place, container, false);
+        rootview = inflater.inflate(R.layout.fragment_add_place, container, false);
         String Name="";
         String Description="";
         String Sector_ID="";

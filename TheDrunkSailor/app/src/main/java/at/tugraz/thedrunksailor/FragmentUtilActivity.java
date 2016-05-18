@@ -13,7 +13,7 @@ import android.widget.FrameLayout;
 
 
 public class FragmentUtilActivity extends FragmentActivity {
-    private static final int CONTAINER_ID = 1;
+    private static final int CONTAINER_ID = 2;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,7 +1,7 @@
 package at.tugraz.thedrunksailor;
 
 /**
- * Created by Sami on 18/04/2016.
+ * Created by Sami on 18/05/2016.
  */
 public class Place {
     private String name;

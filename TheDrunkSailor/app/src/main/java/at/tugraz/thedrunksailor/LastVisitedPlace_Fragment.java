@@ -22,7 +22,7 @@ public class LastVisitedPlace_Fragment extends Fragment {
     public static int uid;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootview = inflater.inflate(R.layout.activity_last_places_visited, container, false);
+        rootview = inflater.inflate(R.layout.fragment_last_places_visited, container, false);
         final ListView listview = (ListView) rootview.findViewById(R.id.listview);
 
         if (listview != null) {
@@ -66,7 +66,7 @@ public class LastVisitedPlace_Fragment extends Fragment {
         return places_list;
     }
 
-
+    /*
     public void makeDummyEntries() {
         Place tmp = new Place("Place 1", 3.4, 7);
         List<Place> returnPlaces = new ArrayList<Place>();
@@ -122,6 +122,7 @@ public class LastVisitedPlace_Fragment extends Fragment {
             tl.addView(row, i);
         }
     }
+    */
     class doTask extends AsyncTask<String, String, String[][]> {
 
 
