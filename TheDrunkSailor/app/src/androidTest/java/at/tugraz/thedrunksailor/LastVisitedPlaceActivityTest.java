@@ -95,31 +95,31 @@ public class LastVisitedPlaceActivityTest extends ActivityInstrumentationTestCas
 
     }
 
-    @Test
-    public void testSearchPlace() throws JSONException {
-
-
-        JSONArray success = DatabaseInterface.searchPlace("",1,"","","","",0.0,0.0,0.0,0.0);
-
-
-        System.out.println(success.length());
-        for (int i=0; i < success.length();i++){
-
-            assertEquals("test of sector id","1", success.getJSONObject(i).getString("sector_ID"));
-
-        }
-        JSONArray success2 = DatabaseInterface.searchPlace("mcdonalds",1,"","","","",0.0,4.0,0.0,0.0);
-
-
-        System.out.println(success2.length());
-        for (int i=0; i < success2.length();i++){
-            if(success.getJSONObject(i).getString("name").equals("mcdonalds"))
-            assertEquals("name search","mcdonalds", success2.getJSONObject(i).getString("name"));
-
-        }
-        success2 = DatabaseInterface.searchPlace("mcdonalds",1,"","","","",0.0,2.0,0.0,0.0);
-        assertNull(success2);
-    }
+//    @Test
+//    public void testSearchPlace() throws JSONException {
+//
+//
+//        JSONArray success = DatabaseInterface.searchPlace("",1,"","","","",0.0,0.0,0.0,0.0);
+//
+//
+//        System.out.println(success.length());
+//        for (int i=0; i < success.length();i++){
+//
+//            assertEquals("test of sector id","1", success.getJSONObject(i).getString("sector_ID"));
+//
+//        }
+//        JSONArray success2 = DatabaseInterface.searchPlace("mcdonalds",1,"","","","",0.0,4.0,0.0,0.0);
+//
+//
+//        System.out.println(success2.length());
+//        for (int i=0; i < success2.length();i++){
+//            if(success.getJSONObject(i).getString("name").equals("mcdonalds"))
+//            assertEquals("name search","mcdonalds", success2.getJSONObject(i).getString("name"));
+//
+//        }
+//        success2 = DatabaseInterface.searchPlace("mcdonalds",1,"","","","",0.0,2.0,0.0,0.0);
+//        assertNull(success2);
+//    }
     @Test
     public void testGetSectors(){
         JSONArray success = DatabaseInterface.getSectors();
