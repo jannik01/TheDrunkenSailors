@@ -43,17 +43,16 @@ public class SignInActivityTest extends ActivityInstrumentationTestCase2<SignInA
     {
 
        // mySolo.clickOnText("UserName");
-        mySolo.enterText(1, "meinname");
+        mySolo.enterText(1, "testuser1");
 
-        mySolo.enterText(0, "password");
+        mySolo.enterText(0, "pass");
         //mySolo.clickOnText("name");
        // mySolo.clickOnText("password");
-        mySolo.enterText(0, "123");
+        mySolo.enterText(0, "word");
 
         mySolo.clickOnButton("Sign in");
 
-        boolean actual = mySolo.searchText("meinname");
-
+        boolean actual = mySolo.searchText("Welcome XY");
 
         assertEquals("Fail", true, actual);
         //mySolo.searchEditText("++++++++++++++++++");

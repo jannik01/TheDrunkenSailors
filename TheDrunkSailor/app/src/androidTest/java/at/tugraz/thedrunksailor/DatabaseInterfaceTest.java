@@ -15,9 +15,9 @@ import static org.junit.Assert.*;
 /**
  * Created by robert on 20.04.2016.
  */
-public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
+public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
-    public MainActivityTest(){
+    public DatabaseInterfaceTest(){
         super(MainActivity.class);
     }
 

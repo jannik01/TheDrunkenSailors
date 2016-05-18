@@ -85,11 +85,11 @@ public class RegistrationActivityTest extends ActivityInstrumentationTestCase2<R
 
     public void testMissingField() throws InterruptedException {
         mySolo.enterText(0,"username");
-        mySolo.enterText(1,"pwd");
-        mySolo.enterText(2,"pwd");
+        mySolo.enterText(1,"pwdpwdpwd");
+        mySolo.enterText(2,"pwdpwdpwd");
 
         mySolo.clickOnButton("Register");
-
+        mySolo.sleep(1000);
         mySolo.clickOnButton("OK");
 
     }
@@ -97,8 +97,8 @@ public class RegistrationActivityTest extends ActivityInstrumentationTestCase2<R
 
     public void testMissingFieldAndWrongPassword() throws InterruptedException {
         mySolo.enterText(0,"username");
-        mySolo.enterText(1,"pwd");
-        mySolo.enterText(2,"pwd1");
+        mySolo.enterText(1,"pwdpwdpwd");
+        mySolo.enterText(2,"pwdpwdpwd1");
 
         mySolo.clickOnButton("Register");
         mySolo.clickOnButton("OK");
