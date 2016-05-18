@@ -19,6 +19,9 @@ public class RegistrationActivity extends AppCompatActivity {
 
     public static String TAG = "REGISTRATION_ACTIVITY";
 
+    EditText mEdit;
+    EditText mPassword;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,8 @@ public class RegistrationActivity extends AppCompatActivity {
         int age = 0;
         Boolean isAllAlright = true;
 
+
+
         RadioButton female = (RadioButton) findViewById(R.id.radioFemale);
         if (female.isSelected())
             gender = "f";
@@ -65,6 +70,72 @@ public class RegistrationActivity extends AppCompatActivity {
         {
             showAlert("Empty Fields", "Not all required Fields are entered");
             isAllAlright=false;
+        }
+
+
+        mEdit = (EditText)findViewById(R.id.txtUsername);
+        mPassword = (EditText)findViewById(R.id.txtPassword);
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(RegistrationActivity.this);
+
+        alert.setMessage("-----");
+        alert.setIcon(android.R.drawable.ic_dialog_alert);
+
+        String UserName = mEdit.getText().toString();
+        String Password = mPassword.getText().toString();
+
+        if (UserName.length() > 25 || UserName.length() < 5)
+        {
+            alert.setMessage("Please use a username between 5 & 25 characters!");
+            alert.setTitle("Fail");
+            alert.show();
+            isAllAlright=false;
+        }
+
+        if (Password.length() > 25 || Password.length() < 8)
+        {
+            alert.setMessage("Please use a password between 8 & 25 characters!");
+            alert.setTitle("Fail");
+            alert.show();
+            isAllAlright=false;
+        }
+
+
+        int count_underscore = 0;
+        int ascii = -1;
+
+        for (int i = 0; i < UserName.length(); i++) {
+            ascii = UserName.charAt(i);
+
+            if(ascii == 95)
+            {
+                if (count_underscore > 0)
+                {
+                    alert.setMessage("Please just use one underscore!");
+                    alert.setTitle("Fail");
+                    alert.show();
+                    isAllAlright=false;
+                }
+                if (i == 0 || i == UserName.length()-1)
+                {
+                    alert.setMessage("Please use underscore not at the beginning or end!");
+                    alert.setTitle("Fail");
+                    alert.show();
+                    isAllAlright=false;
+                }
+
+                count_underscore++;
+
+
+
+            }
+            if (((ascii > 64 && ascii < 91) || (ascii > 96 && ascii < 123) || (ascii > 47 && ascii < 58) || ascii == 95) == false)
+            {
+                alert.setMessage("Please just use letters, numbers and underscore!");
+                alert.setTitle("Fail");
+                alert.show();
+                isAllAlright=false;
+            }
         }
 
         if(isAllAlright)
@@ -108,11 +179,16 @@ public class RegistrationActivity extends AppCompatActivity {
     class doTask extends AsyncTask<String, String, Boolean> {
 
 
-
-
-
         protected Boolean doInBackground(String... args) {
-            boolean success = DatabaseInterface.createUser(args[0],args[1],args[2],args[3],Integer.parseInt(args[4]),args[5]);
+
+            int age = 0;
+
+            if (!args[4].isEmpty())
+            {
+                age = Integer.parseInt(args[4]);
+            }
+
+            boolean success = DatabaseInterface.createUser(args[0],args[1],args[2],args[3],age,args[5]);
 
 
             return success;

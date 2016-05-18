@@ -21,6 +21,7 @@ public class SignInActivity extends AppCompatActivity
     EditText mPassword;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -30,88 +31,39 @@ public class SignInActivity extends AppCompatActivity
 
     public void signInLogic(View view)
     {
-        AlertDialog.Builder alert = new AlertDialog.Builder(SignInActivity.this);
-
         mEdit = (EditText)findViewById(R.id.text_user_name);
         mPassword = (EditText)findViewById(R.id.text_password);
 
-
-                alert.setMessage("-----");
-                alert.setIcon(android.R.drawable.ic_dialog_alert);
-
         String UserName = mEdit.getText().toString();
         String Password = mPassword.getText().toString();
-        Boolean isAllAlright = true;
 
-        /*if (UserName.length() > 25 || UserName.length() < 5)
-        {
-            alert.setMessage("Please use a username between 5 & 25 characters!");
-            alert.setTitle("Fail");
-            alert.show();
-            isAllAlright=false;
+        Integer userid=0;
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(SignInActivity.this);
+
+        alert.setMessage("-----");
+        alert.setIcon(android.R.drawable.ic_dialog_alert);
+
+        try {
+             userid = new doTask().execute(UserName, Password).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
 
-        if (Password.length() > 25 || Password.length() < 8)
+        if(userid == 0)
         {
-            alert.setMessage("Please use a password between 8 & 25 characters!");
-            alert.setTitle("Fail");
-            alert.show();
-            isAllAlright=false;
-        }*/
-
-
-        int count_underscore = 0;
-        int ascii = -1;
-        for (int i = 0; i < UserName.length(); i++) {
-            ascii = UserName.charAt(i);
-
-            if(ascii == 95)
-            {
-                if (count_underscore > 0)
-                {
-                    alert.setMessage("Please just use one underscore!");
-                    alert.setTitle("Fail");
-                    alert.show();
-                    isAllAlright=false;
-                }
-                if (i == 0 || i == UserName.length()-1)
-                {
-                    alert.setMessage("Please use underscore not at the beginning or end!");
-                    alert.setTitle("Fail");
-                    alert.show();
-                    isAllAlright=false;
-                }
-
-                count_underscore++;
-
-
-
-            }
-            if (((ascii > 64 && ascii < 91) || (ascii > 47 && ascii < 58) || ascii == 95) == false)
-            {
-              alert.setMessage("Please just use letters, numbers and underscore!");
-              alert.setTitle("Fail");
-              alert.show();
-                isAllAlright=false;
-            }
+        alert.setMessage("Username and Password is wrong!");
+        alert.setTitle("Fail");
+        alert.show();
         }
 
-        if(isAllAlright)
+        MainActivity.uid=  userid;
+        if (MainActivity.uid>0)
         {
-            Integer userid=0;
-            try {
-                 userid = new doTask().execute(UserName, Password).get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-            MainActivity.uid=  userid;
-            if (MainActivity.uid>0)
-            {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-            }
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -122,13 +74,8 @@ public class SignInActivity extends AppCompatActivity
     }
     class doTask extends AsyncTask<String, String, Integer> {
 
-
-
-
-
         protected Integer doInBackground(String... args) {
             Integer user_id = DatabaseInterface.login(args[0],args[1]);
-
 
             return user_id;
         }

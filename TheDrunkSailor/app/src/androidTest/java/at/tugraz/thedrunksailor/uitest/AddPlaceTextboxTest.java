@@ -34,8 +34,8 @@ public class AddPlaceTextboxTest extends ActivityInstrumentationTestCase2<Activi
         mySolo.enterText(5,"Description...");
 
 
-        mySolo.clickOnButton("+");
-        mySolo.sleep(5000);
+
+        //mySolo.clickOnButton("+");
 
     }
 }

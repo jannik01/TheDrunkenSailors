@@ -85,7 +85,8 @@
                 android:maxLength="18"
                 android:maxLines="1"
                 android:layout_column="26"
-                android:layout_marginLeft="20dp" />
+                android:layout_marginLeft="20dp"
+                android:singleLine="true" />
 
         </TableRow>
 
@@ -164,7 +165,8 @@
                 android:layout_column="26"
                 android:maxLength="18"
                 android:maxLines="1"
-                android:layout_marginLeft="20dp" />
+                android:layout_marginLeft="20dp"
+                android:singleLine="true" />
 
         </TableRow>
 
@@ -263,7 +265,8 @@
                 android:layout_column="26"
                 android:maxLength="18"
                 android:maxLines="1"
-                android:layout_marginLeft="20dp" />
+                android:layout_marginLeft="20dp"
+                android:singleLine="true" />
         </TableRow>
 
         <TableRow

@@ -28,11 +28,20 @@ public class MenuButtonTest extends ActivityInstrumentationTestCase2<MainActivit
 
     }
 
-    public void testButtons() {
+    public void testButtonsWelcome() {
         mySolo.clickOnButton("Welcome XY");
+    }
+
+    public void testButtonsSearchPlace() {
         mySolo.clickOnButton("Search place");
+    }
+
+    public void testButtonsSearchPerson() {
         mySolo.clickOnButton("Search Person");
-        mySolo.clickOnButton("Add place");
+    }
+
+    public void testButtonsAddPlace() {
         mySolo.clickOnButton("Add place");
     }
+
 }
