@@ -41,6 +41,14 @@ if (isset($_POST["user_name"])&&isset($_POST["password"]) ) {
 			// compare hash with hash from database
 			if(password_verify($password,$password_hash_from_db)){
 				$logged_in = true;
+				$sql = "Select user_id FROM ".DB_DATABASE.".Users WHERE user_name=\"".$sane_user_name."\"";
+				$sql_result = mysqli_query($db,$sql);
+	
+				while($row = mysqli_fetch_assoc($sql_result))
+				{
+					$uid[] = $row['user_id'];	
+				}
+
 			}
 		}
 	
@@ -52,7 +60,7 @@ if (isset($_POST["user_name"])&&isset($_POST["password"]) ) {
         // successfully inserted into database
         $response["success"] = "1";
         $response["message"] = "Username and password valid.";
- 
+        $response["uid"] = $uid[0];
         // echoing JSON response
         echo json_encode($response);
     } else {

@@ -16,15 +16,25 @@ $response = array();
     if (mysqli_query($db_connection,$check)) {
         while($row = mysqli_fetch_assoc($checksql))
         $test[] = $row;
-        
-        
-    
-        $response["success"] = 1;
-        $response["message"] = "getting latest places successful.";
-        $response["last_places"] = $test;
+
+        if(empty($test))
+        {
+            $response["success"] = 2;
+            $response["message"] = "No places visisted.";
  
 
-        echo json_encode($response);
+            echo json_encode($response);
+        }
+        else
+        {
+            $response["success"] = 1;
+            $response["message"] = "getting latest places successful.";
+            $response["last_places"] = $test; 
+
+                    echo json_encode($response);
+
+        }
+            
     } else {
 
         $response["success"] = 0;

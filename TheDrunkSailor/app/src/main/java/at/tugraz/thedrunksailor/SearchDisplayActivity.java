@@ -36,8 +36,13 @@ public class SearchDisplayActivity extends AppCompatActivity {
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
-
-                    view.getTag();
+                    try {
+                        MainActivity.pid=MainActivity.place_list.getJSONObject(position).getInt("place_ID");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    Intent intent = new Intent(SearchDisplayActivity.this, PlaceDetailActivity.class);
+                    startActivity(intent);
 
                 }
             });
@@ -58,7 +63,7 @@ public class SearchDisplayActivity extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.logout:
+            case 0:
                 Intent intent = new Intent(SearchDisplayActivity.this, SignInActivity.class);
                 startActivity(intent);
                 return true;

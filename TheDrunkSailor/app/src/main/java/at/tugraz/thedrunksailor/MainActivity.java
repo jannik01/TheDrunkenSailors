@@ -28,7 +28,7 @@ import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
     public static int uid = 79;
-    public static int pid = 1;
+    public static int pid = 25;
     public static JSONArray place_list;
     public static boolean new_user=false;
 
@@ -37,15 +37,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final ListView listview = (ListView) findViewById(R.id.listview);
-
+        final String [][] places_list=createDummyList();
         if (listview != null) {
-            listview.setAdapter(new PlaceItemAdapter(this, createDummyList()));
+            listview.setAdapter(new PlaceItemAdapter(this, places_list));
 
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
+                        pid=Integer.parseInt(places_list[position][0]);
 
-                    view.getTag();
+                    Intent intent = new Intent(MainActivity.this, PlaceDetailActivity.class);
+                    startActivity(intent);
 
                 }
             });
