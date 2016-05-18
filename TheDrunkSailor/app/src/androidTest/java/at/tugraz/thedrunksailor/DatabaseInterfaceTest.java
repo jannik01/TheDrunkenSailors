@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by robert on 20.04.2016.
@@ -108,16 +109,16 @@ public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<Main
             assertEquals("test of sector id","1", success.getJSONObject(i).getString("sector_ID"));
 
         }
-        JSONArray success2 = DatabaseInterface.searchPlace("mcdonalds","1","","","","","","");
+        JSONArray success2 = DatabaseInterface.searchPlace("Mensa","1","","","","","","");
 
 
         System.out.println(success2.length());
         for (int i=0; i < success2.length();i++){
-            if(success.getJSONObject(i).getString("name").equals("mcdonalds"))
-            assertEquals("name search","mcdonalds", success2.getJSONObject(i).getString("name"));
+            if(success.getJSONObject(i).getString("name").equals("Mensa"))
+            assertEquals("name search","Mensa", success2.getJSONObject(i).getString("name"));
 
         }
-        success2 = DatabaseInterface.searchPlace("mcdonalds","","","","","2","","");
+        success2 = DatabaseInterface.searchPlace("Mensa","","","","","2","","");
         assertNull(success2);
     }
     @Test
@@ -148,6 +149,8 @@ public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<Main
 
 
     }
+
+
     public void testGetData() throws JSONException {
         JSONArray details = DatabaseInterface.getPlaceData(MainActivity.pid);
 
@@ -159,5 +162,22 @@ public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<Main
 
         }
 
+    }
+
+    public void testGetPlaces() {
+        JSONArray extensive_place_list = DatabaseInterface.getPlaces();
+
+        try {
+            assertNotNull("DatabaseInterface.getPlaces : id", extensive_place_list.getJSONObject(1).getString("place_id"));
+            assertNotNull("DatabaseInterface.getPlaces : no name", extensive_place_list.getJSONObject(1).getString("place_name"));
+            assertNotNull("DatabaseInterface.getPlaces : no address", extensive_place_list.getJSONObject(1).getString("place_address"));
+            assertNotNull("DatabaseInterface.getPlaces : no zip code", extensive_place_list.getJSONObject(1).getString("place_zip"));
+            assertNotNull("DatabaseInterface.getPlaces : no sector", extensive_place_list.getJSONObject(1).getString("place_sector"));
+            assertNotNull("DatabaseInterface.getPlaces : town", extensive_place_list.getJSONObject(1).getString("place_town"));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            assertTrue("FAILED",false);
+        }
     }
 }
