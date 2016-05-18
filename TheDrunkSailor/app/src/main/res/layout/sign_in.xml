@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".SignInActivity">
+    tools:context=".SignInActivity"
+    android:background="#fff3d4">
 
     <Button
         android:layout_width="wrap_content"
