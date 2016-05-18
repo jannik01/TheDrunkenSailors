@@ -148,4 +148,16 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
 
     }
+    public void testGetData() throws JSONException {
+        JSONArray details = DatabaseInterface.getPlaceData(MainActivity.pid);
+
+
+        System.out.println(details.length());
+        for (int i=0; i < details.length();i++){
+
+            assertEquals("test of place details","big macs", details.getJSONObject(i).getString("description"));
+
+        }
+
+    }
 }

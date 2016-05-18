@@ -28,6 +28,8 @@ public class DatabaseInterface {
     private static String url_search_place = "http://drunkensailors.robert-thomann.at/search_place.php";
     private static String url_get_sector = "http://drunkensailors.robert-thomann.at/get_sectors.php";
     private static String url_start_page_places = "http://drunkensailors.robert-thomann.at/start_page_places.php";
+    private static String url_get_place_data = "http://drunkensailors.robert-thomann.at/get_place.php";
+
 
 
     public static Integer login(String user_name, String password) {
@@ -182,7 +184,6 @@ public class DatabaseInterface {
             e.printStackTrace();
         }
         return null;
-
     }
 
     public static JSONArray startPagePlaces(Integer user_id) {
@@ -272,5 +273,28 @@ public class DatabaseInterface {
 
         }
         return (false);
+    }
+    public static JSONArray getPlaceData(Integer pid) {
+
+        JSONParser jsonParser = new JSONParser();
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("place_id", Integer.toString(pid)));
+        JSONObject json = jsonParser.makeHttpRequest(url_get_place_data,
+                "POST", params);
+
+        //Log.d("Create Response", json.toString());
+        try {
+            int success = json.getInt(TAG_SUCCESS);
+            JSONArray place_data = json.getJSONArray("place_data");
+
+            if (success == 1) {
+                return (place_data);
+            }
+            return null;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+
     }
 }
