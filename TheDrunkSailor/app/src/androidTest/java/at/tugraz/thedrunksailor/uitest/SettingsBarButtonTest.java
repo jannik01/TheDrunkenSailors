@@ -4,18 +4,16 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.robotium.solo.Solo;
 
-import junit.framework.TestCase;
-
 import at.tugraz.thedrunksailor.FragmentManagerActivity;
+import at.tugraz.thedrunksailor.R;
 
 /**
- * Created by Sami on 13/04/2016.
+ * Created by Sami on 18/05/2016.
  */
-public class MenuButtonTest extends ActivityInstrumentationTestCase2<FragmentManagerActivity> {
-
+public class SettingsBarButtonTest extends ActivityInstrumentationTestCase2<FragmentManagerActivity> {
     private Solo mySolo;
 
-    public MenuButtonTest() {
+    public SettingsBarButtonTest() {
         super(FragmentManagerActivity.class);
     }
 
@@ -29,10 +27,7 @@ public class MenuButtonTest extends ActivityInstrumentationTestCase2<FragmentMan
     }
 
     public void testButtons() {
-        mySolo.clickOnButton("Welcome XY");
-        mySolo.clickOnButton("Search place");
-        mySolo.clickOnButton("Search Person");
-        mySolo.clickOnButton("Add place");
-        mySolo.clickOnButton("Add place");
+//        mySolo.clickOnButton("Settings");
+        mySolo.clickOnView(getActivity().findViewById(R.id.section_label));
     }
 }

@@ -60,42 +60,6 @@ public class SignInActivity extends AppCompatActivity
         }*/
 
 
-        int count_underscore = 0;
-        int ascii = -1;
-        for (int i = 0; i < UserName.length(); i++) {
-            ascii = UserName.charAt(i);
-
-            if(ascii == 95)
-            {
-                if (count_underscore > 0)
-                {
-                    alert.setMessage("Please just use one underscore!");
-                    alert.setTitle("Fail");
-                    alert.show();
-                    isAllAlright=false;
-                }
-                if (i == 0 || i == UserName.length()-1)
-                {
-                    alert.setMessage("Please use underscore not at the beginning or end!");
-                    alert.setTitle("Fail");
-                    alert.show();
-                    isAllAlright=false;
-                }
-
-                count_underscore++;
-
-
-
-            }
-            if (((ascii > 64 && ascii < 91) || (ascii > 47 && ascii < 58) || ascii == 95) == false)
-            {
-              alert.setMessage("Please just use letters, numbers and underscore!");
-              alert.setTitle("Fail");
-              alert.show();
-                isAllAlright=false;
-            }
-        }
-
         if(isAllAlright)
         {
             Integer userid=0;
@@ -106,12 +70,8 @@ public class SignInActivity extends AppCompatActivity
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
-            /*MainActivity.uid=  userid;
-            if (MainActivity.uid>0)
-            {
-                Intent intent = new Intent(this, MainActivity.class);
+                Intent intent = new Intent(this, FragmentManagerActivity.class);
                 startActivity(intent);
-            }*/
         }
     }
 

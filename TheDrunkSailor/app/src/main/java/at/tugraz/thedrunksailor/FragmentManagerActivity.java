@@ -2,6 +2,7 @@ package at.tugraz.thedrunksailor;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Toast;
 
 
 public class FragmentManagerActivity extends FragmentActivity
@@ -96,7 +98,7 @@ public class FragmentManagerActivity extends FragmentActivity
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.my, menu);
+            getMenuInflater().inflate(R.menu.settings_bar, menu);
             restoreActionBar();
             return true;
         }
@@ -111,8 +113,14 @@ public class FragmentManagerActivity extends FragmentActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.settings_menu_bar) {
+            Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
             return true;
+        }
+        if(id == R.id.logout_menu_bar) {
+            //REAL LOGOUT STILL NECESSARY
+            Intent intent = new Intent(FragmentManagerActivity.this, SignInActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

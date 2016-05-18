@@ -45,7 +45,6 @@ public class LastVisitedPlaceFragmentTest extends ActivityInstrumentationTestCas
         mySolo.enterText(6,"Description...");
 
         mySolo.sleep(5000);
-
     }
 }
 

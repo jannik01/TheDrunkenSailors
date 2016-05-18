@@ -219,7 +219,6 @@ public class DatabaseInterface {
     }
 
     public static JSONArray getSectors() {
-
         JSONParser jsonParser = new JSONParser();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
 
@@ -239,6 +238,5 @@ public class DatabaseInterface {
             e.printStackTrace();
         }
         return null;
-
     }
 }
