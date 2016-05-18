@@ -29,7 +29,7 @@ public class MenuButtonTest extends ActivityInstrumentationTestCase2<MainActivit
     }
 
     public void testButtons() {
-        mySolo.clickOnButton("Welcome XY");
+        //mySolo.clickOnButton("Welcome XY");
         mySolo.clickOnButton("Search place");
         mySolo.clickOnButton("Search Person");
         mySolo.clickOnButton("Add place");
