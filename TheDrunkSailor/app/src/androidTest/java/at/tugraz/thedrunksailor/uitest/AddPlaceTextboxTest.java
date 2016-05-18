@@ -28,13 +28,11 @@ public class AddPlaceTextboxTest extends ActivityInstrumentationTestCase2<Activi
 
         mySolo.enterText(0,"Franz");
         mySolo.enterText(1,"Wienerstraße 27");
-        mySolo.enterText(2,"Graz");
-        mySolo.enterText(3,"Sector");
-        mySolo.enterText(4,"80200");
-        mySolo.enterText(5,"Country");
-        mySolo.enterText(6,"Description...");
+        mySolo.enterText(2,"8010");
+        mySolo.enterText(3,"Graz");
+        mySolo.enterText(4,"Country");
+        mySolo.enterText(5,"Description...");
 
-        mySolo.clickOnImageButton(0);
 
         mySolo.clickOnButton("+");
         mySolo.sleep(5000);
