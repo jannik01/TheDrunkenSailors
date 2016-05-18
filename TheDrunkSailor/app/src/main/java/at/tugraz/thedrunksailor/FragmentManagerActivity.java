@@ -2,7 +2,7 @@ package at.tugraz.thedrunksailor;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -61,7 +61,7 @@ public class FragmentManagerActivity extends FragmentActivity
                 break;
         }
         // update the main content by replacing fragments
-        FragmentManager fragmentManager = getFragmentManager();
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, objFragment)
                 .commit();

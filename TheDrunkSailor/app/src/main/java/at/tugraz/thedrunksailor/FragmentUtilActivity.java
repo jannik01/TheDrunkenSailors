@@ -1,4 +1,4 @@
-package at.tugraz.thedrunksailor.uitest;
+package at.tugraz.thedrunksailor;
 
 
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import android.widget.FrameLayout;
  */
 
 
-class FragmentUtilActivity extends FragmentActivity {
+public class FragmentUtilActivity extends FragmentActivity {
     private static final int CONTAINER_ID = 1;
 
     @Override protected void onCreate(Bundle savedInstanceState) {

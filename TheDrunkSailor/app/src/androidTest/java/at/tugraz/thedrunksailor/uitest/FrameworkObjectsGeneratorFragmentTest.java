@@ -1,15 +1,9 @@
 package at.tugraz.thedrunksailor.uitest;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.TextView;
 
-import at.tugraz.thedrunksailor.AddPlace_Fragment;
-import at.tugraz.thedrunksailor.FragmentManagerActivity;
+import at.tugraz.thedrunksailor.FragmentUtilActivity;
 import at.tugraz.thedrunksailor.LastVisitedPlace_Fragment;
-import at.tugraz.thedrunksailor.R;
-import at.tugraz.thedrunksailor.TestFragmentActivity;
 
 /**
  * Created by Lissy on 11.05.2016.
@@ -20,7 +14,7 @@ public class FrameworkObjectsGeneratorFragmentTest
 
     private LastVisitedPlace_Fragment lastVisitedPlace_fragment;
     public FrameworkObjectsGeneratorFragmentTest() {
-        super(FragmentUtilActivity.class);
+        super("at.tugraz.thedrunksailor", FragmentUtilActivity.class);
     }
 
     @Override
