@@ -196,7 +196,6 @@ public class DatabaseInterface {
         //Log.d("Create Response", json.toString());
         try {
             int success = json.getInt(TAG_SUCCESS);
-            JSONArray places = json.getJSONArray("last_places");
             /*if(places == null)
             {
                 JSONArray nullarray = new JSONArray();
@@ -205,12 +204,21 @@ public class DatabaseInterface {
             }*/
 
             if (success == 1) {
+                JSONArray places = json.getJSONArray("last_places");
                 return places;
+            } else if (success == 2) {
+                MainActivity.new_user=true;
+
+
+
+
+
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return null;
+            return null;
+
 
     }
 

@@ -27,9 +27,10 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
-    public static int uid=79;
-    public static int pid=1;
+    public static int uid = 79;
+    public static int pid = 1;
     public static JSONArray place_list;
+    public static boolean new_user=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
             });
 
         }
-
 
 
         DatabaseInterface database_interface_object = new DatabaseInterface();
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     public String[][] createDummyList() {
 
         String[][] places_list = new String[0][];
-        String user_id= String.valueOf(uid);
+        String user_id = String.valueOf(uid);
         try {
             places_list = new doTask().execute(user_id).get();
         } catch (InterruptedException e) {
@@ -106,20 +106,18 @@ public class MainActivity extends AppCompatActivity {
         return places_list;
 
     }
-    public void goToAddPlace(View view)
-    {
+
+    public void goToAddPlace(View view) {
         Intent intent = new Intent(MainActivity.this, ActivityAddPlace.class);
         startActivity(intent);
     }
 
-    public void goToSearchPlace(View view)
-    {
+    public void goToSearchPlace(View view) {
         Intent intent = new Intent(MainActivity.this, SearchPlaceActivity.class);
         startActivity(intent);
     }
 
-    public void goToSearchPerson(View view)
-    {
+    public void goToSearchPerson(View view) {
         //Intent intent = new Intent(NavigationBarActivity.this, .class);
         //startActivity(intent);
     }
@@ -179,48 +177,64 @@ public class MainActivity extends AppCompatActivity {
             tl.addView(row, i);
         }
     }
+
     class doTask extends AsyncTask<String, String, String[][]> {
 
 
-
-
-
         protected String[][] doInBackground(String... args) {
-            Integer uid_int=Integer.parseInt(args[0]);
+            Integer uid_int = Integer.parseInt(args[0]);
             System.out.print(uid_int);
             JSONArray places = DatabaseInterface.startPagePlaces(uid_int);
-            Integer places_length=places.length();
-            String [][] places_list= new String[places_length][4];
-            for (Integer i=0;places.length()>i;i++)
-            {
-                try {
-                    places_list[i][0]=places.getJSONObject(i).getString("place_ID");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    places_list[i][1]=places.getJSONObject(i).getString("name");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    places_list[i][2]=places.getJSONObject(i).getString("current_use");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    places_list[i][3]=places.getJSONObject(i).getString("rating");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
 
-            return places_list;
+
+                if (MainActivity.new_user==true) {
+                    String[][] no_places = {
+                            {"1", "No Place visited yet", "-", "-"},
+
+                    };
+                    return no_places;
+
+                } else {
+                    Integer places_length = places.length();
+                    String[][] places_list = new String[places_length][4];
+                    for (Integer i = 0; places.length() > i; i++) {
+                        try {
+                            places_list[i][0] = places.getJSONObject(i).getString("place_ID");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            places_list[i][1] = places.getJSONObject(i).getString("name");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            places_list[i][2] = places.getJSONObject(i).getString("current_use");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            places_list[i][3] = places.getJSONObject(i).getString("rating");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    return places_list;
+                }
+
+
         }
-
-
-
-
     }
 }
+
+
+
+
+
+
+
+
+
+
+
 

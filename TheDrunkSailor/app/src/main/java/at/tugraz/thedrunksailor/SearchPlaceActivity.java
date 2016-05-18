@@ -37,9 +37,16 @@ public class SearchPlaceActivity extends AppCompatActivity implements AdapterVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_place);
         DatabaseInterface database_interface_object = new DatabaseInterface();
-
+        String[] sector_list={""};
+        try {
+            sector_list = new getSector().execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
         spinner = (Spinner) findViewById(R.id.static_spinner);
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(this,R.array.Sectors,android.R.layout.simple_spinner_item);
+        ArrayAdapter adapter = new ArrayAdapter(this,  android.R.layout.simple_spinner_item,sector_list);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
@@ -108,7 +115,27 @@ public class SearchPlaceActivity extends AppCompatActivity implements AdapterVie
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }class getSector extends AsyncTask<String, String, String[]> {
+        protected String[] doInBackground(String... args) {
+            JSONArray sectors = DatabaseInterface.getSectors();
+            Integer places_length = sectors.length();
+            String[] sectors_list = new String[places_length];
+            for (Integer i = 0; sectors.length() > i; i++) {
+                try {
+                    sectors_list[i] = sectors.getJSONObject(i).getString("name");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+
+                }
+
+            }
+            return sectors_list;
+
+        }
+
     }
+
     class doTask extends AsyncTask<String, String, Boolean> {
 
 

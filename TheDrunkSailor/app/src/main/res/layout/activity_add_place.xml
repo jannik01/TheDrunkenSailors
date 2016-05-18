@@ -134,23 +134,26 @@
 
                     <TextView
                         android:id="@+id/textView3"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:text="Sector*"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="#000000"
-                        android:textSize="16dp" />
+                        android:textSize="16dp"
+                        android:layout_weight="1" />
 
-                    <EditText
-                        android:id="@+id/txtSector"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <Spinner
+                        android:id="@+id/static_spinner"
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_column="1"
+                        style = "@style/Base.Widget.AppCompat.Spinner.Underlined"
+                        android:layout_marginTop="5dp"
                         android:layout_marginLeft="20dp"
-                        android:layout_weight="1"
-                        android:maxLength="18"
-                        android:maxLines="1" />
+                        android:layout_weight="1" />
                 </TableRow>
 
 
