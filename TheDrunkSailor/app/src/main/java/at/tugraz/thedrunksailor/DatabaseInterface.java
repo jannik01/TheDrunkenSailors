@@ -9,8 +9,6 @@ import org.json.JSONObject;
 import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
-import java.util.jar.Attributes;
 
 
 /**
@@ -191,6 +189,8 @@ public class DatabaseInterface {
         JSONParser jsonParser = new JSONParser();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("user_ID", user_id.toString()));
+//        params.add(new BasicNameValuePair("user_ID", Integer.toString(LastVisitedPlace_Fragment.uid)));
+
         JSONObject json = jsonParser.makeHttpRequest(url_start_page_places,
                 "POST", params);
 
@@ -208,7 +208,7 @@ public class DatabaseInterface {
                 JSONArray places = json.getJSONArray("last_places");
                 return places;
             } else if (success == 2) {
-                MainActivity.new_user=true;
+                LastVisitedPlace_Fragment.new_user=true;
 
 
 
@@ -224,7 +224,6 @@ public class DatabaseInterface {
     }
 
     public static JSONArray getSectors() {
-
         JSONParser jsonParser = new JSONParser();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
 
@@ -244,15 +243,14 @@ public class DatabaseInterface {
             e.printStackTrace();
         }
         return null;
-
     }
     public static boolean ratePlace(String rating , String current_use) {
 
         JSONParser jsonParser = new JSONParser();
         String url_rate_place = "http://drunkensailors.robert-thomann.at/rate_place.php";
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("user_id", Integer.toString(MainActivity.uid)));
-        params.add(new BasicNameValuePair("place_id", Integer.toString(MainActivity.pid)));
+        params.add(new BasicNameValuePair("user_id", Integer.toString(LastVisitedPlace_Fragment.uid)));
+        params.add(new BasicNameValuePair("place_id", Integer.toString(LastVisitedPlace_Fragment.pid)));
         params.add(new BasicNameValuePair("rating", rating));
         params.add(new BasicNameValuePair("current_use", current_use));
 

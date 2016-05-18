@@ -5,17 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context="at.tugraz.thedrunksailor.FragmentManagerActivity">
 
-    tools:context="at.tugraz.thedrunksailor.ActivityAddPlace">
-
-
-    <include layout="@layout/navigation"
-        android:id="@+id/include" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/include">
+        >
 
         <LinearLayout
             android:id="@+id/frameLayout2"
@@ -43,7 +39,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@+id/frameLayout"
-                android:layout_below="@+id/frameLayout2"
                 android:layout_gravity="center"
                 android:layout_marginRight="10dp"
                 android:background="#fff3d4"

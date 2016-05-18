@@ -11,4 +11,14 @@
         <item>Club</item>
 
     </string-array>
+
+
+    <string name="title_section1">Last visited Places</string>
+    <string name="title_section2">Search Place</string>
+    <string name="title_section3">Add Place</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="logout_settings_bar">Logout</string>
+    <string name="settings_settings_bar">Settings</string>
+
 </resources>

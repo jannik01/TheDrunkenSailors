@@ -15,9 +15,9 @@ import static org.junit.Assert.*;
 /**
  * Created by robert on 20.04.2016.
  */
-public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<FragmentManagerActivity> {
+public class LastVisitedPlaceActivityTest extends ActivityInstrumentationTestCase2<FragmentManagerActivity> {
 
-    public DatabaseInterfaceTest(){
+    public LastVisitedPlaceActivityTest(){
         super(FragmentManagerActivity.class);
     }
 
@@ -89,9 +89,9 @@ public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<Frag
         assertTrue("Failure login user exists ", 0 == user_id);
     }
     @Test
-    public void testPlaceAlreadyExists(){
-        boolean success = DatabaseInterface.createPlace("pizza hut","big sad",2,"das 123","asdsda dd","8010","asads");
-        assertEquals("create Place failed",false, success);
+    public void testCreatePlace(){
+        boolean success = DatabaseInterface.createPlace("pizza asdads","big sad",2,"das 123","asdsda dd","8f8","asads");
+        assertEquals("create Place failed",true, success);
 
     }
 
@@ -99,7 +99,7 @@ public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<Frag
     public void testSearchPlace() throws JSONException {
 
 
-        JSONArray success = DatabaseInterface.searchPlace("","1","","","","","","");
+        JSONArray success = DatabaseInterface.searchPlace("",1,"","","","",0.0,0.0,0.0,0.0);
 
 
         System.out.println(success.length());
@@ -108,7 +108,7 @@ public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<Frag
             assertEquals("test of sector id","1", success.getJSONObject(i).getString("sector_ID"));
 
         }
-        JSONArray success2 = DatabaseInterface.searchPlace("mcdonalds","1","","","","","","");
+        JSONArray success2 = DatabaseInterface.searchPlace("mcdonalds",1,"","","","",0.0,4.0,0.0,0.0);
 
 
         System.out.println(success2.length());
@@ -117,7 +117,7 @@ public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<Frag
             assertEquals("name search","mcdonalds", success2.getJSONObject(i).getString("name"));
 
         }
-        success2 = DatabaseInterface.searchPlace("mcdonalds","","","","","2","","");
+        success2 = DatabaseInterface.searchPlace("mcdonalds",1,"","","","",0.0,2.0,0.0,0.0);
         assertNull(success2);
     }
     @Test
@@ -146,18 +146,6 @@ public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<Frag
         }
 
 
-
-    }
-    public void testGetData() throws JSONException {
-        JSONArray details = DatabaseInterface.getPlaceData(LastVisitedPlace_Fragment.pid);
-
-
-        System.out.println(details.length());
-        for (int i=0; i < details.length();i++){
-
-            assertEquals("test of place details","big macs", details.getJSONObject(i).getString("description"));
-
-        }
 
     }
 }

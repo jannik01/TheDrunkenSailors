@@ -1,25 +1,21 @@
 package at.tugraz.thedrunksailor.uitest;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.EditText;
 
 import com.robotium.solo.Solo;
 
 import at.tugraz.thedrunksailor.FragmentManagerActivity;
-
-import junit.framework.TestCase;
+import at.tugraz.thedrunksailor.R;
 
 /**
- * Created by hueme on 13.04.2016.
+ * Created by Sami on 18/05/2016.
  */
-public class TextMessageTest extends ActivityInstrumentationTestCase2<FragmentManagerActivity> {
-
+public class SettingsBarButtonTest extends ActivityInstrumentationTestCase2<FragmentManagerActivity> {
     private Solo mySolo;
 
-    public TextMessageTest(){
+    public SettingsBarButtonTest() {
         super(FragmentManagerActivity.class);
     }
-
 
     public void setUp() throws Exception {
         super.setUp();
@@ -30,9 +26,8 @@ public class TextMessageTest extends ActivityInstrumentationTestCase2<FragmentMa
 
     }
 
-    public void testTextfields() {
-        mySolo.clickOnEditText(0);
-        EditText impressum_test = mySolo.getEditText("The Drunken Sailors 2016TM");
-        assertNotNull(impressum_test);
+    public void testButtons() {
+//        mySolo.clickOnButton("Settings");
+        mySolo.clickOnView(getActivity().findViewById(R.id.section_label));
     }
 }

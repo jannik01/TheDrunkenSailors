@@ -50,29 +50,29 @@ public class SearchDisplayActivity extends AppCompatActivity {
 
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.logout:
-                Intent intent = new Intent(SearchDisplayActivity.this, SignInActivity.class);
-                startActivity(intent);
-                return true;
-
-            default:
-                return false;
-
-        }
-    }
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu, menu);
+//        return true;
+//    }
+//
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.logout:
+//                Intent intent = new Intent(SearchDisplayActivity.this, SignInActivity.class);
+//                startActivity(intent);
+//                return true;
+//
+//            default:
+//                return false;
+//
+//        }
+//    }
 
 
     public String[][] createDummyList() {
 
-        JSONArray places = MainActivity.place_list;
+        JSONArray places = LastVisitedPlace_Fragment.place_list;
         Integer places_length = places.length();
         String[][] places_list = new String[places_length][4];
         for (Integer i = 0; places.length() > i; i++) {
@@ -106,28 +106,6 @@ public class SearchDisplayActivity extends AppCompatActivity {
             }
         }
         return places_list;
-    }
-
-
-
-
-
-    public void goToAddPlace(View view)
-    {
-        Intent intent = new Intent(SearchDisplayActivity.this, ActivityAddPlace.class);
-        startActivity(intent);
-    }
-
-    public void goToSearchPlace(View view)
-    {
-        Intent intent = new Intent(SearchDisplayActivity.this, SearchPlaceActivity.class);
-        startActivity(intent);
-    }
-
-    public void goToSearchPerson(View view)
-    {
-        //Intent intent = new Intent(NavigationBarActivity.this, .class);
-        //startActivity(intent);
     }
 
 

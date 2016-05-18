@@ -8,10 +8,10 @@ import com.robotium.solo.Solo;
 /**
  * Created by robert on 20.04.2016.
  */
-public class SearchPlaceActivityTest extends ActivityInstrumentationTestCase2<SearchPlaceActivity> {
+public class SearchPlaceActivityTest extends ActivityInstrumentationTestCase2<FragmentManagerActivity> {
 
     public SearchPlaceActivityTest() {
-        super(SearchPlaceActivity.class);
+        super(FragmentManagerActivity.class);
     }
     private Solo mySolo;
 

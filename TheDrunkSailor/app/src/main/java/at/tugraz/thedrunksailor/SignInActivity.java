@@ -59,10 +59,10 @@ public class SignInActivity extends AppCompatActivity
         alert.show();
         }
 
-        MainActivity.uid=  userid;
-        if (MainActivity.uid>0)
+        LastVisitedPlace_Fragment.uid=  userid;
+        if (LastVisitedPlace_Fragment.uid>0)
         {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, FragmentManagerActivity.class);
             startActivity(intent);
         }
     }
