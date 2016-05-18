@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class LastVisitedPlace_Fragment extends android.app.Fragment {
+public class LastVisitedPlace_Fragment extends Fragment {
     View rootview;
     public static int uid;
 
