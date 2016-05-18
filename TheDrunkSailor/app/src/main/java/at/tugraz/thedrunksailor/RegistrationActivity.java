@@ -179,9 +179,6 @@ public class RegistrationActivity extends AppCompatActivity {
     class doTask extends AsyncTask<String, String, Boolean> {
 
 
-
-
-
         protected Boolean doInBackground(String... args) {
 
             int age = 0;
