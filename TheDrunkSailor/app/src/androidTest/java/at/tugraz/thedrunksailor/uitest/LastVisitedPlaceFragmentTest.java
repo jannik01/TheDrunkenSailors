@@ -44,9 +44,6 @@ public class LastVisitedPlaceFragmentTest extends ActivityInstrumentationTestCas
         mySolo.enterText(5,"Country");
         mySolo.enterText(6,"Description...");
 
-        mySolo.clickOnImageButton(0);
-
-        mySolo.clickOnButton("+");
         mySolo.sleep(5000);
 
     }

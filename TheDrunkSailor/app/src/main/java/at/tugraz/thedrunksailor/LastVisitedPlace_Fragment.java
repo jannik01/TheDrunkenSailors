@@ -19,7 +19,7 @@ import java.util.concurrent.ExecutionException;
 
 public class LastVisitedPlace_Fragment extends Fragment {
     View rootview;
-    public static int uid;
+    public static int uid=79;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_last_places_visited, container, false);
