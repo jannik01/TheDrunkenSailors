@@ -108,13 +108,13 @@ public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<Main
             assertEquals("test of sector id","1", success.getJSONObject(i).getString("sector_ID"));
 
         }
-        JSONArray success2 = DatabaseInterface.searchPlace("mcdonalds","1","","","","","","");
+        JSONArray success2 = DatabaseInterface.searchPlace("Mensa","1","","","","","","");
 
 
         System.out.println(success2.length());
         for (int i=0; i < success2.length();i++){
-            if(success.getJSONObject(i).getString("name").equals("mcdonalds"))
-            assertEquals("name search","mcdonalds", success2.getJSONObject(i).getString("name"));
+            if(success.getJSONObject(i).getString("name").equals("Mensa"))
+            assertEquals("name search","Mensa", success2.getJSONObject(i).getString("name"));
 
         }
         success2 = DatabaseInterface.searchPlace("mcdonalds","","","","","2","","");
@@ -149,13 +149,13 @@ public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<Main
 
     }
     public void testGetData() throws JSONException {
-        JSONArray details = DatabaseInterface.getPlaceData(MainActivity.pid);
+        JSONArray details = DatabaseInterface.getPlaceData(25);
 
 
         System.out.println(details.length());
         for (int i=0; i < details.length();i++){
 
-            assertEquals("test of place details","big macs", details.getJSONObject(i).getString("description"));
+            assertEquals("test of place details","mjam", details.getJSONObject(i).getString("description"));
 
         }
 

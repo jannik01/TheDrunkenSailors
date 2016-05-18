@@ -39,13 +39,13 @@ public class PlaceDetailActivity extends AppCompatActivity {
         zipcode.setText(details[2]);
         town.setText(details[3]);
         country.setText(details[4]);
-        /*if (details[5].equals("0.0000"))
+        if (details[5].equals("0.0000"))
             current_use.setText("-");
-        else*/
+        else
         current_use.setText(details[5]);
-        /*if (details[6].equals("0.0000"))
+        if (details[6].equals("0.0000"))
             rating.setText("-");
-        else*/
+        else
         rating.setText(details[6]);
         description.setText(details[7]);
 
@@ -177,7 +177,10 @@ class doTask extends AsyncTask<String, String, Boolean> {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            try {
+            try {if(details.getJSONObject(0).getString("current_use")==null){
+                detailslist[5]="0";
+            }
+            else
                 detailslist[5] = details.getJSONObject(0).getString("current_use");
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -187,6 +190,10 @@ class doTask extends AsyncTask<String, String, Boolean> {
 
             }
             try {
+                if(details.getJSONObject(0).getString("rating")==null){
+                    detailslist[6]="0";
+                }
+                else
                 detailslist[6] = details.getJSONObject(0).getString("rating");
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -198,7 +205,7 @@ class doTask extends AsyncTask<String, String, Boolean> {
             } catch (JSONException e1) {
                 e1.printStackTrace();
             }
-            Log.e("Error",detailslist[6]);
+            Log.e("Error",detailslist[7]);
             return detailslist;
         }
     }

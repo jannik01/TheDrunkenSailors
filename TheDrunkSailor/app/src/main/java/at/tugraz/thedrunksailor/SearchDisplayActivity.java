@@ -30,23 +30,26 @@ public class SearchDisplayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_search);
         final ListView listview = (ListView) findViewById(R.id.listview);
 
+        final String [][] places_list=createDummyList();
         if (listview != null) {
-            listview.setAdapter(new PlaceItemAdapter(this, createDummyList()));
+            listview.setAdapter(new PlaceItemAdapter(this, places_list));
 
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
-                    try {
-                        MainActivity.pid=MainActivity.place_list.getJSONObject(position).getInt("place_ID");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    MainActivity.pid=Integer.parseInt(places_list[position][0]);
+                    String asdf = Integer.toString(MainActivity.pid);
+                    String qwre = ((Integer.toString(position)) );
+                    Log.e("ERROR", places_list[1][0]);
+                    Log.e("ERROR", places_list[2][0]);
+                    Log.e("ERROR", places_list[0][0]);
+                    Log.e("ERROR",asdf );
+
                     Intent intent = new Intent(SearchDisplayActivity.this, PlaceDetailActivity.class);
                     startActivity(intent);
 
                 }
             });
-
         }
 
 
