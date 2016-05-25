@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.ContextThemeWrapper;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -122,6 +123,12 @@ public class SearchPlace_Fragment extends Fragment implements AdapterView.OnItem
                 if (new doTask().execute(params).get()) {
                     Intent intent = new Intent(getActivity(), SearchDisplayActivity.class);
                     startActivity(intent);
+                }
+                else
+                {
+                    Toast toast = Toast.makeText(getActivity(), "No Place(s) found", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.TOP, 0,1500);
+                    toast.show();
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();

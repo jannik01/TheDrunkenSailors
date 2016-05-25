@@ -201,6 +201,7 @@ public class DatabaseInterface {
         JSONArray places = new JSONArray();
 
         try {
+            int success2 = json.getInt(TAG_SUCCESS);
             int success = (json!=null ? json.getInt(TAG_SUCCESS) : 0);
 
             if (success == 1) {
@@ -208,8 +209,9 @@ public class DatabaseInterface {
                 LastVisitedPlace_Fragment.new_user=false;
                 return places;
 
-            } else if (success == 2) {
+            } else if (success2 == 2) {
                 LastVisitedPlace_Fragment.new_user=true;
+                return null;
 
 
 

@@ -1,6 +1,7 @@
 package at.tugraz.thedrunksailor;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.AsyncTask;
@@ -9,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -22,7 +24,8 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -88,6 +91,13 @@ public class SearchPerson_Fragment extends Fragment implements AdapterView.OnIte
             if (new doTask().execute(params).get()) {
                 Intent intent = new Intent(getActivity(), PersonSearchDisplayActivity.class);
                 startActivity(intent);
+            }
+            else
+            {
+                Toast toast = Toast.makeText(getActivity(), "No User(s) found", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.TOP, 0,1500);
+                toast.show();
+
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

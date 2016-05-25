@@ -37,6 +37,7 @@
             android:name=".PlaceDetailActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
         </activity>
+
         <activity
             android:name=".PersonSearchDisplayActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
