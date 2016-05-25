@@ -39,7 +39,7 @@ public class SearchDisplayActivity extends AppCompatActivity {
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
-                    LastVisitedPlace_Fragment.pid=Integer.parseInt(places_list[position][0]);
+                    Globals.pid=Integer.parseInt(places_list[position][0]);
                     Intent intent = new Intent(SearchDisplayActivity.this, PlaceDetailActivity.class);
                     startActivity(intent);
                 }
@@ -72,7 +72,7 @@ public class SearchDisplayActivity extends AppCompatActivity {
 
     public String[][] createDummyList() {
 
-        JSONArray places = LastVisitedPlace_Fragment.place_list;
+        JSONArray places = Globals.place_list;
         Integer places_length = places.length();
         String[][] places_list = new String[places_length][4];
         for (Integer i = 0; places.length() > i; i++) {

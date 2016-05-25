@@ -20,12 +20,7 @@ import java.util.concurrent.ExecutionException;
 
 public class LastVisitedPlace_Fragment extends Fragment {
     View rootview;
-    public static int uid = 79;
-    public static int pid = 25;
-    public static int pers_id = 25;
-    public static JSONArray place_list;
-    public static JSONArray person_list;
-    public static boolean new_user=false;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_last_places_visited, container, false);
@@ -37,7 +32,7 @@ public class LastVisitedPlace_Fragment extends Fragment {
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
-                    pid=Integer.parseInt(places_list[position][0]);
+                    Globals.pid=Integer.parseInt(places_list[position][0]);
 
                     Intent intent = new Intent(getActivity(), PlaceDetailActivity.class);
                     startActivity(intent);
@@ -53,7 +48,7 @@ public class LastVisitedPlace_Fragment extends Fragment {
     public String[][] createDummyList() {
 
         String[][] places_list = new String[0][];
-        String user_id = String.valueOf(uid);
+        String user_id = String.valueOf(Globals.uid);
         try {
             places_list = new doTask().execute(user_id).get();
         } catch (InterruptedException e) {
@@ -141,7 +136,7 @@ public class LastVisitedPlace_Fragment extends Fragment {
             Integer uid_int = Integer.parseInt(args[0]);
             JSONArray places = DatabaseInterface.startPagePlaces(uid_int);
 
-                if (LastVisitedPlace_Fragment.new_user==true) {
+                if (Globals.new_user==true) {
                     String[][] no_places = {
                             {"1", "No Place visited yet", "-", "-"},
 

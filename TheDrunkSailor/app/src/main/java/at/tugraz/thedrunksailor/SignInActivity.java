@@ -70,8 +70,8 @@ public class SignInActivity extends AppCompatActivity
         alert.show();
         }
 
-        LastVisitedPlace_Fragment.uid=  userid;
-        if (LastVisitedPlace_Fragment.uid>0)
+        Globals.uid=  userid;
+        if (Globals.uid>0)
         {
             Intent intent = new Intent(this, FragmentManagerActivity.class);
             startActivity(intent);

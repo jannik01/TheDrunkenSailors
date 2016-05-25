@@ -78,7 +78,6 @@ public class RegistrationActivityTest extends ActivityInstrumentationTestCase2<R
 
         mySolo.clickOnButton("Register");
 
-        mySolo.clickOnButton("OK");
 
     }
 
@@ -90,7 +89,6 @@ public class RegistrationActivityTest extends ActivityInstrumentationTestCase2<R
 
         mySolo.clickOnButton("Register");
         mySolo.sleep(1000);
-        mySolo.clickOnButton("OK");
 
     }
 
@@ -101,8 +99,7 @@ public class RegistrationActivityTest extends ActivityInstrumentationTestCase2<R
         mySolo.enterText(2,"pwdpwdpwd1");
 
         mySolo.clickOnButton("Register");
-        mySolo.clickOnButton("OK");
-        mySolo.clickOnButton("OK");
+
 
     }
 

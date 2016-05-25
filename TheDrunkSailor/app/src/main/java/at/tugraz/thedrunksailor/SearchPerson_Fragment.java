@@ -129,7 +129,7 @@ public class SearchPerson_Fragment extends Fragment implements AdapterView.OnIte
             if (persons == null) {
                 return false;
             } else {
-                LastVisitedPlace_Fragment.person_list = persons;
+                Globals.person_list = persons;
                 return true;
             }
 

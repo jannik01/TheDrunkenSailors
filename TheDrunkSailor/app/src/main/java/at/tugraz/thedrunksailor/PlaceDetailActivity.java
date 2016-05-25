@@ -90,7 +90,7 @@ public class PlaceDetailActivity extends AppCompatActivity {
 
     }
     public String[] getDetails() {
-        String[] params = new String[]{Integer.toString(LastVisitedPlace_Fragment.pid)};
+        String[] params = new String[]{Integer.toString(Globals.pid)};
         new getData().execute(params);
         String[] detail_list = new String[0];
         try {

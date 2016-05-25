@@ -185,7 +185,7 @@ public class SearchPlace_Fragment extends Fragment implements AdapterView.OnItem
             }
             else
             {
-                LastVisitedPlace_Fragment.place_list=places;
+                Globals.place_list=places;
                 return true;
             }
 

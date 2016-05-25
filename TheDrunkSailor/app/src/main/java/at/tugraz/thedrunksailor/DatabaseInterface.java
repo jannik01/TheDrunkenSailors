@@ -206,11 +206,11 @@ public class DatabaseInterface {
 
             if (success == 1) {
                 places = json.getJSONArray("last_places");
-                LastVisitedPlace_Fragment.new_user=false;
+                Globals.new_user=false;
                 return places;
 
             } else if (success2 == 2) {
-                LastVisitedPlace_Fragment.new_user=true;
+                Globals.new_user=true;
                 return null;
 
 
@@ -254,8 +254,8 @@ public class DatabaseInterface {
         JSONParser jsonParser = new JSONParser();
         String url_rate_place = "http://drunkensailors.robert-thomann.at/rate_place.php";
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("user_id", Integer.toString(LastVisitedPlace_Fragment.uid)));
-        params.add(new BasicNameValuePair("place_id", Integer.toString(LastVisitedPlace_Fragment.pid)));
+        params.add(new BasicNameValuePair("user_id", Integer.toString(Globals.uid)));
+        params.add(new BasicNameValuePair("place_id", Integer.toString(Globals.pid)));
         params.add(new BasicNameValuePair("rating", rating));
         params.add(new BasicNameValuePair("current_use", current_use));
 

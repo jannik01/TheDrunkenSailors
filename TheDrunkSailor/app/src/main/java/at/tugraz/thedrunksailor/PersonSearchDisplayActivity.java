@@ -37,7 +37,7 @@ public class PersonSearchDisplayActivity extends AppCompatActivity {
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
-                    LastVisitedPlace_Fragment.pers_id=Integer.parseInt(person_list[position][0]);
+                    Globals.pers_id=Integer.parseInt(person_list[position][0]);
 
 
 
@@ -78,7 +78,7 @@ public class PersonSearchDisplayActivity extends AppCompatActivity {
 
     public String[][] createDummyList() {
 
-        JSONArray persons = LastVisitedPlace_Fragment.person_list;
+        JSONArray persons = Globals.person_list;
         Integer persons_length = persons.length();
         String[][] person_list = new String[persons_length][4];
         for (Integer i = 0; persons.length() > i; i++) {

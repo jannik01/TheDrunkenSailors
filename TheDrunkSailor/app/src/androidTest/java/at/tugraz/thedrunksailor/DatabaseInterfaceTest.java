@@ -91,6 +91,7 @@ public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<Frag
     }
     @Test
     public void testPlaceAlreadyExists(){
+        DatabaseInterface.createPlace("pizza hut","big sad",2,"das 123","asdsda dd","8010","asads");
         boolean success = DatabaseInterface.createPlace("pizza hut","big sad",2,"das 123","asdsda dd","8010","asads");
         assertEquals("create Place failed",false, success);
 

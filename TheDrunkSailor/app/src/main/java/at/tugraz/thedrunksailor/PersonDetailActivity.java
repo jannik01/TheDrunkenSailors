@@ -40,7 +40,7 @@ public class PersonDetailActivity extends AppCompatActivity {
                 listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     public void onItemClick(AdapterView<?> parent, View view,
                                             int position, long id) {
-                        LastVisitedPlace_Fragment.pid = Integer.parseInt(places_list[position][0]);
+                        Globals.pid = Integer.parseInt(places_list[position][0]);
 
 
                         Intent intent = new Intent(PersonDetailActivity.this, PlaceDetailActivity.class);
@@ -75,7 +75,7 @@ public class PersonDetailActivity extends AppCompatActivity {
     }
 
     public String[] getDetails() {
-        String[] params = new String[]{Integer.toString(LastVisitedPlace_Fragment.pers_id)};
+        String[] params = new String[]{Integer.toString(Globals.pers_id)};
         new getData().execute(params);
         String[] detail_list = new String[0];
         try {
@@ -91,7 +91,7 @@ public class PersonDetailActivity extends AppCompatActivity {
 
     }
     public String[][] getLastPlaces() {
-        String[] params = new String[]{Integer.toString(LastVisitedPlace_Fragment.pers_id)};
+        String[] params = new String[]{Integer.toString(Globals.pers_id)};
         new getData().execute(params);
         String[][] detail_list = new String[0][];
         try {
