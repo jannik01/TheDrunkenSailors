@@ -27,7 +27,11 @@ public class DatabaseInterface {
     private static String url_get_sector = "http://drunkensailors.robert-thomann.at/get_sectors.php";
     private static String url_start_page_places = "http://drunkensailors.robert-thomann.at/start_page_places.php";
     private static String url_get_place_data = "http://drunkensailors.robert-thomann.at/get_place.php";
+    private static String url_search_person = "http://drunkensailors.robert-thomann.at/search_person.php";
+    private static String url_get_person_data = "http://drunkensailors.robert-thomann.at/get_person.php";
+
     private static String url_get_place_list = "http://drunkensailors.robert-thomann.at/search_place_for_maps.php";
+
 
 
     public static Integer login(String user_name, String password) {
@@ -201,6 +205,9 @@ public class DatabaseInterface {
 
             if (success == 1) {
                 places = json.getJSONArray("last_places");
+                LastVisitedPlace_Fragment.new_user=false;
+                return places;
+
             } else if (success == 2) {
                 LastVisitedPlace_Fragment.new_user=true;
 
@@ -293,6 +300,59 @@ public class DatabaseInterface {
 
     }
 
+    public static JSONArray searchPerson(String name, String age, String sex, String job, String lastly) {
+
+        JSONParser jsonParser = new JSONParser();
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("name", name));
+        params.add(new BasicNameValuePair("age", age));
+        params.add(new BasicNameValuePair("sex", sex));
+        params.add(new BasicNameValuePair("job", job));
+        params.add(new BasicNameValuePair("lastly_visited", lastly));
+
+        JSONObject json = jsonParser.makeHttpRequest(url_search_person,
+                "POST", params);
+
+        //Log.d("Create Response", json.toString());
+        try {
+            int success = json.getInt(TAG_SUCCESS);
+            JSONArray person_list = json.getJSONArray("person_list");
+
+            if (success == 1) {
+                return (person_list);
+            }
+            return null;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+    public static JSONArray getPersonData(Integer pers_id) {
+
+        JSONParser jsonParser = new JSONParser();
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("user_id", Integer.toString(pers_id)));
+        JSONObject json = jsonParser.makeHttpRequest(url_get_person_data,
+                "POST", params);
+
+        //Log.d("Create Response", json.toString());
+        try {
+            int success = json.getInt(TAG_SUCCESS);
+            JSONArray person_data = json.getJSONArray("person_data");
+
+            if (success == 1) {
+                return (person_data);
+            }
+            return null;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
+
     public static JSONArray getPlacesByPostal(String zip_code) {
 
 
@@ -305,14 +365,14 @@ public class DatabaseInterface {
         if(response != null){
 
             try {
-                    int success = ( response.getInt(TAG_SUCCESS));
+                int success = ( response.getInt(TAG_SUCCESS));
 
-                    if (success == 1) {
-                        places = response.getJSONArray("place_string");
-                    }
-                    else {
-                        Log.e("[ERROR]", "query not successful.");
-                    }
+                if (success == 1) {
+                    places = response.getJSONArray("place_string");
+                }
+                else {
+                    Log.e("[ERROR]", "query not successful.");
+                }
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -321,6 +381,7 @@ public class DatabaseInterface {
 
         return (places);
     }
+
 
 
 }
