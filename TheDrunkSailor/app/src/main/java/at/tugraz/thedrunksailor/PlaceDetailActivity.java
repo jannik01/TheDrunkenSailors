@@ -1,14 +1,11 @@
 package at.tugraz.thedrunksailor;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -24,7 +21,7 @@ public class PlaceDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_detail_place);
+        setContentView(R.layout.activity_detail_place);
         TextView name = (TextView)findViewById(R.id.name);
         TextView address = (TextView)findViewById(R.id.Address);
         TextView zipcode = (TextView)findViewById(R.id.zipcode);

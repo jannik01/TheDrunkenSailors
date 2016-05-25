@@ -135,12 +135,10 @@ public class LastVisitedPlace_Fragment extends Fragment {
 
     class doTask extends AsyncTask<String, String, String[][]> {
 
-
         protected String[][] doInBackground(String... args) {
             Integer uid_int = Integer.parseInt(args[0]);
             System.out.print(uid_int);
             JSONArray places = DatabaseInterface.startPagePlaces(uid_int);
-
 
                 if (LastVisitedPlace_Fragment.new_user==true) {
                     String[][] no_places = {
@@ -148,7 +146,6 @@ public class LastVisitedPlace_Fragment extends Fragment {
 
                     };
                     return no_places;
-
                 } else {
                     Integer places_length = places.length();
                     String[][] places_list = new String[places_length][4];
@@ -176,8 +173,6 @@ public class LastVisitedPlace_Fragment extends Fragment {
                     }
                     return places_list;
                 }
-
-
         }
     }
 }
