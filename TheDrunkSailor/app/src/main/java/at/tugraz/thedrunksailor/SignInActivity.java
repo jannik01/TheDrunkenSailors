@@ -1,5 +1,6 @@
 package at.tugraz.thedrunksailor;
 
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -56,6 +57,16 @@ public class SignInActivity extends AppCompatActivity
         {
         alert.setMessage("Username and Password is wrong!");
         alert.setTitle("Fail");
+            alert.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // continue with delete
+                }
+            });
+            alert.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // do nothing
+                }
+            });
         alert.show();
         }
 

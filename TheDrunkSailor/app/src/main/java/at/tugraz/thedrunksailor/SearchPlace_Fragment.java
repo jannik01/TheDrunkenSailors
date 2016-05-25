@@ -1,6 +1,7 @@
 package at.tugraz.thedrunksailor;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.AsyncTask;
@@ -102,6 +103,16 @@ public class SearchPlace_Fragment extends Fragment implements AdapterView.OnItem
         {
             alerter.setMessage("Please put in a zip code between 3 - 5 digits");
             alerter.setTitle("Fail");
+            alerter.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // continue with delete
+                }
+            });
+            alerter.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+            });
             alerter.show();
         }
         else {
