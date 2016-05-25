@@ -29,7 +29,7 @@ public class DatabaseInterface {
     private static String url_get_sector = "http://drunkensailors.robert-thomann.at/get_sectors.php";
     private static String url_start_page_places = "http://drunkensailors.robert-thomann.at/start_page_places.php";
     private static String url_get_place_data = "http://drunkensailors.robert-thomann.at/get_place.php";
-    private static String url_get_place_list = "http://drunkensailors.robert-thomann.at/get_place_list.php";
+    private static String url_get_place_list = "http://drunkensailors.robert-thomann.at/search_place_for_maps.php";
 
 
     public static Integer login(String user_name, String password) {
@@ -294,11 +294,12 @@ public class DatabaseInterface {
 
     }
 
-    public static JSONArray getPlaces() {
+    public static JSONArray getPlacesByPostal(String zip_code) {
 
 
         JSONParser jsonParser = new JSONParser();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("zipcode", zip_code));
         JSONObject response = jsonParser.makeHttpRequest(url_get_place_list,"POST", params);
         JSONArray places = new JSONArray();
 
@@ -308,8 +309,12 @@ public class DatabaseInterface {
                     int success = ( response.getInt(TAG_SUCCESS));
 
                     if (success == 1) {
-                        places = response.getJSONArray("places_list");
+                        places = response.getJSONArray("place_string");
                     }
+                    else {
+                        Log.e("[ERROR]", "query not successful.");
+                    }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }

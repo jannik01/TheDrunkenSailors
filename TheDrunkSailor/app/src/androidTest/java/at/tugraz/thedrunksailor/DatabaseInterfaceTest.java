@@ -164,20 +164,66 @@ public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<Main
 
     }
 
-    public void testGetPlaces() {
-        JSONArray extensive_place_list = DatabaseInterface.getPlaces();
+    public void testGetPlacesByPostal_no_Places() {
+        JSONArray extensive_place_list = DatabaseInterface.getPlacesByPostal("H666");
+        assertEquals("FAIL: Received places for non exisiting zip code.",extensive_place_list, new JSONArray() );
+    }
+
+    public void testGetPlacesByPostal() {
+        JSONArray extensive_place_list = DatabaseInterface.getPlacesByPostal("8010");
+        assertNotEquals("FAIL: Empty result.",extensive_place_list, new JSONArray() );
 
         try {
-            assertNotNull("DatabaseInterface.getPlaces : id", extensive_place_list.getJSONObject(1).getString("place_id"));
-            assertNotNull("DatabaseInterface.getPlaces : no name", extensive_place_list.getJSONObject(1).getString("place_name"));
-            assertNotNull("DatabaseInterface.getPlaces : no address", extensive_place_list.getJSONObject(1).getString("place_address"));
-            assertNotNull("DatabaseInterface.getPlaces : no zip code", extensive_place_list.getJSONObject(1).getString("place_zip"));
-            assertNotNull("DatabaseInterface.getPlaces : no sector", extensive_place_list.getJSONObject(1).getString("place_sector"));
-            assertNotNull("DatabaseInterface.getPlaces : town", extensive_place_list.getJSONObject(1).getString("place_town"));
+            assertNotNull("DatabaseInterface.getPlaces : no name", extensive_place_list.getJSONObject(0).getString("name"));
 
         } catch (JSONException e) {
             e.printStackTrace();
-            assertTrue("FAILED",false);
+            assertTrue("FAILED: could not read name",false);
+        }
+
+
+
+        try {
+            assertNotNull("DatabaseInterface.getPlaces : id", extensive_place_list.getJSONObject(0).getString("place_ID"));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            assertTrue("FAILED: could not read place_id",false);
+        }
+        try {
+            assertNotNull("DatabaseInterface.getPlaces : no address", extensive_place_list.getJSONObject(0).getString("address"));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            assertTrue("FAILED: could not read address",false);
+        }
+        try {
+            assertNotNull("DatabaseInterface.getPlaces : no zipcode", extensive_place_list.getJSONObject(0).getString("zipcode"));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            assertTrue("FAILED: could not read zip code",false);
+        }
+        try {
+            assertNotNull("DatabaseInterface.getPlaces : no sector", extensive_place_list.getJSONObject(0).getString("sector_ID"));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            assertTrue("FAILED: could not read sector ID",false);
+        }
+        try {
+            assertNotNull("DatabaseInterface.getPlaces : town", extensive_place_list.getJSONObject(0).getString("town"));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            assertTrue("FAILED: could not read town",false);
+        }
+        try {
+            assertNotNull("DatabaseInterface.getPlaces : country", extensive_place_list.getJSONObject(0).getString("country"));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            assertTrue("FAILED: could not read country",false);
         }
     }
 }
