@@ -30,7 +30,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".SearchDisplayActivity"></activity>
+        <activity
+            android:name=".SearchDisplayActivity"
+            android:theme="@style/Theme.AppCompat">
+        </activity>
+        <activity
+            android:name=".PlaceDetailActivity"
+            android:theme="@style/Theme.AppCompat">
+        </activity>
 
         <activity
             android:name=".FragmentUtilActivity"
