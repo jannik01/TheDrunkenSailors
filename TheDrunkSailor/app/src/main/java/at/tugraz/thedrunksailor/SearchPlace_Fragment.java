@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.ContextThemeWrapper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -75,7 +76,7 @@ public class SearchPlace_Fragment extends Fragment implements AdapterView.OnItem
 
     public void searchPlaceLogic(View view)
     {
-        AlertDialog.Builder alerter = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder alerter = new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), R.style.myDialog));
         EditText mPLZ = (EditText)rootview.findViewById(R.id.plz);
 
         alerter.setIcon(android.R.drawable.ic_dialog_alert);
