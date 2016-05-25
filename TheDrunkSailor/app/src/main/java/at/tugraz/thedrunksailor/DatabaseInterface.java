@@ -27,7 +27,7 @@ public class DatabaseInterface {
     private static String url_get_sector = "http://drunkensailors.robert-thomann.at/get_sectors.php";
     private static String url_start_page_places = "http://drunkensailors.robert-thomann.at/start_page_places.php";
     private static String url_get_place_data = "http://drunkensailors.robert-thomann.at/get_place.php";
-
+    private static String url_get_place_list = "http://drunkensailors.robert-thomann.at/search_place_for_maps.php";
 
 
     public static Integer login(String user_name, String password) {
@@ -194,18 +194,13 @@ public class DatabaseInterface {
                 "POST", params);
 
         //Log.d("Create Response", json.toString());
+        JSONArray places = new JSONArray();
+
         try {
-            int success = json.getInt(TAG_SUCCESS);
-            /*if(places == null)
-            {
-                JSONArray nullarray = new JSONArray();
-                nullarray.put("");
-                places =nullarray;
-            }*/
+            int success = (json!=null ? json.getInt(TAG_SUCCESS) : 0);
 
             if (success == 1) {
-                JSONArray places = json.getJSONArray("last_places");
-                return places;
+                places = json.getJSONArray("last_places");
             } else if (success == 2) {
                 LastVisitedPlace_Fragment.new_user=true;
 
@@ -217,7 +212,8 @@ public class DatabaseInterface {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-            return null;
+
+        return(places);
 
 
     }
@@ -296,4 +292,35 @@ public class DatabaseInterface {
         return null;
 
     }
+
+    public static JSONArray getPlacesByPostal(String zip_code) {
+
+
+        JSONParser jsonParser = new JSONParser();
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("zipcode", zip_code));
+        JSONObject response = jsonParser.makeHttpRequest(url_get_place_list,"POST", params);
+        JSONArray places = new JSONArray();
+
+        if(response != null){
+
+            try {
+                    int success = ( response.getInt(TAG_SUCCESS));
+
+                    if (success == 1) {
+                        places = response.getJSONArray("place_string");
+                    }
+                    else {
+                        Log.e("[ERROR]", "query not successful.");
+                    }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return (places);
+    }
+
+
 }
