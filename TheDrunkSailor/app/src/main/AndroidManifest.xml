@@ -38,6 +38,14 @@
             android:name=".PlaceDetailActivity"
             android:theme="@style/Theme.AppCompat">
         </activity>
+        <activity
+            android:name=".PersonSearchDisplayActivity"
+            android:theme="@style/Theme.AppCompat">
+        </activity>
+        <activity
+            android:name=".PersonDetailActivity"
+            android:theme="@style/Theme.AppCompat">
+        </activity>
 
         <activity
             android:name=".FragmentUtilActivity"

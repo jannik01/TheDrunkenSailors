@@ -22,7 +22,9 @@ public class LastVisitedPlace_Fragment extends Fragment {
     View rootview;
     public static int uid = 79;
     public static int pid = 25;
+    public static int pers_id = 25;
     public static JSONArray place_list;
+    public static JSONArray person_list;
     public static boolean new_user=false;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -138,7 +140,6 @@ public class LastVisitedPlace_Fragment extends Fragment {
 
         protected String[][] doInBackground(String... args) {
             Integer uid_int = Integer.parseInt(args[0]);
-            System.out.print(uid_int);
             JSONArray places = DatabaseInterface.startPagePlaces(uid_int);
 
 
