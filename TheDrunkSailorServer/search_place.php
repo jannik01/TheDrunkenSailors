@@ -19,7 +19,7 @@ if (isset($_POST["sector_ID"])) {
     $min_rating = mysqli_real_escape_string($db_connection, $_POST['min_rating']);
     $max_rating = mysqli_real_escape_string($db_connection, $_POST['max_rating']);
 
-    
+     $db_connection->set_charset("utf8");
     $check="SELECT T.place_ID, result , current_use, P.sector_ID, P.name
     FROM Places P, (
         SELECT R.place_ID, AVG(R.rating) as result , T2.currentuse as current_use 

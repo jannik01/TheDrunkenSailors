@@ -16,7 +16,7 @@ if (isset($_POST["place_name"],$_POST["description"], $_POST["sector_ID"],$_POST
     $country = mysqli_real_escape_string($db_connection, $_POST['country']);
     $zipcode = mysqli_real_escape_string($db_connection, $_POST['zipcode']);
     $town = mysqli_real_escape_string($db_connection, $_POST['town']);
-
+ $db_connection->set_charset("utf8");
 
  
 

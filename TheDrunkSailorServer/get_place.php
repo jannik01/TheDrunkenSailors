@@ -12,7 +12,7 @@ $response = array();
 
         $check ="SELECT P.address, P.description, P.zipcode, P.town,P.country, P.name, AVG(R.rating)as rating, AVG(C.current_use) as current_use FROM ".DB_DATABASE.".Ratings R, ".DB_DATABASE.".Places P, ".DB_DATABASE.".Current_Use C WHERE R.place_ID=P.place_ID AND C.place_id=P.place_ID AND R.place_ID =\"".$place_ID."\"";
    
-
+        $db_connection->set_charset("utf8");
             $checksql=mysqli_query($db_connection,$check);
 
     if (mysqli_query($db_connection,$check)) {
@@ -21,8 +21,6 @@ $response = array();
         $response["success"] = 1;
         $response["message"] = "Place Data aquisition complete.";
         $response["place_data"] = $test;
-
- 
 
         echo json_encode($response);
     } else {

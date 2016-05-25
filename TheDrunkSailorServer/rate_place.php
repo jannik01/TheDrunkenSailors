@@ -11,7 +11,7 @@ $response = array();
     $user_id = mysqli_real_escape_string($db_connection, $_POST['user_id']);
     $rating = mysqli_real_escape_string($db_connection, $_POST['rating']);
     $current_use = mysqli_real_escape_string($db_connection, $_POST['current_use']);
-
+ $db_connection->set_charset("utf8");
 
     
     //$check="SELECT rating FROM ".DB_DATABASE.".Ratings WHERE place_id=\"".$place_id" AND user_id=\"0\"";

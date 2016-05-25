@@ -11,6 +11,7 @@ $response = array();
 
         $check ="SELECT name FROM ".DB_DATABASE.".Sector GROUP BY sector_ID ASC";
    
+        $db_connection->set_charset("utf8");
 
             $checksql=mysqli_query($db_connection,$check);
 
