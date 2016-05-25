@@ -47,7 +47,7 @@ public class RegistrationActivity extends AppCompatActivity {
         String gender;
         int age = 0;
         Boolean isAllAlright = true;
-
+        String ErrorMsg = "";
 
 
         RadioButton female = (RadioButton) findViewById(R.id.radioFemale);
@@ -62,13 +62,13 @@ public class RegistrationActivity extends AppCompatActivity {
 
         if (!password.equals(passwordRe) || password.equals("") || passwordRe.equals(""))
         {
-            showAlert("Password Failure", "Password not matching or empty");
+            ErrorMsg= ErrorMsg +"Password not matching or empty\n";
             isAllAlright=false;
         }
 
         if (username.equals("") || name.equals(""))
         {
-            showAlert("Empty Fields", "Not all required Fields are entered");
+            ErrorMsg= ErrorMsg +"Not all required Fields are entered\n";
             isAllAlright=false;
         }
 
@@ -86,17 +86,13 @@ public class RegistrationActivity extends AppCompatActivity {
 
         if (UserName.length() > 25 || UserName.length() < 5)
         {
-            alert.setMessage("Please use a username between 5 & 25 characters!");
-            alert.setTitle("Fail");
-            alert.show();
+            ErrorMsg= ErrorMsg +"Please use a username between 5 & 25 characters!\n";
             isAllAlright=false;
         }
 
         if (Password.length() > 25 || Password.length() < 8)
         {
-            alert.setMessage("Please use a password between 8 & 25 characters!");
-            alert.setTitle("Fail");
-            alert.show();
+            ErrorMsg= ErrorMsg +"Please use a password between 8 & 25 characters!\n";
             isAllAlright=false;
         }
 
@@ -111,16 +107,12 @@ public class RegistrationActivity extends AppCompatActivity {
             {
                 if (count_underscore > 0)
                 {
-                    alert.setMessage("Please just use one underscore!");
-                    alert.setTitle("Fail");
-                    alert.show();
+                    ErrorMsg= ErrorMsg +"Please just use one underscore!\n";
                     isAllAlright=false;
                 }
                 if (i == 0 || i == UserName.length()-1)
                 {
-                    alert.setMessage("Please use underscore not at the beginning or end!");
-                    alert.setTitle("Fail");
-                    alert.show();
+                    ErrorMsg= ErrorMsg +"Please use underscore not at the beginning or end!\n";
                     isAllAlright=false;
                 }
 
@@ -131,9 +123,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
             if (((ascii > 64 && ascii < 91) || (ascii > 96 && ascii < 123) || (ascii > 47 && ascii < 58) || ascii == 95) == false)
             {
-                alert.setMessage("Please just use letters, numbers and underscore!");
-                alert.setTitle("Fail");
-                alert.show();
+                ErrorMsg= ErrorMsg +"Please just use letters, numbers and underscore!\n";
                 isAllAlright=false;
             }
         }
@@ -151,9 +141,14 @@ public class RegistrationActivity extends AppCompatActivity {
             }
             if (success==true)
             {
-                /*Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);*/
+                Intent intent = new Intent(this, SignInActivity.class);
+                startActivity(intent);
             }
+        }
+        else{
+            alert.setMessage(ErrorMsg);
+            alert.setTitle("Fail");
+            alert.show();
         }
 
     }
