@@ -35,6 +35,8 @@ public class FragmentManagerActivity extends FragmentActivity
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.main_fragment_manager);
 
+
+
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -43,6 +45,10 @@ public class FragmentManagerActivity extends FragmentActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+    }
+
+    public void onAction(){
+
     }
 
     @Override

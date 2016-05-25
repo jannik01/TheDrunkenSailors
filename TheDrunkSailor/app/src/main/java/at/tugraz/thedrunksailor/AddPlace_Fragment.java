@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -48,6 +49,16 @@ public class AddPlace_Fragment extends Fragment implements AdapterView.OnItemSel
         ArrayAdapter adapter = new ArrayAdapter(getActivity(),  android.R.layout.simple_spinner_item,sector_list);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+
+        Button button = (Button) rootview.findViewById(R.id.btnAddPlace);
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View rootview)
+            {
+                buttonOnClick(rootview);
+            }
+        });
         return rootview;
     }
 
