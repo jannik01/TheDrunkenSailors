@@ -30,7 +30,7 @@ public class DatabaseInterface {
     private static String url_search_person = "http://drunkensailors.robert-thomann.at/search_person.php";
     private static String url_get_person_data = "http://drunkensailors.robert-thomann.at/get_person.php";
 
-
+    private static String url_get_place_list = "http://drunkensailors.robert-thomann.at/search_place_for_maps.php";
 
 
 
@@ -144,7 +144,6 @@ public class DatabaseInterface {
         return (false);
     }
 
-
     public static JSONArray searchPlace(String place_name, String sector_ID, String zipcode,String town, String min_use, String max_use, String min_rating, String max_rating) {
         JSONParser jsonParser = new JSONParser();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -199,19 +198,16 @@ public class DatabaseInterface {
                 "POST", params);
 
         //Log.d("Create Response", json.toString());
+        JSONArray places = new JSONArray();
+
         try {
-            int success = json.getInt(TAG_SUCCESS);
-            /*if(places == null)
-            {
-                JSONArray nullarray = new JSONArray();
-                nullarray.put("");
-                places =nullarray;
-            }*/
+            int success = (json!=null ? json.getInt(TAG_SUCCESS) : 0);
 
             if (success == 1) {
-                JSONArray places = json.getJSONArray("last_places");
+                places = json.getJSONArray("last_places");
                 LastVisitedPlace_Fragment.new_user=false;
                 return places;
+
             } else if (success == 2) {
                 LastVisitedPlace_Fragment.new_user=true;
 
@@ -223,7 +219,8 @@ public class DatabaseInterface {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-            return null;
+
+        return(places);
 
 
     }
@@ -249,6 +246,7 @@ public class DatabaseInterface {
         }
         return null;
     }
+
     public static boolean ratePlace(String rating , String current_use) {
 
         JSONParser jsonParser = new JSONParser();
@@ -277,6 +275,7 @@ public class DatabaseInterface {
         }
         return (false);
     }
+
     public static JSONArray getPlaceData(Integer pid) {
 
         JSONParser jsonParser = new JSONParser();
@@ -300,6 +299,7 @@ public class DatabaseInterface {
         return null;
 
     }
+
     public static JSONArray searchPerson(String name, String age, String sex, String job, String lastly) {
 
         JSONParser jsonParser = new JSONParser();
@@ -351,4 +351,37 @@ public class DatabaseInterface {
         return null;
 
     }
+
+
+    public static JSONArray getPlacesByPostal(String zip_code) {
+
+
+        JSONParser jsonParser = new JSONParser();
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("zipcode", zip_code));
+        JSONObject response = jsonParser.makeHttpRequest(url_get_place_list,"POST", params);
+        JSONArray places = new JSONArray();
+
+        if(response != null){
+
+            try {
+                int success = ( response.getInt(TAG_SUCCESS));
+
+                if (success == 1) {
+                    places = response.getJSONArray("place_string");
+                }
+                else {
+                    Log.e("[ERROR]", "query not successful.");
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return (places);
+    }
+
+
+
 }
