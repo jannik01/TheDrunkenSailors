@@ -148,6 +148,16 @@ public class RegistrationActivity extends AppCompatActivity {
         else{
             alert.setMessage(ErrorMsg);
             alert.setTitle("Fail");
+            alert.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // continue with delete
+                }
+            });
+            alert.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // do nothing
+                }
+            });
             alert.show();
         }
 

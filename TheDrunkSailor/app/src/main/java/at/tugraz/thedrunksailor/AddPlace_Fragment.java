@@ -1,6 +1,7 @@
 package at.tugraz.thedrunksailor;
 
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 
 
@@ -84,8 +85,8 @@ public class AddPlace_Fragment extends Fragment implements AdapterView.OnItemSel
                     Address.getText().toString(), Country.getText().toString(), Zip.getText().toString(), Town.getText().toString()};
             try {
                 if (new doTask().execute(params).get()) {
-                    /*Intent intent = new Intent(this, MainActivity.class);
-                    startActivity(intent);*/
+                   Intent intent = new Intent(getActivity(), FragmentManagerActivity.class);
+                   startActivity(intent);
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
