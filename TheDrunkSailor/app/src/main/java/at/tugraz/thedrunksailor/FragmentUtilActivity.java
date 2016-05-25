@@ -25,6 +25,7 @@ public class FragmentUtilActivity extends FragmentActivity {
         frameLayout.setId(CONTAINER_ID);
 
         setContentView(frameLayout, params);
+
     }
 
     public void addFragment(Fragment fragment, String tag) {

@@ -6,12 +6,14 @@ import android.support.v4.app.Fragment;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -48,6 +50,16 @@ public class AddPlace_Fragment extends Fragment implements AdapterView.OnItemSel
         ArrayAdapter adapter = new ArrayAdapter(getActivity(),  android.R.layout.simple_spinner_item,sector_list);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+
+        Button button = (Button) rootview.findViewById(R.id.btnAddPlace);
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View rootview)
+            {
+                buttonOnClick(rootview);
+            }
+        });
         return rootview;
     }
 
@@ -81,8 +93,8 @@ public class AddPlace_Fragment extends Fragment implements AdapterView.OnItemSel
                 e.printStackTrace();
             }
         } else {
-            new AlertDialog.Builder(getActivity())
-                    .setTitle("wrong input")
+            new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), R.style.myDialog))
+                    .setTitle("Wrong input")
                     .setMessage("Please fill all the required fields")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {

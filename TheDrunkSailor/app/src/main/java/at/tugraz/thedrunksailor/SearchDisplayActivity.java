@@ -1,5 +1,6 @@
 package at.tugraz.thedrunksailor;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TableLayout;
@@ -27,31 +29,23 @@ public class SearchDisplayActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_display_search);
         final ListView listview = (ListView) findViewById(R.id.listview);
 
         final String [][] places_list=createDummyList();
         if (listview != null) {
             listview.setAdapter(new PlaceItemAdapter(this, places_list));
-
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
                     LastVisitedPlace_Fragment.pid=Integer.parseInt(places_list[position][0]);
-
-
-
                     Intent intent = new Intent(SearchDisplayActivity.this, PlaceDetailActivity.class);
                     startActivity(intent);
-
                 }
             });
         }
-
-
         DatabaseInterface database_interface_object = new DatabaseInterface();
-
-
     }
 
 
