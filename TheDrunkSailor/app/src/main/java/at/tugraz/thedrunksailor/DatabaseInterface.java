@@ -140,7 +140,6 @@ public class DatabaseInterface {
         return (false);
     }
 
-
     public static JSONArray searchPlace(String place_name, String sector_ID, String zipcode,String town, String min_use, String max_use, String min_rating, String max_rating) {
         JSONParser jsonParser = new JSONParser();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -244,6 +243,7 @@ public class DatabaseInterface {
         }
         return null;
     }
+
     public static boolean ratePlace(String rating , String current_use) {
 
         JSONParser jsonParser = new JSONParser();
@@ -272,6 +272,7 @@ public class DatabaseInterface {
         }
         return (false);
     }
+
     public static JSONArray getPlaceData(Integer pid) {
 
         JSONParser jsonParser = new JSONParser();

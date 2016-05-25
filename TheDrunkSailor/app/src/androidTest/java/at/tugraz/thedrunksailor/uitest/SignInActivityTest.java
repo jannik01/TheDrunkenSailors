@@ -41,7 +41,6 @@ public class SignInActivityTest extends ActivityInstrumentationTestCase2<SignInA
 
     public void testInput()
     {
-
        // mySolo.clickOnText("UserName");
         mySolo.enterText(1, "testuser1");
 
@@ -52,7 +51,7 @@ public class SignInActivityTest extends ActivityInstrumentationTestCase2<SignInA
 
         mySolo.clickOnButton("Sign in");
 
-        boolean actual = mySolo.searchText("Welcome XY");
+        boolean actual = mySolo.searchText("The Drunken Sailors");
 
         assertEquals("Fail", true, actual);
         //mySolo.searchEditText("++++++++++++++++++");

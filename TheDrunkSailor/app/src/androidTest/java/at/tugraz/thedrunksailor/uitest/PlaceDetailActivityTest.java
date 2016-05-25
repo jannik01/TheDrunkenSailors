@@ -23,8 +23,6 @@ public class PlaceDetailActivityTest extends ActivityInstrumentationTestCase2<Pl
     public void setUp() throws Exception {
         super.setUp();
         mySolo = new Solo(getInstrumentation(), getActivity());
-
-
     }
 
     public void tearDown() throws Exception {
