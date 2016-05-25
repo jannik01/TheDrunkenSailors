@@ -79,7 +79,7 @@ public class PlaceDetailActivity extends AppCompatActivity {
 
         try {
             if (new doTask().execute(params).get()) {
-                Intent intent = new Intent(this, PlaceDetailActivity.class);
+                Intent intent = new Intent(this, FragmentManagerActivity.class);
                 startActivity(intent);
             }
         } catch (InterruptedException e) {
