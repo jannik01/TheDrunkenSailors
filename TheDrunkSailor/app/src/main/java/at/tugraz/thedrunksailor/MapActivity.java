@@ -413,7 +413,7 @@ public class MapActivity extends AppCompatActivity implements
             JSONArray json_array = DatabaseInterface.searchPlace("Mensa","1","","","","","","");
 
 
-            if (json_array != null) {
+            if (json_array.length() > 0) {
 
                 places_list_2 = new String[json_array.length()][5];
 

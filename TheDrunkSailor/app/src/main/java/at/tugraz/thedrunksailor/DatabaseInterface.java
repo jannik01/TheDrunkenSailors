@@ -70,18 +70,18 @@ public class DatabaseInterface {
         params.add(new BasicNameValuePair("job", job));
         JSONObject json = jsonParser.makeHttpRequest(url_create_user,
                 "POST", params);
+        boolean success = false;
 
+        if (json != null) {
+            try {
+                success = (1 == json.getInt(TAG_SUCCESS));
 
-        try {
-            int success = json.getInt(TAG_SUCCESS);
-
-            if (success == 1) {
-                return (true);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
-        return false;
+
+        return (success);
 
     }
 
@@ -97,20 +97,22 @@ public class DatabaseInterface {
         params.add(new BasicNameValuePair("zipcode", zipcode));
         params.add(new BasicNameValuePair("town", town));
 
+        boolean success = false;
         JSONObject json = jsonParser.makeHttpRequest(url_create_place,
                 "POST", params);
 
-        //Log.d("Create Response", json.toString());
-        try {
-            int success = json.getInt(TAG_SUCCESS);
-
-            if (success == 1) {
-                return (true);
+        if(json != null) {
+            //Log.d("Create Response", json.toString());
+            try {
+                if (1 == json.getInt(TAG_SUCCESS)){
+                    success = true;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
-        return false;
+
+        return(success);
 
     }
 
@@ -164,23 +166,20 @@ public class DatabaseInterface {
             params.add(new BasicNameValuePair("max_rating", ""));
         else
             params.add(new BasicNameValuePair("max_rating", max_rating.toString()));
+        JSONArray places = new JSONArray();
         JSONObject json = jsonParser.makeHttpRequest(url_search_place, "POST", params);
+        if(json != null) {
+            try {
+                int success = json.getInt(TAG_SUCCESS);
+                if(success == 1) {
+                    places = json.getJSONArray("place_string");
+                }
 
-        try {
-            int success = json.getInt(TAG_SUCCESS);
-            JSONArray places = json.getJSONArray("place_string");
-
-
-            if (success == 1) {
-                return places;
-
-            } else {
-                return null;
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
-        return null;
+        return(places);
     }
 
     public static JSONArray startPagePlaces(Integer user_id) {
@@ -221,23 +220,23 @@ public class DatabaseInterface {
     public static JSONArray getSectors() {
         JSONParser jsonParser = new JSONParser();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-
+        JSONArray sectors = new JSONArray();
         JSONObject json = jsonParser.makeHttpRequest(url_get_sector,
                 "POST", params);
 
         //Log.d("Create Response", json.toString());
-        try {
-            int success = json.getInt(TAG_SUCCESS);
-            JSONArray sectors = json.getJSONArray("sector_name");
-
-            if (success == 1) {
-                return (sectors);
+        if(json != null) {
+            try {
+                int success = json.getInt(TAG_SUCCESS);
+                if (success == 1) {
+                    sectors = json.getJSONArray("sector_name");
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-            return null;
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
-        return null;
+
+        return(sectors);
     }
 
     public static boolean ratePlace(String rating , String current_use) {
@@ -274,22 +273,26 @@ public class DatabaseInterface {
         JSONParser jsonParser = new JSONParser();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("place_id", Integer.toString(pid)));
-        JSONObject json = jsonParser.makeHttpRequest(url_get_place_data,
+        JSONArray place_data = new JSONArray();
+
+        JSONObject result = jsonParser.makeHttpRequest(url_get_place_data,
                 "POST", params);
 
-        //Log.d("Create Response", json.toString());
-        try {
-            int success = json.getInt(TAG_SUCCESS);
-            JSONArray place_data = json.getJSONArray("place_data");
 
-            if (success == 1) {
-                return (place_data);
+        //Log.d("Create Response", result.toString());
+        if(result != null) {
+            try {
+                int success = result.getInt(TAG_SUCCESS);
+                if (success == 1) {
+                    place_data = result.getJSONArray("place_data");
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-            return null;
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
-        return null;
+
+        return (place_data);
 
     }
 

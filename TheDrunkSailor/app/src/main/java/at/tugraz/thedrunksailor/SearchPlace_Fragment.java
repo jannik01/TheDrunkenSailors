@@ -161,7 +161,7 @@ public class SearchPlace_Fragment extends Fragment implements AdapterView.OnItem
 
         protected Boolean doInBackground(String... args) {
             JSONArray places = DatabaseInterface.searchPlace(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7]);
-            if (places==null)
+            if (places.length() == 0)
             {
                 return false;
             }
