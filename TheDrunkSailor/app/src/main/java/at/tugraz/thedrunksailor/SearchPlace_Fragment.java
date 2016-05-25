@@ -83,12 +83,6 @@ public class SearchPlace_Fragment extends Fragment implements AdapterView.OnItem
 
         String plz = mPLZ.getText().toString();
 
-        if (plz.length() < 3 || plz.length() > 5)
-        {
-            alerter.setMessage("Please put in a zip code between 3 - 5 digits");
-            alerter.setTitle("Fail");
-            alerter.show();
-        }
         RatingBar minCBar = (RatingBar) rootview.findViewById(R.id.occmin);
         RatingBar maxCBar = (RatingBar) rootview.findViewById(R.id.occmax);
         RatingBar minRBar = (RatingBar) rootview.findViewById(R.id.rankmin);
@@ -103,17 +97,26 @@ public class SearchPlace_Fragment extends Fragment implements AdapterView.OnItem
         Float minR = minRBar.getRating();
         Float maxR = maxRBar.getRating();
         Integer sectorID= (int) (long)spinner.getSelectedItemId() +1;
-        String[] params = new String[]{Name, sectorID.toString(),plz,Town,minC.toString(),maxC.toString(),minR.toString(),maxR.toString() };
 
-        try {
-            if (new doTask().execute(params).get()) {
-                Intent intent = new Intent(getActivity(), SearchDisplayActivity.class);
-                startActivity(intent);
+        if (plz.length() < 3 || plz.length() > 5)
+        {
+            alerter.setMessage("Please put in a zip code between 3 - 5 digits");
+            alerter.setTitle("Fail");
+            alerter.show();
+        }
+        else {
+            String[] params = new String[]{Name, sectorID.toString(), plz, Town, minC.toString(), maxC.toString(), minR.toString(), maxR.toString()};
+
+            try {
+                if (new doTask().execute(params).get()) {
+                    Intent intent = new Intent(getActivity(), SearchDisplayActivity.class);
+                    startActivity(intent);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
         }
     }
 
