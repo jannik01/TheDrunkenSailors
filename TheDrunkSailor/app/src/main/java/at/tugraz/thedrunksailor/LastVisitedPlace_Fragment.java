@@ -1,5 +1,6 @@
 package at.tugraz.thedrunksailor;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -20,20 +21,25 @@ import java.util.concurrent.ExecutionException;
 public class LastVisitedPlace_Fragment extends Fragment {
     View rootview;
     public static int uid = 79;
-    public static int pid = 1;
+    public static int pid = 25;
     public static JSONArray place_list;
     public static boolean new_user=false;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_last_places_visited, container, false);
         final ListView listview = (ListView) rootview.findViewById(R.id.listview);
+        final String [][] places_list=createDummyList();
 
         if (listview != null) {
             listview.setAdapter(new PlaceItemAdapter(getActivity(), createDummyList()));
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
-                    view.getTag();
+                    pid=Integer.parseInt(places_list[position][0]);
+
+                    Intent intent = new Intent(getActivity(), PlaceDetailActivity.class);
+                    startActivity(intent);
+
                 }
             });
         }

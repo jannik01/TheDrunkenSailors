@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Spinner;
@@ -31,7 +32,6 @@ import java.util.concurrent.ExecutionException;
 public class SearchPlace_Fragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
 
-    EditText mPLZ;
     Spinner spinner;
 
     View rootview;
@@ -40,22 +40,28 @@ public class SearchPlace_Fragment extends Fragment implements AdapterView.OnItem
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.search_place, container, false);
         DatabaseInterface database_interface_object = new DatabaseInterface();
-//        String[] sector_list={""};
-//        try {
-//            sector_list = new getSector().execute().get();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } catch (ExecutionException e) {
-//            e.printStackTrace();
-//        }
-//        spinner = (Spinner) findViewById(R.id.static_spinner);
-//        ArrayAdapter adapter = new ArrayAdapter(this,  android.R.layout.simple_spinner_item,sector_list);
-
+        String[] sector_list={""};
+        try {
+            sector_list = new getSector().execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+           e.printStackTrace();
+        }
         spinner = (Spinner) rootview.findViewById(R.id.static_spinner);
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(getActivity(),R.array.Sectors,android.R.layout.simple_spinner_item);
+        ArrayAdapter adapter = new ArrayAdapter(getActivity(),  android.R.layout.simple_spinner_item,sector_list);
+
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
-
+        Button button = (Button) rootview.findViewById(R.id.searchbutton);
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View rootview)
+            {
+                searchPlaceLogic(rootview);
+            }
+        });
         return rootview;
     }
 
@@ -70,7 +76,7 @@ public class SearchPlace_Fragment extends Fragment implements AdapterView.OnItem
     public void searchPlaceLogic(View view)
     {
         AlertDialog.Builder alerter = new AlertDialog.Builder(getActivity());
-        mPLZ = (EditText)rootview.findViewById(R.id.plz);
+        EditText mPLZ = (EditText)rootview.findViewById(R.id.plz);
 
         alerter.setIcon(android.R.drawable.ic_dialog_alert);
 

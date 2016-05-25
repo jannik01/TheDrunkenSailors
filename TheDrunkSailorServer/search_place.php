@@ -13,12 +13,13 @@ if (isset($_POST["sector_ID"])) {
     $address = mysqli_real_escape_string($db_connection, $_POST['address']);
     $country = mysqli_real_escape_string($db_connection, $_POST['country']);
     $zipcode = mysqli_real_escape_string($db_connection, $_POST['zipcode']);
+    $town = mysqli_real_escape_string($db_connection, $_POST['town']);
     $min_use = mysqli_real_escape_string($db_connection, $_POST['min_use']);
     $max_use = mysqli_real_escape_string($db_connection, $_POST['max_use']);
     $min_rating = mysqli_real_escape_string($db_connection, $_POST['min_rating']);
     $max_rating = mysqli_real_escape_string($db_connection, $_POST['max_rating']);
 
-    
+     $db_connection->set_charset("utf8");
     $check="SELECT T.place_ID, result , current_use, P.sector_ID, P.name
     FROM Places P, (
         SELECT R.place_ID, AVG(R.rating) as result , T2.currentuse as current_use 
@@ -41,6 +42,8 @@ if (isset($_POST["sector_ID"])) {
     if($address!="") { $check.=" AND address=\"".$address."\""; }
     if($country!="") { $check.=" AND country=\"".$country."\""; }
     if($zipcode!="") { $check.=" AND zipcode=\"".$zipcode."\""; }
+    if($town!="") { $check.=" AND town=\"".$town."\""; }
+
     //echo json_encode($check);
             $checksql=mysqli_query($db_connection,$check);
         
@@ -69,6 +72,5 @@ if (isset($_POST["sector_ID"])) {
     $response["message"] = "No sector selected";
  	echo json_encode($response);
 
-    echo json_encode($response);
 }
 ?>

@@ -30,18 +30,22 @@ public class SearchDisplayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_search);
         final ListView listview = (ListView) findViewById(R.id.listview);
 
+        final String [][] places_list=createDummyList();
         if (listview != null) {
-            listview.setAdapter(new PlaceItemAdapter(this, createDummyList()));
+            listview.setAdapter(new PlaceItemAdapter(this, places_list));
 
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
+                    LastVisitedPlace_Fragment.pid=Integer.parseInt(places_list[position][0]);
 
-                    view.getTag();
+
+
+                    Intent intent = new Intent(SearchDisplayActivity.this, PlaceDetailActivity.class);
+                    startActivity(intent);
 
                 }
             });
-
         }
 
 
@@ -49,6 +53,7 @@ public class SearchDisplayActivity extends AppCompatActivity {
 
 
     }
+
 
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        // Inflate the menu; this adds items to the action bar if it is present.
@@ -68,6 +73,7 @@ public class SearchDisplayActivity extends AppCompatActivity {
 //
 //        }
 //    }
+
 
 
     public String[][] createDummyList() {
