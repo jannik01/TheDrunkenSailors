@@ -52,7 +52,6 @@ public class SignInActivityTest extends ActivityInstrumentationTestCase2<SignInA
         mySolo.enterText(0, "word");
 
         mySolo.clickOnButton("Sign in");
-
         mySolo.sleep(1000);
         assertNotSame("Fail",0,Globals.uid);
         //mySolo.searchEditText("++++++++++++++++++");
