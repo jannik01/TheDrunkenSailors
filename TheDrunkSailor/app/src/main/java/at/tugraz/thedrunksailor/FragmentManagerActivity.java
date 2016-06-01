@@ -104,7 +104,7 @@ public class FragmentManagerActivity extends FragmentActivity
             return true;
         }
         if(id == R.id.logout_menu_bar) {
-            Globals.uid=0;
+            DatabaseInterface.logout();
             Intent intent = new Intent(FragmentManagerActivity.this, SignInActivity.class);
             startActivity(intent);
         }

@@ -76,6 +76,9 @@ public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<Frag
 
         int user_id = DatabaseInterface.login("testuser1","password");
         assertTrue("Failure login ", 0 != user_id);
+        assertEquals("Logged in as wrong user.",user_id,Globals.uid);
+        DatabaseInterface.logout();
+        assertEquals("Logout doesn't work.",0,Globals.uid);
     }
 
     @Test

@@ -39,6 +39,8 @@ public class DatabaseInterface {
         params.add(new BasicNameValuePair("password", password));
         JSONObject json = jsonParser.makeHttpRequest(url_login_user, "POST", params);
         Integer success = 0;
+        Integer userid = 0;
+
         try {
             success = json.getInt("success");
         } catch (Exception e) {
@@ -49,13 +51,15 @@ public class DatabaseInterface {
             Log.e("[DEBUG]", "DB-Interface success = " + success.toString());
             try {
                 String test = json.getString("uid");
-                return Integer.parseInt(test);
+                userid = Integer.parseInt(test);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
         Log.e("[DEBUG]", "DB-Interface success = " + success.toString() + " - considered as false");
-        return (0);
+
+        Globals.uid = userid;
+        return (userid);
     }
 
     public static boolean createUser(String user_name, String password, String name, String sex, Integer age, String job) {
@@ -351,5 +355,9 @@ public class DatabaseInterface {
             }
         }
         return (places);
+    }
+
+    public static void logout() {
+        Globals.uid=0;
     }
 }

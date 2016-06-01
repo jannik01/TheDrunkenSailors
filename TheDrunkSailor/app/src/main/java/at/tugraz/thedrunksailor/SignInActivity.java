@@ -70,7 +70,6 @@ public class SignInActivity extends AppCompatActivity
         alert.show();
         }
 
-        Globals.uid=  userid;
         if (Globals.uid>0)
         {
             Intent intent = new Intent(this, FragmentManagerActivity.class);
