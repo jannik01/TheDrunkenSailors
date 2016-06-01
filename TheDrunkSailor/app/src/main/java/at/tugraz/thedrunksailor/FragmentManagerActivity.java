@@ -66,6 +66,9 @@ public class FragmentManagerActivity extends FragmentActivity
             case 2:
                 objFragment = new AddPlace_Fragment();
                 break;
+            case 3:
+                objFragment = new Map_Fragment();
+                break;
         }
         // update the main content by replacing fragments
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
@@ -86,6 +89,9 @@ public class FragmentManagerActivity extends FragmentActivity
 
             case 3:
                 mTitle = getString(R.string.title_section3);
+                break;
+            case 5:
+                mTitle = getString(R.string.title_section5);
                 break;
         }
     }

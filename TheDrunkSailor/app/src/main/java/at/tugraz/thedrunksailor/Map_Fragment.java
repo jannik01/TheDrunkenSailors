@@ -3,9 +3,31 @@ package at.tugraz.thedrunksailor;
 /**
  * Created by Strw on 11.05.16.
  */
+
+import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.FusedLocationProviderApi;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -19,39 +41,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Criteria;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationManager;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.TableRow;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
-import java.util.Vector;
-import java.util.concurrent.ThreadLocalRandom;
 
 
-public class MapActivity extends AppCompatActivity implements
+public class Map_Fragment extends Fragment implements
         LocationListener,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -79,22 +77,45 @@ public class MapActivity extends AppCompatActivity implements
     private Location lastlocation;
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.map_layout);
+
+         View rootview = inflater.inflate(R.layout.map_layout, container, false);
 
         mLocationRequest = LocationRequest.create();
-        mGoogleApiClient = new GoogleApiClient.Builder(this).addApi(LocationServices.API).addConnectionCallbacks(this).addOnConnectionFailedListener(this).build();
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity()).addApi(LocationServices.API).addConnectionCallbacks(this).addOnConnectionFailedListener(this).build();
 
 
-        context = getApplicationContext();
+        context = getContext();
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.map);
+        if (mapFragment == null) {
+            FragmentManager fragmentManager = getChildFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            mapFragment = SupportMapFragment.newInstance();
+            fragmentTransaction.replace(R.id.map, mapFragment).commit();
+        }
+
+        if (mapFragment != null)
+        {
+            mapFragment.getMapAsync(new OnMapReadyCallback() {
+                                        @Override
+                                        public void onMapReady(GoogleMap googleMap) {
+                                            if (googleMap != null) {
+
+                                                googleMap.getUiSettings().setAllGesturesEnabled(true);
+
+
+                                            }
+
+                                        }
+                                    });
+        }
         mapFragment.getMapAsync(this);
 
         mGoogleApiClient.connect();
-
+        return rootview;
     }
 
     @Override
@@ -107,7 +128,7 @@ public class MapActivity extends AppCompatActivity implements
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                Intent intent = new Intent(MapActivity.this, PlaceDetailActivity.class);
+                Intent intent = new Intent(getActivity(), PlaceDetailActivity.class);
                 LastVisitedPlace_Fragment.pid = mHashMap.get(marker);
                 startActivity(intent);
 
@@ -119,7 +140,7 @@ public class MapActivity extends AppCompatActivity implements
 
 
     private void enableMyLocation() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
             CharSequence text = "Missing Permission!";
@@ -127,7 +148,7 @@ public class MapActivity extends AppCompatActivity implements
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
 
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},LOCATION_PERMISSION_REQUEST_CODE);
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION},LOCATION_PERMISSION_REQUEST_CODE);
 
             // Permission to access the location is missing.
 
@@ -158,21 +179,17 @@ public class MapActivity extends AppCompatActivity implements
 
 
 
-    @Override
-    protected void onResumeFragments() {
-        super.onResumeFragments();
 
-    }
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
         mGoogleApiClient.connect();
 
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         if(mGoogleApiClient.isConnected()) {
             mGoogleApiClient.disconnect();
@@ -186,7 +203,7 @@ public class MapActivity extends AppCompatActivity implements
     }
 
     public void updateMarker(){
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
             CharSequence text = "Missing Permission!";
@@ -194,7 +211,7 @@ public class MapActivity extends AppCompatActivity implements
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
 
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
 
 
         }else {
@@ -207,7 +224,7 @@ public class MapActivity extends AppCompatActivity implements
                 LatLng position = new LatLng(location.getLatitude(), location.getLongitude());
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 15));
 
-                Geocoder mGeocoder = new Geocoder(this);
+                Geocoder mGeocoder = new Geocoder(getActivity());
                 List<Address> address;
 
 
@@ -263,14 +280,14 @@ public class MapActivity extends AppCompatActivity implements
 
         Log.e("fillMap", "Function Called");
 
-        Geocoder mGeocoder = new Geocoder(this);
+        Geocoder mGeocoder = new Geocoder(getActivity());
 
         List<Address> address;
         String[][]  markers = new String[places_list.length][5];
         int markers_fill_counter = 0;
 
         // clear map
-        mMap.clear();
+        //mMap.clear();
 
 
 
