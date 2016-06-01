@@ -2,104 +2,56 @@ package at.tugraz.thedrunksailor;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
-
 import org.json.JSONArray;
 import org.json.JSONException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class MainActivity extends AppCompatActivity {
-    public static int uid;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        final ListView listview = (ListView) findViewById(R.id.listview);
+public class LastVisitedPlace_Fragment extends Fragment {
+    View rootview;
+    public static int uid = 79;
+    public static int pid = 25;
+    public static JSONArray place_list;
+    public static boolean new_user=false;
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        rootview = inflater.inflate(R.layout.fragment_last_places_visited, container, false);
+        final ListView listview = (ListView) rootview.findViewById(R.id.listview);
+        final String [][] places_list=createDummyList();
 
         if (listview != null) {
-            listview.setAdapter(new PlaceItemAdapter(this, createDummyList()));
-
+            listview.setAdapter(new PlaceItemAdapter(getActivity(), createDummyList()));
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
+                    pid=Integer.parseInt(places_list[position][0]);
 
-                    view.getTag();
+                    Intent intent = new Intent(getActivity(), PlaceDetailActivity.class);
+                    startActivity(intent);
 
                 }
             });
-
         }
-
-
-    EditText mPLZ;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.search_place);
         DatabaseInterface database_interface_object = new DatabaseInterface();
-
-
-    }
-
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.logout:
-                Intent intent = new Intent(MainActivity.this, SignInActivity.class);
-                startActivity(intent);
-                return true;
-
-            default:
-                return false;
-
-        }
-    public void searchPlaceLogic(View view)
-    {
-        AlertDialog.Builder alerter = new AlertDialog.Builder(MainActivity.this);
-        mPLZ = (EditText)findViewById(R.id.plz);
-
-        alerter.setIcon(android.R.drawable.ic_dialog_alert);
-
-        String plz = mPLZ.getText().toString();
-
-        if (plz.length() < 3 || plz.length() > 5)
-        {
-            alerter.setMessage("Please put in a zip code between 3 - 5 digits");
-            alerter.setTitle("Fail");
-            alerter.show();
-        }
-
+        return rootview;
     }
 
 
     public String[][] createDummyList() {
 
         String[][] places_list = new String[0][];
-        String user_id= String.valueOf(uid);
+        String user_id = String.valueOf(uid);
         try {
             places_list = new doTask().execute(user_id).get();
         } catch (InterruptedException e) {
@@ -120,28 +72,10 @@ public class MainActivity extends AppCompatActivity {
                 {"10", "Place10", "3", "4"},
                 {"11", "Place11", "2", "1.2"},
         };
-
         return places_list;
-
-    }
-    public void goToAddPlace(View view)
-    {
-        Intent intent = new Intent(MainActivity.this, ActivityAddPlace.class);
-        startActivity(intent);
     }
 
-    public void goToSearchPlace(View view)
-    {
-        //Intent intent = new Intent(NavigationBarActivity.this, .class);
-        //startActivity(intent);
-    }
-
-    public void goToSearchPerson(View view)
-    {
-        //Intent intent = new Intent(NavigationBarActivity.this, .class);
-        //startActivity(intent);
-    }
-
+    /*
     public void makeDummyEntries() {
         Place tmp = new Place("Place 1", 3.4, 7);
         List<Place> returnPlaces = new ArrayList<Place>();
@@ -151,14 +85,14 @@ public class MainActivity extends AppCompatActivity {
         tmp = new Place("Place 3", 6.1, 2.2);
         returnPlaces.add(tmp);
         JSONArray places = DatabaseInterface.startPagePlaces(16);
-        TableLayout tl = (TableLayout) findViewById(R.id.list_places_table);
+        TableLayout tl = (TableLayout) rootview.findViewById(R.id.list_places_table);
         for (int i = 0; i < places.length(); i++) {
-            TableRow row = new TableRow(this);
+            TableRow row = new TableRow(getActivity());
             TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
             row.setLayoutParams(lp);
             for (int j = 0; j < 4; j++) {
 
-                TextView tv = new TextView(this);
+                TextView tv = new TextView(getActivity());
                 tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                         TableRow.LayoutParams.WRAP_CONTENT));
                 //tv.setBackgroundResource(R.drawable.cell_shape);
@@ -197,48 +131,65 @@ public class MainActivity extends AppCompatActivity {
             tl.addView(row, i);
         }
     }
+    */
+
     class doTask extends AsyncTask<String, String, String[][]> {
 
 
-
-
-
         protected String[][] doInBackground(String... args) {
-            Integer uid_int=Integer.parseInt(args[0]);
+            Integer uid_int = Integer.parseInt(args[0]);
             System.out.print(uid_int);
             JSONArray places = DatabaseInterface.startPagePlaces(uid_int);
-            Integer places_length=places.length();
-            String [][] places_list= new String[places_length][4];
-            for (Integer i=0;places.length()>i;i++)
-            {
-                try {
-                    places_list[i][0]=places.getJSONObject(i).getString("place_ID");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    places_list[i][1]=places.getJSONObject(i).getString("name");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    places_list[i][2]=places.getJSONObject(i).getString("current_use");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    places_list[i][3]=places.getJSONObject(i).getString("rating");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
 
-            return places_list;
+
+                if (LastVisitedPlace_Fragment.new_user==true) {
+                    String[][] no_places = {
+                            {"1", "No Place visited yet", "-", "-"},
+
+                    };
+                    return no_places;
+
+                } else {
+                    Integer places_length = places.length();
+                    String[][] places_list = new String[places_length][4];
+                    for (Integer i = 0; places.length() > i; i++) {
+                        try {
+                            places_list[i][0] = places.getJSONObject(i).getString("place_ID");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            places_list[i][1] = places.getJSONObject(i).getString("name");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            places_list[i][2] = places.getJSONObject(i).getString("current_use");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            places_list[i][3] = places.getJSONObject(i).getString("rating");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    return places_list;
+                }
+
+
         }
-
-
-
-
     }
 }
+
+
+
+
+
+
+
+
+
+
+
 

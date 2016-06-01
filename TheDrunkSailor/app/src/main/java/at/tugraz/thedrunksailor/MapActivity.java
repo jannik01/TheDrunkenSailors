@@ -43,7 +43,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
+import java.util.Vector;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 public class MapActivity extends AppCompatActivity implements
@@ -54,11 +59,11 @@ public class MapActivity extends AppCompatActivity implements
         OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback {
 
-
+    private HashMap<Marker, Integer> mHashMap = new HashMap<Marker, Integer>();
 
     private Context context;
 
-    LocationManager locman;
+    LocationManager locationmanager;
     Location location;
 
     String [][] places_list;
@@ -68,7 +73,6 @@ public class MapActivity extends AppCompatActivity implements
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
-    private boolean mPermissionDenied = false;
 
     private GoogleMap mMap;
 
@@ -86,8 +90,7 @@ public class MapActivity extends AppCompatActivity implements
 
         context = getApplicationContext();
 
-        SupportMapFragment mapFragment =
-                (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
         mGoogleApiClient.connect();
@@ -104,10 +107,9 @@ public class MapActivity extends AppCompatActivity implements
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                marker.get
                 Intent intent = new Intent(MapActivity.this, PlaceDetailActivity.class);
+                LastVisitedPlace_Fragment.pid = mHashMap.get(marker);
                 startActivity(intent);
-
 
 
             }
@@ -128,22 +130,13 @@ public class MapActivity extends AppCompatActivity implements
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},LOCATION_PERMISSION_REQUEST_CODE);
 
             // Permission to access the location is missing.
-            //PermissionUtils.requestPermission(this, LOCATION_PERMISSION_REQUEST_CODE,
-            //  Manifest.permission.ACCESS_FINE_LOCATION, true);
+
         } else if (mMap != null) {
             // Access to the location has been granted to the app.
             mMap.setMyLocationEnabled(true);
 
-            locman = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-            location = locman.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-            if(location != null){
-
-               // mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title("My Position") );
-                //mMap.addMarker(new MarkerOptions().position(new LatLng(20, 20)).title("20/20") );
-            }
-
-
+            locationmanager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+            location = locationmanager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
         }
 
@@ -156,7 +149,6 @@ public class MapActivity extends AppCompatActivity implements
     public boolean onMyLocationButtonClick() {
         CameraPosition pos = mMap.getCameraPosition();
         updateMarker();
-        Toast.makeText(this, "MyLocation button clicked" + pos.toString(), Toast.LENGTH_SHORT).show();
         // Return false so that we don't consume the event and the default behavior still occurs
         // (the camera animates to the user's current position).
 
@@ -169,10 +161,7 @@ public class MapActivity extends AppCompatActivity implements
     @Override
     protected void onResumeFragments() {
         super.onResumeFragments();
-        if (mPermissionDenied) {
-            // Permission was not granted, display error dialog.
-            mPermissionDenied = false;
-        }
+
     }
 
     @Override
@@ -193,66 +182,7 @@ public class MapActivity extends AppCompatActivity implements
 
     @Override
     public void onConnected(Bundle bundle) {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            CharSequence text = "Missing Permission!";
-            int duration = Toast.LENGTH_LONG;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
-
-
-        }else {
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-
-            location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-
-            //mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title("My Position"));
-            if(location != null) {
-                LatLng position = new LatLng(location.getLatitude(), location.getLongitude());
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 15));
-            } else {
-
-                Log.e("test", "No last location");
-            }
-
-
-            Geocoder mGeocoder = new Geocoder(this);
-            List<Address> address;
-
-            Log.e("test", "geocode");
-
-            try {
-                address = mGeocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-                Log.e("test", "address");
-                Address addr = address.get(0);
-
-                String zip_code = addr.getPostalCode();
-                Log.e("test", "zip " + zip_code);
-
-                String[] params=new String[]{zip_code};
-                places_list = new doTask().execute(params).get();
-
-                Log.e("test", "finished");
-
-                fillMap(places_list);
-
-
-
-            }catch(Exception e){}
-
-
-
-
-            /*for(int i = 0; i < my_places.length; i++){
-
-
-                mMap.addMarker(new MarkerOptions().position(new LatLng( Float.parseFloat(my_places[i][5]), Float.parseFloat(my_places[i][4]) )).title(my_places[i][1]).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)) );
-
-            }*/
-        }
+        updateMarker();
     }
 
     public void updateMarker(){
@@ -272,31 +202,24 @@ public class MapActivity extends AppCompatActivity implements
 
             location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
-            //mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title("My Position"));
             if(location != null) {
 
                 LatLng position = new LatLng(location.getLatitude(), location.getLongitude());
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 15));
 
-
-
                 Geocoder mGeocoder = new Geocoder(this);
                 List<Address> address;
 
-                Log.e("test", "geocode");
 
                 try {
-                  address = mGeocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-                    Log.e("test", "address");
+                    address = mGeocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
                     Address addr = address.get(0);
 
                     String zip_code = addr.getPostalCode();
-                    Log.e("test", "zip " + zip_code);
 
-                     String[] params=new String[]{zip_code};
-                     places_list = new doTask().execute(params).get();
+                    String[] params=new String[]{zip_code};
+                    places_list = new doTask().execute(params).get();
 
-                    Log.e("test", "finished");
 
                     fillMap(places_list);
 
@@ -309,13 +232,6 @@ public class MapActivity extends AppCompatActivity implements
                 Log.e("test", "No last location");
             }
 
-
-            /*for(int i = 0; i < my_places.length; i++){
-
-
-                mMap.addMarker(new MarkerOptions().position(new LatLng( Float.parseFloat(my_places[i][5]), Float.parseFloat(my_places[i][4]) )).title(my_places[i][1]).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)) );
-
-            }*/
         }
 
     }
@@ -336,8 +252,6 @@ public class MapActivity extends AppCompatActivity implements
             updateMarker();
         }
 
-        Log.e("onLocationChanged", "Location changed");
-
     }
 
     @Override
@@ -347,60 +261,129 @@ public class MapActivity extends AppCompatActivity implements
 
     public void fillMap(String[][] places_list){
 
-        Log.e("test", "fillMap() called");
+        Log.e("fillMap", "Function Called");
 
         Geocoder mGeocoder = new Geocoder(this);
 
-        Log.e("test", "geocoder");
-
         List<Address> address;
-        Log.e("test", "address");
-        Log.e("test", "place list: " + places_list.length);
+        String[][]  markers = new String[places_list.length][5];
+        int markers_fill_counter = 0;
+
+        // clear map
+        mMap.clear();
+
+
 
         for(int i = 0; i < places_list.length; i++) {
+
             try {
-                address = mGeocoder.getFromLocationName("Inffeldgasse 10 8010 Graz",1);//places_list[i][3]+" "+ places_list[i][4] + " " + places_list[i][5], 1);
+                address = mGeocoder.getFromLocationName(places_list[i][3] + " " + places_list[i][4] + " " + places_list[i][5], 1);
 
 
                 if (address != null) {
-                    Address loc = address.get(0);
-
-                    Log.e("test","place fill adr: "+  places_list[i][1] + " " + loc.toString() );
-
-                    // colors for types
-                    if(places_list[i][2].equals("1") ){
-                        Log.e("test","set marker" );
-                        mMap.addMarker(new MarkerOptions().position(new LatLng(loc.getLatitude(), loc.getLongitude())).title(places_list[i][1]).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-
-                    }else if(places_list[i][2].equals("2") ){
-                        mMap.addMarker(new MarkerOptions().position(new LatLng(loc.getLatitude(), loc.getLongitude())).title(places_list[i][1]).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)));
-
-                    }else if(places_list[i][2].equals("3") ){
-                        mMap.addMarker(new MarkerOptions().position(new LatLng(loc.getLatitude(), loc.getLongitude())).title(places_list[i][1]).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-
-                    }else if(places_list[i][2].equals("4")){
-                        mMap.addMarker(new MarkerOptions().position(new LatLng(loc.getLatitude(), loc.getLongitude())).title(places_list[i][1]).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-
-                    }else if(places_list[i][2].equals("5") ){
-                        mMap.addMarker(new MarkerOptions().position(new LatLng(loc.getLatitude(), loc.getLongitude())).title(places_list[i][1]).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
-
-                    }else if(places_list[i][2].equals("6") ){
-                        mMap.addMarker(new MarkerOptions().position(new LatLng(loc.getLatitude(), loc.getLongitude())).title(places_list[i][1]).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
-
-                    }else if(places_list[i][2].equals("7") ){
-                        mMap.addMarker(new MarkerOptions().position(new LatLng(loc.getLatitude(), loc.getLongitude())).title(places_list[i][1]).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
-
-                    }else {
-                        mMap.addMarker(new MarkerOptions().position(new LatLng(loc.getLatitude(), loc.getLongitude())).title(places_list[i][1]).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-
+                    Address adr = address.get(0);
+                    if (adr.getLatitude() != 0 && adr.getLongitude() != 0 ) {
+                        markers[markers_fill_counter][0] = places_list[i][1];                          // Location Name
+                        markers[markers_fill_counter][1] = String.valueOf(adr.getLatitude());         // Longitude
+                        markers[markers_fill_counter][2] = String.valueOf(adr.getLongitude());
+                        markers[markers_fill_counter][3] = places_list[i][2];                          // Type
+                        markers[markers_fill_counter][4] = places_list[i][0];                           // ID
+                        markers_fill_counter++;
                     }
 
-
                 }
+
+                Log.e("Addresses", "Test");
             } catch (Exception e) {
+                Log.e("Addresses", "Failed to get Addresses");
+                e.printStackTrace();
+
 
             }
         }
+
+
+
+            for(int marker_counter = 0; marker_counter < markers_fill_counter; marker_counter++) {
+
+                for(int compare_with_counter = 0; compare_with_counter < markers_fill_counter; compare_with_counter++) {
+                    // colors for types
+                    if( (marker_counter != compare_with_counter) && markers[marker_counter][1].equals(markers[compare_with_counter][1]) && markers[marker_counter][2].equals(markers[compare_with_counter][2]) ) {
+
+
+                        Log.e("Markers Equal", "Markers on Equal position");
+                        double random = new Random().nextDouble();
+                        double result_long = 0.00002 + (random * ((0.0001 * (double) 2) - 0.0001));
+                        double result_lat = 0.00002 + (random * ((0.0001 * (double) 1) - 0.0001));
+                        int negative_lat = new Random().nextInt(2);
+                        int negative_long = new Random().nextInt(2);
+
+                        if (negative_lat == 1) {
+                            result_lat *= -1.0;
+                        }
+                        if (negative_long == 1) {
+                            result_long *= -1.0;
+                        }
+
+
+                        markers[compare_with_counter][1] = String.valueOf((Double.parseDouble(markers[marker_counter][1]) + result_lat));
+                        markers[compare_with_counter][2] = String.valueOf((Double.parseDouble(markers[marker_counter][2]) + result_long));
+                    }
+
+
+
+
+                }
+
+
+            }
+
+        addMarkers(markers);
+
+
+
+
+    }
+
+
+    public void addMarkers(String[][] places_list ){
+
+        Log.e("addMarkers", "Called");
+        Marker marker;
+        for(int i = 0; i < places_list.length; i++) {
+
+            LatLng position = new LatLng(Double.parseDouble(places_list[i][1]), Double.parseDouble(places_list[i][2]) );
+
+
+            if (places_list[i][3].equals("1")) {
+                marker = mMap.addMarker(new MarkerOptions().position(position).title(places_list[i][0]).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+
+            } else if (places_list[i][3].equals("2")) {
+                marker = mMap.addMarker(new MarkerOptions().position(position).title(places_list[i][0]).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)));
+
+            } else if (places_list[i][3].equals("3")) {
+                marker = mMap.addMarker(new MarkerOptions().position(position).title(places_list[i][0]).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+
+            } else if (places_list[i][3].equals("4")) {
+                 marker = mMap.addMarker(new MarkerOptions().position(position).title(places_list[i][0]).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+
+            } else if (places_list[i][3].equals("5")) {
+                 marker = mMap.addMarker(new MarkerOptions().position(position).title(places_list[i][0]).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+
+            } else if (places_list[i][3].equals("6")) {
+                 marker = mMap.addMarker(new MarkerOptions().position(position).title(places_list[i][0]).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
+
+            } else if (places_list[i][3].equals("7")) {
+                 marker = mMap.addMarker(new MarkerOptions().position(position).title(places_list[i][0]).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+
+            } else {
+                 marker = mMap.addMarker(new MarkerOptions().position(position).title(places_list[i][0]).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+
+            }
+
+            mHashMap.put(marker, Integer.valueOf(places_list[i][4]) );
+        }
+
 
     }
 
@@ -413,14 +396,12 @@ public class MapActivity extends AppCompatActivity implements
             String [][] places_list_2;
 
 
-            JSONArray json_array = DatabaseInterface.searchPlace("Mensa","1","","","","","","");
+            JSONArray json_array = DatabaseInterface.getPlacesByPostal(args[0]);
 
 
             if (json_array != null) {
 
-                places_list_2 = new String[json_array.length()][5];
-
-                Log.e("test", "json array filled: "+ json_array.length() + ";" );
+                places_list_2 = new String[json_array.length()][6];
 
                 for (int i = 0; i < json_array.length(); i++) {
                     try {
@@ -456,8 +437,6 @@ public class MapActivity extends AppCompatActivity implements
 
 
                 }
-                //Log.e("test", places_list_2[0][0].toString());
-                //Log.e("test", places_list_2[0][2].toString());
 
                 return places_list_2;
             }

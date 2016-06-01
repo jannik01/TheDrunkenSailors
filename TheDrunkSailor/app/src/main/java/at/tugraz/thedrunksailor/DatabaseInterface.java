@@ -9,8 +9,6 @@ import org.json.JSONObject;
 import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
-import java.util.jar.Attributes;
 
 
 /**
@@ -28,6 +26,8 @@ public class DatabaseInterface {
     private static String url_search_place = "http://drunkensailors.robert-thomann.at/search_place.php";
     private static String url_get_sector = "http://drunkensailors.robert-thomann.at/get_sectors.php";
     private static String url_start_page_places = "http://drunkensailors.robert-thomann.at/start_page_places.php";
+    private static String url_get_place_data = "http://drunkensailors.robert-thomann.at/get_place.php";
+    private static String url_get_place_list = "http://drunkensailors.robert-thomann.at/search_place_for_maps.php";
 
 
     public static Integer login(String user_name, String password) {
@@ -140,31 +140,27 @@ public class DatabaseInterface {
         return (false);
     }
 
-
-    public static JSONArray searchPlace(String place_name, Integer sector_ID, String address, String country, String zipcode,String town, Double min_use, Double max_use, Double min_rating, Double max_rating) {
+    public static JSONArray searchPlace(String place_name, String sector_ID, String zipcode,String town, String min_use, String max_use, String min_rating, String max_rating) {
         JSONParser jsonParser = new JSONParser();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        if (min_use == 0)
-            params.add(new BasicNameValuePair("place_name", place_name));
-        params.add(new BasicNameValuePair("sector_ID", sector_ID.toString()));
-        params.add(new BasicNameValuePair("address", address));
-        params.add(new BasicNameValuePair("country", country));
+        params.add(new BasicNameValuePair("place_name", place_name));
+        params.add(new BasicNameValuePair("sector_ID", sector_ID));
         params.add(new BasicNameValuePair("zipcode", zipcode));
         params.add(new BasicNameValuePair("town", town));
 
-        if (min_use == 0)
+        if (min_use == "0.0")
             params.add(new BasicNameValuePair("min_use", ""));
         else
             params.add(new BasicNameValuePair("min_use", min_use.toString()));
-        if (max_use == 0)
+        if (max_use == "0.0")
             params.add(new BasicNameValuePair("max_use", ""));
         else
             params.add(new BasicNameValuePair("max_use", max_use.toString()));
-        if (min_rating == 0)
+        if (min_rating == "0.0")
             params.add(new BasicNameValuePair("min_rating", ""));
         else
             params.add(new BasicNameValuePair("min_rating", min_rating.toString()));
-        if (max_rating == 0)
+        if (max_rating == "0.0")
             params.add(new BasicNameValuePair("max_rating", ""));
         else
             params.add(new BasicNameValuePair("max_rating", max_rating.toString()));
@@ -185,41 +181,44 @@ public class DatabaseInterface {
             e.printStackTrace();
         }
         return null;
-
     }
 
     public static JSONArray startPagePlaces(Integer user_id) {
 
         JSONParser jsonParser = new JSONParser();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        //params.add(new BasicNameValuePair("user_ID", user_id.toString()));
-        params.add(new BasicNameValuePair("user_ID", "17"));
+        params.add(new BasicNameValuePair("user_ID", user_id.toString()));
+//        params.add(new BasicNameValuePair("user_ID", Integer.toString(LastVisitedPlace_Fragment.uid)));
+
         JSONObject json = jsonParser.makeHttpRequest(url_start_page_places,
                 "POST", params);
 
         //Log.d("Create Response", json.toString());
+        JSONArray places = new JSONArray();
+
         try {
-            int success = json.getInt(TAG_SUCCESS);
-            JSONArray places = json.getJSONArray("last_places");
-            /*if(places == null)
-            {
-                JSONArray nullarray = new JSONArray();
-                nullarray.put("");
-                places =nullarray;
-            }*/
+            int success = (json!=null ? json.getInt(TAG_SUCCESS) : 0);
 
             if (success == 1) {
-                return places;
+                places = json.getJSONArray("last_places");
+            } else if (success == 2) {
+                LastVisitedPlace_Fragment.new_user=true;
+
+
+
+
+
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return null;
+
+        return(places);
+
 
     }
 
     public static JSONArray getSectors() {
-
         JSONParser jsonParser = new JSONParser();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
 
@@ -239,6 +238,89 @@ public class DatabaseInterface {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static boolean ratePlace(String rating , String current_use) {
+
+        JSONParser jsonParser = new JSONParser();
+        String url_rate_place = "http://drunkensailors.robert-thomann.at/rate_place.php";
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("user_id", Integer.toString(LastVisitedPlace_Fragment.uid)));
+        params.add(new BasicNameValuePair("place_id", Integer.toString(LastVisitedPlace_Fragment.pid)));
+        params.add(new BasicNameValuePair("rating", rating));
+        params.add(new BasicNameValuePair("current_use", current_use));
+
+        JSONObject json = jsonParser.makeHttpRequest(url_rate_place, "POST", params);
+
+        Integer success = 0;
+        try {
+            success = json.getInt("success");
+        } catch (Exception e) {
+            Log.e("[ERROR]", "can't get string from json.");
+
+        }
+
+
+        if (success == 1) {
+            Log.e("[DEBUG]", "DB-Interface success = " + success.toString());
+            return (true);
+
+        }
+        return (false);
+    }
+
+    public static JSONArray getPlaceData(Integer pid) {
+
+        JSONParser jsonParser = new JSONParser();
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("place_id", Integer.toString(pid)));
+        JSONObject json = jsonParser.makeHttpRequest(url_get_place_data,
+                "POST", params);
+
+        //Log.d("Create Response", json.toString());
+        try {
+            int success = json.getInt(TAG_SUCCESS);
+            JSONArray place_data = json.getJSONArray("place_data");
+
+            if (success == 1) {
+                return (place_data);
+            }
+            return null;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
 
     }
+
+    public static JSONArray getPlacesByPostal(String zip_code) {
+
+
+        JSONParser jsonParser = new JSONParser();
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("zipcode", zip_code));
+        JSONObject response = jsonParser.makeHttpRequest(url_get_place_list,"POST", params);
+        JSONArray places = new JSONArray();
+
+        if(response != null){
+
+            try {
+                    int success = ( response.getInt(TAG_SUCCESS));
+
+                    if (success == 1) {
+                        places = response.getJSONArray("place_string");
+                    }
+                    else {
+                        Log.e("[ERROR]", "query not successful.");
+                    }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return (places);
+    }
+
+
 }

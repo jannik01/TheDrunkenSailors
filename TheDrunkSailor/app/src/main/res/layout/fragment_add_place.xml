@@ -5,17 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".AddPlace_Fragment">
 
-    tools:context="at.tugraz.thedrunksailor.ActivityAddPlace">
-
-
-    <include layout="@layout/navigation"
-        android:id="@+id/include" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/include">
+        >
 
         <LinearLayout
             android:id="@+id/frameLayout2"
@@ -43,7 +39,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@+id/frameLayout"
-                android:layout_below="@+id/frameLayout2"
                 android:layout_gravity="center"
                 android:layout_marginRight="10dp"
                 android:background="#fff3d4"
@@ -134,23 +129,26 @@
 
                     <TextView
                         android:id="@+id/textView3"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:text="Sector*"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="#000000"
-                        android:textSize="16dp" />
+                        android:textSize="16dp"
+                        android:layout_weight="1" />
 
-                    <EditText
-                        android:id="@+id/txtSector"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <Spinner
+                        android:id="@+id/static_spinner"
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="0dp"
+                        android:layout_column="1"
+                        style = "@style/Base.Widget.AppCompat.Spinner.Underlined"
+                        android:layout_marginTop="5dp"
                         android:layout_marginLeft="20dp"
-                        android:layout_weight="1"
-                        android:maxLength="18"
-                        android:maxLines="1" />
+                        android:layout_weight="1" />
                 </TableRow>
 
 
@@ -262,7 +260,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:nestedScrollingEnabled="false"
-                    android:text="+"
+                    android:text="Plus"
                     android:onClick="buttonOnClick"
                     android:textSize="26dp" />
 
