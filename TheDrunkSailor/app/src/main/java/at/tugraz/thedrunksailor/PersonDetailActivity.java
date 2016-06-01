@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -30,6 +31,13 @@ public class PersonDetailActivity extends AppCompatActivity {
         TextView job = (TextView)findViewById(R.id.job);
         //TextView lastly_visited = (TextView)findViewById(R.id.lastly_visited);
         //TextView friends = (TextView)findViewById(R.id.friends);
+
+        setButtonFollow();
+        Button follow_button = (Button) findViewById(R.id.button2);
+        follow_button.setOnClickListener(follow_button_handler);
+
+
+
         String []details =getDetails();
         String [][]last_places=getLastPlaces();
         final ListView listview = (ListView) findViewById(R.id.listview);
@@ -74,6 +82,22 @@ public class PersonDetailActivity extends AppCompatActivity {
 
     }
 
+    View.OnClickListener follow_button_handler = new View.OnClickListener() {
+        public void onClick(View v) {
+            Button follow_button = (Button) findViewById(R.id.button2);
+            String buttonText = follow_button.getText().toString();
+            if(buttonText.equals("follow") || buttonText.equals("FOLLOW")) {
+                Log.e("Follower Button", "Follower Button clicked");
+                followPerson();
+            } else if(buttonText.equals("unfollow") || buttonText.equals("UNFOLLOW")){
+                Log.e("Follower Button", "Unollower Button clicked");
+                unfollowPerson();
+            }
+
+
+        }
+    };
+
     public String[] getDetails() {
         String[] params = new String[]{Integer.toString(Globals.pers_id)};
         new getData().execute(params);
@@ -104,6 +128,58 @@ public class PersonDetailActivity extends AppCompatActivity {
 
 
         return detail_list;
+
+    }
+
+    public Boolean followPerson(){
+        String[] params = new String[]{Integer.toString(Globals.pers_id)};
+        try {
+            Button button = (Button)findViewById(R.id.button2);
+            Boolean following_success = new doTaskFollowPerson().execute(params).get();
+            if(following_success){
+                // set button to "unfollow"
+                assert button != null;
+                button.setText("unfollow");
+                return true;
+            } else {
+
+                // Dont change button
+                // show Alert message that user cant be followed
+                assert button != null;
+                button.setText("follow");
+                return false;
+            }
+
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        return false;
+
+    }
+
+    public Boolean unfollowPerson(){
+        String[] params = new String[]{Integer.toString(Globals.pers_id)};
+        try {
+            Button button = (Button)findViewById(R.id.button2);
+            Boolean unfollowing_success = new doTaskUnFollowPerson().execute(params).get();
+            if(unfollowing_success){
+                // set button to "unfollow"
+                assert button != null;
+                button.setText("follow");
+                return true;
+            } else {
+
+                assert button != null;
+                button.setText("unfollow");
+                // Dont change button
+                // show Alert message that user cant be followed
+                return false;
+            }
+
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        return false;
 
     }
 
@@ -138,13 +214,13 @@ public class PersonDetailActivity extends AppCompatActivity {
 
     }
 
-class doTask extends AsyncTask<String, String, Boolean> {
-    protected Boolean doInBackground(String... args) {
-        boolean success = DatabaseInterface.ratePlace(args[0], args[1]);
-        return success;
-    }
+    class doTask extends AsyncTask<String, String, Boolean> {
+        protected Boolean doInBackground(String... args) {
+            boolean success = DatabaseInterface.ratePlace(args[0], args[1]);
+            return success;
+        }
 
-}
+    }
     class getData extends AsyncTask<String, String, String[]> {
         protected String[] doInBackground(String... args) {
             Integer pers_int = Integer.parseInt(args[0]);
@@ -174,46 +250,140 @@ class doTask extends AsyncTask<String, String, Boolean> {
         }
     }
 
-}
-class getLast extends AsyncTask<String, String, String[][]> {
 
-    protected String[][] doInBackground(String... args) {
-        Integer pers_int = Integer.parseInt(args[0]);
-        JSONArray places = DatabaseInterface.startPagePlaces(pers_int);
-        Integer places_length;
-        if(places==null)
-            return null;
+    class getLast extends AsyncTask<String, String, String[][]> {
 
-         places_length = places.length();
-        if (places_length>5)
-            places_length=5;
-        String[][] places_list = new String[places_length][4];
-        for (Integer i = 0; places.length() > i; i++) {
-            try {
-                places_list[i][0] = places.getJSONObject(i).getString("place_ID");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            try {
-                places_list[i][1] = places.getJSONObject(i).getString("name");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            try {
+        protected String[][] doInBackground(String... args) {
+            Integer pers_int = Integer.parseInt(args[0]);
+            JSONArray places = DatabaseInterface.startPagePlaces(pers_int);
+            Integer places_length;
+            if(places==null)
+                return null;
+
+            places_length = places.length();
+            if (places_length>5)
+                places_length=5;
+            String[][] places_list = new String[places_length][4];
+            for (Integer i = 0; places.length() > i; i++) {
+                try {
+                    places_list[i][0] = places.getJSONObject(i).getString("place_ID");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    places_list[i][1] = places.getJSONObject(i).getString("name");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
                     places_list[i][2] = places.getJSONObject(i).getString("current_use");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            try {
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
                     places_list[i][3] = places.getJSONObject(i).getString("rating");
 
-            } catch (JSONException e) {
-                e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
+            return places_list;
         }
-        return places_list;
     }
+
+
+    class doTaskFollowPerson extends AsyncTask<String, String, Boolean> {
+
+
+        protected Boolean doInBackground(String... args) {
+
+
+            Boolean following_succeeded = DatabaseInterface.followPerson(Integer.parseInt(args[0]));
+
+
+            if (following_succeeded) {
+                //Log.e("test", places_list_2[0][0].toString());
+                Log.e("Follwing", "Follwing succeeded");
+                return true;
+            } else {
+                Log.e("Follwing", "Follwing did not succeed");
+                return false;
+            }
+
+        }
+    }
+
+    class doTaskUnFollowPerson extends AsyncTask<String, String, Boolean> {
+
+
+        protected Boolean doInBackground(String... args) {
+
+
+            Boolean unfollowing_succeeded = DatabaseInterface.unfollowPerson(Integer.parseInt(args[0]));
+
+
+            if (unfollowing_succeeded) {
+                //Log.e("test", places_list_2[0][0].toString());
+                Log.e("Unfollwing", "Unfollwing succeeded");
+                return true;
+            } else {
+                Log.e("Unfollwing", "Unfollwing did not succeed");
+                return false;
+            }
+
+        }
+    }
+
+
+    public void setButtonFollow()
+    {
+        boolean isfollower;
+        String[] params = new String[]{Integer.toString(Globals.pers_id)};
+
+        try {
+            isfollower = new getFollower().execute(params).get();
+            Button button = (Button)findViewById(R.id.button2);
+            Log.e("setButtonFollow", "isfollower: " + isfollower);
+            if(isfollower){
+
+                // set Button Text "unfollow"
+                assert button != null;
+                button.setText("Unfollow");
+            } else {
+                // set Button Text "follow"
+                assert button != null;
+                button.setText("follow");
+
+            }
+
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        // Toast toast_subscribed = Toast.makeText(PersonDetailActivity.this, "You are subscribed", Toast.LENGTH_LONG);
+
+        //        Toast toast_unsubscribed = Toast.makeText(getApplicationContext()., "You are not subscribed", Toast.LENGTH_LONG);
+        //        toast_subscribed.setGravity(Gravity.TOP, 0,1500);
+        //        toast_unsubscribed.setGravity(Gravity.TOP, 0,1500);
+
+
+    }
+
+
+    class getFollower extends AsyncTask<String, String, Boolean> {
+
+        protected Boolean doInBackground(String... args) {
+            Integer pers_int = Integer.parseInt(args[0]);
+            Boolean isfollower = DatabaseInterface.doIFollowPerson(pers_int);
+
+
+            return isfollower;
+        }
+    }
+
+
+
 }
+
 
 
 
