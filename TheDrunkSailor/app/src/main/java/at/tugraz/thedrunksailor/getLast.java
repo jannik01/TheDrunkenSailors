@@ -36,7 +36,7 @@ class getLast extends AsyncTask<String, String, String[][]> {
                 e.printStackTrace();
             }
             try {
-                places_list[i][3] = places.getJSONObject(i).getString("rating");
+                places_list[i][3] = Globals.ratings.getJSONObject(i).getString("rating");
 
             } catch (JSONException e) {
                 e.printStackTrace();

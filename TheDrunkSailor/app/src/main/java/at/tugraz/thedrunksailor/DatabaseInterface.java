@@ -190,6 +190,7 @@ public class DatabaseInterface {
             int success = (json!=null ? json.getInt(TAG_SUCCESS) : 0);
             if (success == 1) {
                 places = json.getJSONArray("last_places");
+                Globals.ratings = json.getJSONArray("rating");
                 Globals.new_user=false;
                 return places;
             } else if (success2 == 2) {
