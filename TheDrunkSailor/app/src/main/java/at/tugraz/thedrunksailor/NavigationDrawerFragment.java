@@ -4,6 +4,7 @@ package at.tugraz.thedrunksailor;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.graphics.Color;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -86,6 +87,7 @@ public class NavigationDrawerFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
+    int save = -1;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -94,7 +96,15 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                parent.getChildAt(position).setBackgroundColor(
+                        Color.parseColor("#ffd550"));
+                if (save != -1 && save != position) {
+                    parent.getChildAt(save).setBackgroundColor(
+                            Color.parseColor("#cccccc"));
+                }
                 selectItem(position);
+                save = position;
             }
         });
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
