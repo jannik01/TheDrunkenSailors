@@ -299,40 +299,44 @@ public class DatabaseInterface {
         JSONParser jsonParser = new JSONParser();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("user_id", Integer.toString(pers_id)));
-        JSONObject json = jsonParser.makeHttpRequest(url_search_persons_id_is_following,
+        JSONArray person_list = new JSONArray();
+        JSONObject response = jsonParser.makeHttpRequest(url_search_persons_id_is_following,
                 "POST", params);
         //Log.d("Create Response", json.toString());
-        try {
-            int success = json.getInt(TAG_SUCCESS);
-            JSONArray person_list = json.getJSONArray("person_list");
-            if (success == 1) {
-                return (person_list);
+        if (response != null) {
+            try {
+                int success = response.getInt(TAG_SUCCESS);
+                if (success == 1) {
+                    person_list = response.getJSONArray("person_list");
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-            return null;
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
-        return null;
+        return (person_list);
     }
 
     public static JSONArray getPersonData(Integer pers_id) {
+        JSONArray person_data = new JSONArray();
         JSONParser jsonParser = new JSONParser();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("user_id", Integer.toString(pers_id)));
-        JSONObject json = jsonParser.makeHttpRequest(url_get_person_data,
+        JSONObject response = jsonParser.makeHttpRequest(url_get_person_data,
                 "POST", params);
         //Log.d("Create Response", json.toString());
-        try {
-            int success = json.getInt(TAG_SUCCESS);
-            JSONArray person_data = json.getJSONArray("person_data");
-            if (success == 1) {
-                return (person_data);
+        if(response != null) {
+            try {
+                int success = response.getInt(TAG_SUCCESS);
+
+                if (success == 1) {
+                    person_data = response.getJSONArray("person_data");
+                }
+                return null;
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-            return null;
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
-        return null;
+        return(person_data);
     }
 
     public static JSONArray getPlacesByPostal(String zip_code) {

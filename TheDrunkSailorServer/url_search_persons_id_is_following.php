@@ -12,7 +12,7 @@ $response = array();
     $db_connection->set_charset("utf8");
 
     $check="SELECT U.user_id, U.name, U.sex, U.age, U.job 
-    FROM ".DB_DATABASE.".Users P, ".DB_DATABASE.".User_Links UL WHERE P.user_id = UL.user_id_leader AND UL.user_id_follower=\"".$user_id."\"";
+    FROM ".DB_DATABASE.".Users U, ".DB_DATABASE.".User_Links UL WHERE U.user_id = UL.user_id_leader AND UL.user_id_follower=\"".$user_id."\"";
     
     $checksql=mysqli_query($db_connection,$check);
         

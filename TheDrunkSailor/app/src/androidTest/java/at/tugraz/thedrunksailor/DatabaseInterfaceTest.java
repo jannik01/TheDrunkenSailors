@@ -146,12 +146,7 @@ public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<Frag
                 assertEquals( 1.6667, success.getJSONObject(i).getDouble("current_use"),0);
                 assertEquals( 4, success.getJSONObject(i).getDouble("rating"),0);
             }
-
-
         }
-
-
-
     }
 
 
@@ -230,5 +225,13 @@ public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<Frag
             e.printStackTrace();
             assertTrue("FAILED: could not read country",false);
         }
+    }
+
+    public void testSearchPersonsIdIsFollowing() {
+        JSONArray person_list = DatabaseInterface.searchPersonsIdIsFollowing(16);
+        System.out.println(person_list);
+        assertEquals("Wrong number of following persons.", 2 , person_list.length());
+
+
     }
 }

@@ -129,7 +129,7 @@ public class Map_Fragment extends Fragment implements
             @Override
             public void onInfoWindowClick(Marker marker) {
                 Intent intent = new Intent(getActivity(), PlaceDetailActivity.class);
-                LastVisitedPlace_Fragment.pid = mHashMap.get(marker);
+                Globals.pid = mHashMap.get(marker);
                 startActivity(intent);
 
 
