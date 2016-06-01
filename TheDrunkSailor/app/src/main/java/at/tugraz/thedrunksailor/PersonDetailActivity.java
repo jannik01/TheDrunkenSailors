@@ -41,11 +41,8 @@ public class PersonDetailActivity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view,
                                             int position, long id) {
                         Globals.pid = Integer.parseInt(places_list[position][0]);
-
-
                         Intent intent = new Intent(PersonDetailActivity.this, PlaceDetailActivity.class);
                         startActivity(intent);
-
                     }
                 });
             }
@@ -54,7 +51,6 @@ public class PersonDetailActivity extends AppCompatActivity {
         {
             String[][] no_places = {
                     {"1", "No Place visited yet", "-", "-"},
-
             };
             if (listview != null) {
                 listview.setAdapter(new PlaceItemAdapter(this, no_places));
@@ -64,14 +60,6 @@ public class PersonDetailActivity extends AppCompatActivity {
         age.setText(details[1]);
         sex.setText(details[2]);
         job.setText(details[3]);
-
-
-
-
-
-
-
-
     }
 
     public String[] getDetails() {
@@ -85,11 +73,9 @@ public class PersonDetailActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
-
         return detail_list;
-
     }
+
     public String[][] getLastPlaces() {
         String[] params = new String[]{Integer.toString(Globals.pers_id)};
         new getData().execute(params);
@@ -101,32 +87,22 @@ public class PersonDetailActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
-
         return detail_list;
-
     }
 
     private class MySeekListener implements SeekBar.OnSeekBarChangeListener {
-
-
         private int uiID = 0;
-
         public MySeekListener(int uid) {
             uiID = uid;
         }
 
-        public void onProgressChanged(SeekBar seekBar, int progress,
-                                      boolean fromUser) {
-            // Log the progress
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             Log.d("DEBUG", "Progress is: " + progress);
             TextView view = (TextView) findViewById(uiID);
             if (view != null) {
                 String text = progress+1 + "/" + (MAX+1);
                 view.setText( text);
             }
-
-
         }
 
         public void onStartTrackingTouch(SeekBar seekBar) {
@@ -134,17 +110,15 @@ public class PersonDetailActivity extends AppCompatActivity {
 
         public void onStopTrackingTouch(SeekBar seekBar) {
         }
-
-
     }
 
-class doTask extends AsyncTask<String, String, Boolean> {
-    protected Boolean doInBackground(String... args) {
-        boolean success = DatabaseInterface.ratePlace(args[0], args[1]);
-        return success;
+    class doTask extends AsyncTask<String, String, Boolean> {
+        protected Boolean doInBackground(String... args) {
+            boolean success = DatabaseInterface.ratePlace(args[0], args[1]);
+            return success;
+        }
     }
 
-}
     class getData extends AsyncTask<String, String, String[]> {
         protected String[] doInBackground(String... args) {
             Integer pers_int = Integer.parseInt(args[0]);
@@ -172,46 +146,6 @@ class doTask extends AsyncTask<String, String, Boolean> {
             }
             return detailslist;
         }
-    }
-
-}
-class getLast extends AsyncTask<String, String, String[][]> {
-
-    protected String[][] doInBackground(String... args) {
-        Integer pers_int = Integer.parseInt(args[0]);
-        JSONArray places = DatabaseInterface.startPagePlaces(pers_int);
-        Integer places_length;
-        if(places==null)
-            return null;
-
-         places_length = places.length();
-        if (places_length>5)
-            places_length=5;
-        String[][] places_list = new String[places_length][4];
-        for (Integer i = 0; places.length() > i; i++) {
-            try {
-                places_list[i][0] = places.getJSONObject(i).getString("place_ID");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            try {
-                places_list[i][1] = places.getJSONObject(i).getString("name");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            try {
-                    places_list[i][2] = places.getJSONObject(i).getString("current_use");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            try {
-                    places_list[i][3] = places.getJSONObject(i).getString("rating");
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        return places_list;
     }
 }
 

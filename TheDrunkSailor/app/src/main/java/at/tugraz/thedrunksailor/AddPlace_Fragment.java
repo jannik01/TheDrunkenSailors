@@ -1,10 +1,7 @@
 package at.tugraz.thedrunksailor;
 
-
 import android.content.Intent;
 import android.support.v4.app.Fragment;
-
-
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.view.ContextThemeWrapper;
@@ -20,10 +17,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.ViewGroup;
-
 import org.json.JSONArray;
 import org.json.JSONException;
-
 import java.util.concurrent.ExecutionException;
 
 public class AddPlace_Fragment extends Fragment implements AdapterView.OnItemSelectedListener {
@@ -32,13 +27,6 @@ public class AddPlace_Fragment extends Fragment implements AdapterView.OnItemSel
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_add_place, container, false);
-        String Name="";
-        String Description="";
-        String Sector_ID="";
-        String Address="";
-        String Country="";
-        String Zipcode="";
-        String Town="";
         String[] sector_list={""};
         try {
             sector_list = new getSector().execute().get();
@@ -65,7 +53,6 @@ public class AddPlace_Fragment extends Fragment implements AdapterView.OnItemSel
     }
 
     public void onNothingSelected(AdapterView<?> parent){
-
     }
 
 
@@ -77,9 +64,10 @@ public class AddPlace_Fragment extends Fragment implements AdapterView.OnItemSel
         EditText Country = (EditText) rootview.findViewById(R.id.txtCountry);
         EditText Description = (EditText) rootview.findViewById(R.id.txtDescription);
         Integer sectorID= (int) (long)spinner.getSelectedItemId() +1;
+
         if (!Name.getText().toString().isEmpty() && !Address.getText().toString().isEmpty() &&
-                !Zip.getText().toString().isEmpty() && !sectorID.toString().isEmpty() &&
-                Zip.length() >= 3 && Zip.length() <= 5 && Integer.parseInt(sectorID.toString()) >= 0)
+            !Zip.getText().toString().isEmpty() && !sectorID.toString().isEmpty() &&
+            Zip.length() >= 3 && Zip.length() <= 5 && Integer.parseInt(sectorID.toString()) >= 0)
         {
             String[] params = new String[]{Name.getText().toString(), Description.getText().toString(), sectorID.toString(),
                     Address.getText().toString(), Country.getText().toString(), Zip.getText().toString(), Town.getText().toString()};
@@ -95,20 +83,20 @@ public class AddPlace_Fragment extends Fragment implements AdapterView.OnItemSel
             }
         } else {
             new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), R.style.myDialog))
-                    .setTitle("Wrong input")
-                    .setMessage("Please fill all the required fields")
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            // continue with delete
-                        }
-                    })
-                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            // do nothing
-                        }
-                    })
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show();
+                .setTitle("Wrong input")
+                .setMessage("Please fill all the required fields")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
         }
     }
 
@@ -127,14 +115,9 @@ public class AddPlace_Fragment extends Fragment implements AdapterView.OnItemSel
                     sectors_list[i] = sectors.getJSONObject(i).getString("name");
                 } catch (JSONException e) {
                     e.printStackTrace();
-
-
                 }
-
             }
                 return sectors_list;
-
             }
-
         }
     }

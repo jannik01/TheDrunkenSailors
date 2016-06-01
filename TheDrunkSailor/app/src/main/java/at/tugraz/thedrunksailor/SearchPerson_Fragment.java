@@ -122,8 +122,6 @@ public class SearchPerson_Fragment extends Fragment implements AdapterView.OnIte
     }
 
     class doTask extends AsyncTask<String, String, Boolean> {
-
-
         protected Boolean doInBackground(String... args) {
             JSONArray persons = DatabaseInterface.searchPerson(args[0], args[1], args[2], args[3], args[4]);
             if (persons == null) {

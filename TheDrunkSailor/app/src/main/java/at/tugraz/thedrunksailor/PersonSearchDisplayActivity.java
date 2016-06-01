@@ -1,26 +1,13 @@
 package at.tugraz.thedrunksailor;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class PersonSearchDisplayActivity extends AppCompatActivity {
 
@@ -29,29 +16,19 @@ public class PersonSearchDisplayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_search_person);
         final ListView listview = (ListView) findViewById(R.id.listview);
-
         final String [][] person_list=createDummyList();
         if (listview != null) {
             listview.setAdapter(new PlaceItemAdapter(this, person_list));
-
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
                     Globals.pers_id=Integer.parseInt(person_list[position][0]);
-
-
-
                     Intent intent = new Intent(PersonSearchDisplayActivity.this, PersonDetailActivity.class);
                     startActivity(intent);
-
                 }
             });
         }
-
-
         DatabaseInterface database_interface_object = new DatabaseInterface();
-
-
     }
 
 
@@ -74,10 +51,7 @@ public class PersonSearchDisplayActivity extends AppCompatActivity {
 //        }
 //    }
 
-
-
     public String[][] createDummyList() {
-
         JSONArray persons = Globals.person_list;
         Integer persons_length = persons.length();
         String[][] person_list = new String[persons_length][4];
@@ -93,13 +67,12 @@ public class PersonSearchDisplayActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             try {
-                    person_list[i][2] = persons.getJSONObject(i).getString("age");
+                person_list[i][2] = persons.getJSONObject(i).getString("age");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             try {
-
-                    person_list[i][3] = persons.getJSONObject(i).getString("sex");
+                person_list[i][3] = persons.getJSONObject(i).getString("sex");
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -107,12 +80,5 @@ public class PersonSearchDisplayActivity extends AppCompatActivity {
         }
         return person_list;
     }
-
-
-
-
-
-
-
 }
 

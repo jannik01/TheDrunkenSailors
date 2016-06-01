@@ -8,14 +8,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
 import org.json.JSONArray;
 import org.json.JSONException;
-
 import java.util.concurrent.ExecutionException;
 
 public class PlaceDetailActivity extends AppCompatActivity {
-
     public static final int MAX = 4;
 
     @Override
@@ -46,37 +43,27 @@ public class PlaceDetailActivity extends AppCompatActivity {
         rating.setText(details[6]);
         description.setText(details[7]);
 
-
-
-
         SeekBar rank = (SeekBar) findViewById(R.id.rngRanking);
         SeekBar use = (SeekBar) findViewById(R.id.rngUse);
-
         if (rank != null) {
             rank.setOnSeekBarChangeListener(new MySeekListener(R.id.lbRank));
             rank.setMax(MAX);
             rank.setProgress(2);
         }
-
         if (use != null) {
             use.setOnSeekBarChangeListener(new MySeekListener(R.id.lbUse));
             use.setMax(4);
             use.setProgress(2);
         }
-
-
     }
+
     public void buttonOnClick(View v) {
         SeekBar rank = (SeekBar) findViewById(R.id.rngRanking);
         SeekBar use = (SeekBar) findViewById(R.id.rngUse);
         rank.getProgress();
-
         String rating = Integer.toString(rank.getProgress()+1);
         String current_use_= Integer.toString(use.getProgress()+1);
-
-
         String[] params = new String[]{rating, current_use_};
-
         try {
             if (new doTask().execute(params).get()) {
                 Intent intent = new Intent(this, FragmentManagerActivity.class);
@@ -87,7 +74,6 @@ public class PlaceDetailActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
     }
     public String[] getDetails() {
         String[] params = new String[]{Integer.toString(Globals.pid)};
@@ -100,32 +86,23 @@ public class PlaceDetailActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
-
         return detail_list;
-
     }
 
     private class MySeekListener implements SeekBar.OnSeekBarChangeListener {
-
-
         private int uiID = 0;
 
         public MySeekListener(int uid) {
             uiID = uid;
         }
 
-        public void onProgressChanged(SeekBar seekBar, int progress,
-                                      boolean fromUser) {
-            // Log the progress
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             Log.d("DEBUG", "Progress is: " + progress);
             TextView view = (TextView) findViewById(uiID);
             if (view != null) {
                 String text = progress+1 + "/" + (MAX+1);
                 view.setText( text);
             }
-
-
         }
 
         public void onStartTrackingTouch(SeekBar seekBar) {
@@ -133,17 +110,15 @@ public class PlaceDetailActivity extends AppCompatActivity {
 
         public void onStopTrackingTouch(SeekBar seekBar) {
         }
-
-
     }
 
-class doTask extends AsyncTask<String, String, Boolean> {
-    protected Boolean doInBackground(String... args) {
-        boolean success = DatabaseInterface.ratePlace(args[0], args[1]);
-        return success;
+    class doTask extends AsyncTask<String, String, Boolean> {
+        protected Boolean doInBackground(String... args) {
+            boolean success = DatabaseInterface.ratePlace(args[0], args[1]);
+            return success;
+        }
     }
 
-}
     class getData extends AsyncTask<String, String, String[]> {
         protected String[] doInBackground(String... args) {
             Integer pid_int = Integer.parseInt(args[0]);
@@ -181,22 +156,16 @@ class doTask extends AsyncTask<String, String, Boolean> {
                 detailslist[5] = details.getJSONObject(0).getString("current_use");
             } catch (JSONException e) {
                 e.printStackTrace();
-
-
-
-
             }
             try {
                 if(details.getJSONObject(0).getString("rating")==null){
                     detailslist[6]="0";
                 }
                 else
-                detailslist[6] = details.getJSONObject(0).getString("rating");
+                    detailslist[6] = details.getJSONObject(0).getString("rating");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-
             try {
                 detailslist[7] = details.getJSONObject(0).getString("description");
             } catch (JSONException e1) {
@@ -206,6 +175,5 @@ class doTask extends AsyncTask<String, String, Boolean> {
             return detailslist;
         }
     }
-
 }
 

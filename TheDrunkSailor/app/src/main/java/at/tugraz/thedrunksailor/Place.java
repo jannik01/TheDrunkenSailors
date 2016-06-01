@@ -23,12 +23,4 @@ public class Place {
     public String getName() {
         return name;
     }
-
-    public double getCurrent_capacity() {
-        return current_capacity;
-    }
-
-    public double getUser_note() {
-        return user_note;
-    }
 }

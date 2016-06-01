@@ -1,16 +1,11 @@
 package at.tugraz.thedrunksailor;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
-import java.util.logging.Logger;
-
-import at.tugraz.thedrunksailor.R;
 
 /**
  * Created by Clemens on 27.04.2016.
@@ -18,7 +13,6 @@ import at.tugraz.thedrunksailor.R;
 
 
 class PlaceItemAdapter extends BaseAdapter {
-
     Context context;
     String[][] data;
     final static String TAG="LIST LOGGER";
@@ -28,8 +22,7 @@ class PlaceItemAdapter extends BaseAdapter {
         // TODO Auto-generated constructor stub
         this.context = context;
         this.data = data;
-        inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -57,16 +50,13 @@ class PlaceItemAdapter extends BaseAdapter {
         View vi = convertView;
         if (vi == null)
             vi = inflater.inflate(R.layout.place_row_item, null);
-
         vi.setTag(data[position][0]);
         TextView name = (TextView) vi.findViewById(R.id.name);
         TextView currentUse = (TextView) vi.findViewById(R.id.current_use);
         TextView average = (TextView) vi.findViewById(R.id.average);
-
         name.setText(data[position][1]);
         currentUse.setText(data[position][2]);
         average.setText(data[position][3]);
-
         return vi;
     }
 }
