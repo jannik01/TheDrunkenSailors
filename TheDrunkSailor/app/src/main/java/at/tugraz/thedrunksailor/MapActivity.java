@@ -282,7 +282,8 @@ public class MapActivity extends AppCompatActivity implements
         protected String[][] doInBackground(String... args) {
             String [][] places_list_2;
             JSONArray json_array = DatabaseInterface.searchPlace("Mensa","1","","","","","","");
-            if (json_array != null) {
+
+            if (json_array.length() > 0) {
                 places_list_2 = new String[json_array.length()][5];
                 Log.e("test", "json array filled: "+ json_array.length() + ";" );
                 for (int i = 0; i < json_array.length(); i++) {
