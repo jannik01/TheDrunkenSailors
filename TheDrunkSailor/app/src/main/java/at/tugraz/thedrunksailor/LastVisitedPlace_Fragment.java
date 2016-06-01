@@ -15,13 +15,14 @@ import java.util.concurrent.ExecutionException;
 
 public class LastVisitedPlace_Fragment extends Fragment {
     View rootview;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootview = inflater.inflate(R.layout.fragment_last_places_visited, container, false);
 
         final ListView listview = (ListView) rootview.findViewById(R.id.listview);
-        final String [][] places_list=createDummyList();
+        final String [][] places_list= createUserVisitedPlacesList();
         if (listview != null) {
-            listview.setAdapter(new PlaceItemAdapter(getActivity(), createDummyList()));
+            listview.setAdapter(new PlaceItemAdapter(getActivity(), createUserVisitedPlacesList()));
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Globals.pid=Integer.parseInt(places_list[position][0]);
@@ -35,7 +36,7 @@ public class LastVisitedPlace_Fragment extends Fragment {
     }
 
 
-    public String[][] createDummyList() {
+    public String[][] createUserVisitedPlacesList() {
         String[][] places_list = new String[0][];
         String user_id = String.valueOf(Globals.uid);
         try {
@@ -45,19 +46,6 @@ public class LastVisitedPlace_Fragment extends Fragment {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        String[][] place = {
-                {"1", "Place1", "3", "5"},
-                {"2", "Place2", "3", "3"},
-                {"3", "Place3", "5", "2.3"},
-                {"4", "Place4", "1", "2.7"},
-                {"5", "Place5", "3", "4"},
-                {"6", "Place6", "2", "1.2"},
-                {"7", "Place7", "3", "3"},
-                {"15", "Place8", "5", "2.3"},
-                {"9", "Place9", "1", "2.7"},
-                {"10", "Place10", "3", "4"},
-                {"11", "Place11", "2", "1.2"},
-        };
         return places_list;
     }
 

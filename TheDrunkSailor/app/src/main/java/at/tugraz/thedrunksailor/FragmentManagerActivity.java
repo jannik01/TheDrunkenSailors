@@ -26,8 +26,7 @@ public class FragmentManagerActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.main_fragment_manager);
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getFragmentManager().findFragmentById(R.id.navigation_drawer);
+        mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
@@ -105,7 +104,7 @@ public class FragmentManagerActivity extends FragmentActivity
             return true;
         }
         if(id == R.id.logout_menu_bar) {
-            //REAL LOGOUT STILL NECESSARY
+            Globals.uid=0;
             Intent intent = new Intent(FragmentManagerActivity.this, SignInActivity.class);
             startActivity(intent);
         }
