@@ -252,9 +252,9 @@
 
                 <Button
                     android:id="@+id/btnAddPlace"
-                    android:layout_width="wrap_content"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="center_horizontal|top"
                     android:nestedScrollingEnabled="false"
                     android:text="Plus"
                     android:onClick="buttonOnClick"
