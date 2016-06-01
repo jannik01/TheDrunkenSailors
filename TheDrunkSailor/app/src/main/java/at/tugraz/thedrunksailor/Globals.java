@@ -12,4 +12,5 @@ public class Globals {
     public static JSONArray place_list;
     public static JSONArray person_list;
     public static boolean new_user=false;
+    public static JSONArray ratings;
 }

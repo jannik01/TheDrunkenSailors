@@ -122,8 +122,8 @@ public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<Frag
             assertEquals("name search","Mensa", success2.getJSONObject(i).getString("name"));
 
         }
-        success2 = DatabaseInterface.searchPlace("Mensa","","","","","2","","");
-        assertNull(success2);
+        success2 = DatabaseInterface.searchPlace("Mens2a","","","","","2","","");
+        assertEquals("result not empty",0,success2.length());
     }
     @Test
     public void testGetSectors(){

@@ -111,7 +111,7 @@ public class LastVisitedPlaceActivityTest extends ActivityInstrumentationTestCas
         }
 
         success2 = DatabaseInterface.searchPlace("Test","1","","","","","5.0","");
-        assertNull(success2);
+        assertEquals("result not empty",0,success2.length());
     }
     @Test
     public void testGetSectors(){

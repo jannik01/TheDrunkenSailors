@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,7 +80,7 @@ public class LastVisitedPlace_Fragment extends Fragment {
                         e.printStackTrace();
                     }
                     try {
-                        places_list[i][3] = places.getJSONObject(i).getString("rating");
+                        places_list[i][3] = Globals.ratings.getJSONObject(i).getString("rating");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
