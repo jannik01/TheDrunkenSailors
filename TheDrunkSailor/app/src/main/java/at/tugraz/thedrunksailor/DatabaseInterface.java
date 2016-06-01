@@ -273,6 +273,7 @@ public class DatabaseInterface {
     }
 
     public static JSONArray searchPerson(String name, String age, String sex, String job, String lastly) {
+        JSONArray person_list = new JSONArray();
         JSONParser jsonParser = new JSONParser();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("name", name));
@@ -280,20 +281,19 @@ public class DatabaseInterface {
         params.add(new BasicNameValuePair("sex", sex));
         params.add(new BasicNameValuePair("job", job));
         params.add(new BasicNameValuePair("lastly_visited", lastly));
-        JSONObject json = jsonParser.makeHttpRequest(url_search_person,
+        JSONObject result = jsonParser.makeHttpRequest(url_search_person,
                 "POST", params);
-        //Log.d("Create Response", json.toString());
-        try {
-            int success = json.getInt(TAG_SUCCESS);
-            JSONArray person_list = json.getJSONArray("person_list");
-            if (success == 1) {
-                return (person_list);
+        if(result != null) {
+            try {
+                int success = result.getInt(TAG_SUCCESS);
+                if (success == 1) {
+                    person_list = result.getJSONArray("person_list");
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-            return null;
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
-        return null;
+        return(person_list);
     }
 
     public static JSONArray searchPersonsIdIsFollowing(Integer pers_id) {
@@ -332,7 +332,6 @@ public class DatabaseInterface {
                 if (success == 1) {
                     person_data = response.getJSONArray("person_data");
                 }
-                return null;
             } catch (JSONException e) {
                 e.printStackTrace();
             }

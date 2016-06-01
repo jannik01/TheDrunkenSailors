@@ -2,6 +2,8 @@ package at.tugraz.thedrunksailor.uitest;
 
 import android.test.ActivityInstrumentationTestCase2;
 import com.robotium.solo.Solo;
+
+import at.tugraz.thedrunksailor.Globals;
 import at.tugraz.thedrunksailor.SignInActivity;
 
 //import junit.framework.TestCase;
@@ -51,9 +53,8 @@ public class SignInActivityTest extends ActivityInstrumentationTestCase2<SignInA
 
         mySolo.clickOnButton("Sign in");
 
-        boolean actual = mySolo.searchText("The Drunken Sailors");
-
-        assertEquals("Fail", true, actual);
+        mySolo.sleep(1000);
+        assertNotSame("Fail",0,Globals.uid);
         //mySolo.searchEditText("++++++++++++++++++");
     }
 

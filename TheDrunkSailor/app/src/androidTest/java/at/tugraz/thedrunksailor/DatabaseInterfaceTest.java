@@ -1,5 +1,6 @@
 package at.tugraz.thedrunksailor;
 
+import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.test.ActivityInstrumentationTestCase2;
 
@@ -233,5 +234,84 @@ public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<Frag
         assertEquals("Wrong number of following persons.", 2 , person_list.length());
 
 
+    }
+
+    public void testGetPersonData() {
+        JSONArray person_data = DatabaseInterface.getPersonData(94);
+        assertTrue("There should be exactly one test user.",1==person_data.length());
+        String name,age,sex,job;
+        name = age = sex = job = "";
+        try {
+            name = person_data.getJSONObject(0).getString("name");
+        } catch (JSONException e) {
+            assertTrue("Could not get name",false);
+        }
+        try {
+            age = person_data.getJSONObject(0).getString("age");
+        } catch (JSONException e) {
+            assertTrue("Could note get age",false);
+        }
+        try {
+            sex = person_data.getJSONObject(0).getString("sex");
+        } catch (JSONException e) {
+            assertTrue("Could not get sex",false);
+        }
+        try {
+            job = person_data.getJSONObject(0).getString("job");
+        } catch (JSONException e) {
+            assertTrue("Could not get job",false);
+        }
+
+        assertEquals("Wrong name","John Doe",name);
+        assertEquals("Wrong sex","m",sex);
+        assertEquals("Wrong age","14",age);
+        assertEquals("Wrong job","Coder",job);
+    }
+
+    public void testSearchPerson() {
+        JSONArray person_data = DatabaseInterface.searchPerson("John Doe","14","m","Coder","");
+
+        int user_id = 0;
+        String name,age,sex,job;
+        name = age = sex = job = "";
+
+        try {
+            user_id = person_data.getJSONObject(0).getInt("user_id");
+        } catch (JSONException e) {
+            assertTrue("Could not get user id",false);
+        }
+
+        try {
+            name = person_data.getJSONObject(0).getString("name");
+        } catch (JSONException e) {
+            assertTrue("Could not get name",false);
+        }
+        try {
+            age = person_data.getJSONObject(0).getString("age");
+        } catch (JSONException e) {
+            assertTrue("Could note get age",false);
+        }
+        try {
+            sex = person_data.getJSONObject(0).getString("sex");
+        } catch (JSONException e) {
+            assertTrue("Could not get sex",false);
+        }
+        try {
+            job = person_data.getJSONObject(0).getString("job");
+        } catch (JSONException e) {
+            assertTrue("Could not get job",false);
+        }
+
+        assertEquals("Wrong user id",94,user_id);
+        assertEquals("Wrong name","John Doe",name);
+        assertEquals("Wrong sex","m",sex);
+        assertEquals("Wrong age","14",age);
+        assertEquals("Wrong job","Coder",job);
+
+    }
+
+    public void testRatePlace () {
+        boolean success = DatabaseInterface.ratePlace("1","1");
+        assertTrue(success);
     }
 }
