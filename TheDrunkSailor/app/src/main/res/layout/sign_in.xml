@@ -3,10 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".SignInActivity">
 
     <Button
@@ -17,7 +13,7 @@
         android:textSize="25dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="120dp"
         android:height="100dp"
         android:width="200dp"
         android:onClick="signInLogic" />
@@ -54,7 +50,7 @@
         android:id="@+id/btn_register"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="37dp"
+        android:layout_marginBottom="60dp"
         android:textSize="25dp"
         android:height="50dp"
         android:onClick="register"/>
@@ -66,6 +62,23 @@
         android:src="@drawable/sign"
         android:adjustViewBounds="true"
         android:height="1dp"
-        android:layout_above="@+id/text_user_name" />
+        android:layout_above="@+id/text_user_name"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:text="TheDrunkenSailors 2016TM"
+        android:gravity="center"
+        android:allowUndo="false"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

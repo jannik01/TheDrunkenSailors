@@ -39,7 +39,7 @@ xmlns:tools="http://schemas.android.com/tools"
 
             <TextView
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="cur Use"
+                android:text="current Use"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -50,10 +50,11 @@ xmlns:tools="http://schemas.android.com/tools"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_weight="1"
                 android:layout_marginLeft="15dp"
-                android:text="Avg Ratig"
+                android:text="Average Rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:singleLine="false" />
 
         </LinearLayout>
 
@@ -72,15 +73,15 @@ xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/impressum_textfield"
-        android:text="The Drunken Sailors 2016TM"
+        android:text="TheDrunkenSailors 2016TM"
         android:gravity="center"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:allowUndo="false"
         android:clickable="false"
         android:cursorVisible="false"
         android:focusable="false"
-        android:focusableInTouchMode="false"/>
+        android:focusableInTouchMode="false"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

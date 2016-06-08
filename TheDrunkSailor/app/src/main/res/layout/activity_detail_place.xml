@@ -98,9 +98,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="PLZ:"
+                        android:text="Zip Code:"
                         android:id="@+id/lbPlz"
                         android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
                         android:textSize="16dp"
                         android:layout_column="26" />
 
@@ -324,6 +325,8 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="20dp"
                     android:text="Submit"
                     android:id="@+id/button"
                     android:onClick="buttonOnClick"
