@@ -40,28 +40,6 @@ public class SearchDisplayActivity extends AppCompatActivity {
         DatabaseInterface database_interface_object = new DatabaseInterface();
     }
 
-
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu, menu);
-//        return true;
-//    }
-//
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.logout:
-//                Intent intent = new Intent(SearchDisplayActivity.this, SignInActivity.class);
-//                startActivity(intent);
-//                return true;
-//
-//            default:
-//                return false;
-//
-//        }
-//    }
-
-
-
     public String[][] getResultSearch() {
 
         JSONArray places = Globals.place_list;

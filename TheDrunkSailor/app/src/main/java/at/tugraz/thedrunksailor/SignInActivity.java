@@ -67,11 +67,6 @@ public class SignInActivity extends AppCompatActivity
                     // continue with delete
                 }
             });
-            alert.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    // do nothing
-                }
-            });
         alert.show();
         }
 

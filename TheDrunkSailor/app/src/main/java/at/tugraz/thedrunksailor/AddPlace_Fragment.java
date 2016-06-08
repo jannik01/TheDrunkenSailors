@@ -95,11 +95,6 @@ public class AddPlace_Fragment extends Fragment implements AdapterView.OnItemSel
                         // continue with delete
                     }
                 })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // do nothing
-                    }
-                })
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
         }

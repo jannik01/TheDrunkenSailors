@@ -112,11 +112,6 @@ public class SearchPlace_Fragment extends Fragment implements AdapterView.OnItem
                 // continue with delete
                 }
             });
-            alerter.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // do nothing
-                    }
-            });
             alerter.show();
         }
         else {
