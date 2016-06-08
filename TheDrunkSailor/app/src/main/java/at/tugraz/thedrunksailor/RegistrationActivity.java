@@ -15,14 +15,19 @@ public class RegistrationActivity extends AppCompatActivity {
     public static String TAG = "REGISTRATION_ACTIVITY";
     EditText mEdit;
     EditText mPassword;
+    CheckConnection stateOfConnection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+        stateOfConnection = new CheckConnection(this);
     }
 
     public void doRegistration(View v) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(RegistrationActivity.this);
+        if(!stateOfConnection.isOnline(alert))
+            return;
         EditText usernameText = (EditText) findViewById(R.id.txtUsername);
         EditText passwordText = (EditText) findViewById(R.id.txtPassword);
         EditText passwordReText = (EditText) findViewById(R.id.txtPasswordRe);
@@ -59,7 +64,6 @@ public class RegistrationActivity extends AppCompatActivity {
         mEdit = (EditText)findViewById(R.id.txtUsername);
         mPassword = (EditText)findViewById(R.id.txtPassword);
 
-        AlertDialog.Builder alert = new AlertDialog.Builder(RegistrationActivity.this);
         alert.setMessage("-----");
         alert.setIcon(android.R.drawable.ic_dialog_alert);
 

@@ -36,7 +36,7 @@ public class SearchPlace_Fragment extends Fragment implements AdapterView.OnItem
 
 
     Spinner spinner;
-
+    CheckConnection stateOfConnection;
     View rootview;
     @Nullable
     @Override
@@ -65,6 +65,7 @@ public class SearchPlace_Fragment extends Fragment implements AdapterView.OnItem
                 searchPlaceLogic(rootview);
             }
         });
+        stateOfConnection = new CheckConnection(getActivity());
         return rootview;
     }
 
@@ -79,6 +80,8 @@ public class SearchPlace_Fragment extends Fragment implements AdapterView.OnItem
     public void searchPlaceLogic(View view)
     {
         AlertDialog.Builder alerter = new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), R.style.myDialog));
+        if(!stateOfConnection.isOnline(alerter))
+            return;
         EditText mPLZ = (EditText)rootview.findViewById(R.id.plz);
 
         alerter.setIcon(android.R.drawable.ic_dialog_alert);

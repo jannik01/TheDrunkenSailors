@@ -23,6 +23,7 @@ import java.util.concurrent.ExecutionException;
 
 public class AddPlace_Fragment extends Fragment implements AdapterView.OnItemSelectedListener {
     View rootview;
+    CheckConnection stateOfConnection;
     Spinner spinner;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class AddPlace_Fragment extends Fragment implements AdapterView.OnItemSel
                 buttonOnClick(rootview);
             }
         });
+        stateOfConnection = new CheckConnection(getActivity());
         return rootview;
     }
 
@@ -57,6 +59,9 @@ public class AddPlace_Fragment extends Fragment implements AdapterView.OnItemSel
 
 
     public void buttonOnClick(View v) {
+        AlertDialog.Builder alerter = new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), R.style.myDialog));
+        if(!stateOfConnection.isOnline(alerter))
+            return;
         EditText Name = (EditText) rootview.findViewById(R.id.txtName);
         EditText Address = (EditText) rootview.findViewById(R.id.txtAdress);
         EditText Town = (EditText) rootview.findViewById(R.id.txtTown);
