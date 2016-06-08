@@ -93,16 +93,11 @@ public class NavigationDrawerFragment extends Fragment {
             Bundle savedInstanceState) {
         mDrawerListView = (ListView) inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
+
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                parent.getChildAt(position).setBackgroundColor(
-                        Color.parseColor("#ffd550"));
-                if (save != -1 && save != position) {
-                    parent.getChildAt(save).setBackgroundColor(
-                            Color.parseColor("#a5a2a2"));
-                }
                 selectItem(position);
                 save = position;
             }
