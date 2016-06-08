@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.ContextThemeWrapper;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -37,7 +38,7 @@ public class SearchPerson_Fragment extends Fragment implements AdapterView.OnIte
 
 
     Spinner spinner;
-
+    CheckConnection stateOfConnection;
     View rootview;
 
     @Nullable
@@ -54,6 +55,7 @@ public class SearchPerson_Fragment extends Fragment implements AdapterView.OnIte
                 searchPersonLogic(rootview);
             }
         });
+        stateOfConnection = new CheckConnection(getActivity());
         return rootview;
     }
 
@@ -65,8 +67,9 @@ public class SearchPerson_Fragment extends Fragment implements AdapterView.OnIte
 //    }
 
     public void searchPersonLogic(View view) {
-
-
+        AlertDialog.Builder alerter = new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), R.style.myDialog));
+        if(!stateOfConnection.isOnline(alerter))
+            return;
         EditText mName = (EditText) rootview.findViewById(R.id.name);
         EditText mAge = (EditText) rootview.findViewById(R.id.age);
         EditText mJob = (EditText) rootview.findViewById(R.id.job);

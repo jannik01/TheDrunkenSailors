@@ -2,6 +2,7 @@ package at.tugraz.thedrunksailor;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import java.util.concurrent.ExecutionException;
 
 public class PlaceDetailActivity extends AppCompatActivity {
     public static final int MAX = 4;
+    CheckConnection stateOfConnection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +57,13 @@ public class PlaceDetailActivity extends AppCompatActivity {
             use.setMax(4);
             use.setProgress(2);
         }
+        stateOfConnection = new CheckConnection(this);
     }
 
     public void buttonOnClick(View v) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(PlaceDetailActivity.this);
+        if(!stateOfConnection.isOnline(alert))
+            return;
         SeekBar rank = (SeekBar) findViewById(R.id.rngRanking);
         SeekBar use = (SeekBar) findViewById(R.id.rngUse);
         rank.getProgress();

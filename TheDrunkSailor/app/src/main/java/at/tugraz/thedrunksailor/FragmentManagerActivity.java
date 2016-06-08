@@ -20,6 +20,7 @@ public class FragmentManagerActivity extends FragmentActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
+    CheckConnection stateOfConnection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class FragmentManagerActivity extends FragmentActivity
         setContentView(R.layout.main_fragment_manager);
         mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
+        stateOfConnection = new CheckConnection(this);
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
             R.id.navigation_drawer,

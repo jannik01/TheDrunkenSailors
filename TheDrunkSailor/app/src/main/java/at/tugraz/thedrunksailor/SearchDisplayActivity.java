@@ -1,30 +1,19 @@
 package at.tugraz.thedrunksailor;
 
-import android.app.ActionBar;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-
 public class SearchDisplayActivity extends AppCompatActivity {
+    CheckConnection stateOfConnection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +21,16 @@ public class SearchDisplayActivity extends AppCompatActivity {
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_display_search);
         final ListView listview = (ListView) findViewById(R.id.listview);
-
-        final String [][] places_list=createDummyList();
+        stateOfConnection = new CheckConnection(this);
+        final String [][] places_list= getResultSearch();
         if (listview != null) {
             listview.setAdapter(new PlaceItemAdapter(this, places_list));
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
+                    AlertDialog.Builder alert = new AlertDialog.Builder(SearchDisplayActivity.this);
+                    if(!stateOfConnection.isOnline(alert))
+                        return;
                     Globals.pid=Integer.parseInt(places_list[position][0]);
                     Intent intent = new Intent(SearchDisplayActivity.this, PlaceDetailActivity.class);
                     startActivity(intent);
@@ -70,7 +62,7 @@ public class SearchDisplayActivity extends AppCompatActivity {
 
 
 
-    public String[][] createDummyList() {
+    public String[][] getResultSearch() {
 
         JSONArray places = Globals.place_list;
         Integer places_length = places.length();

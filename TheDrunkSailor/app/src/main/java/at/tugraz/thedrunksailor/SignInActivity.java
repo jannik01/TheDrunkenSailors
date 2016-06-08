@@ -43,18 +43,8 @@ public class SignInActivity extends AppCompatActivity
 
         AlertDialog.Builder alert = new AlertDialog.Builder(SignInActivity.this);
 
-        if(!stateOfConnection.isOnline())
-        {
-            alert.setMessage("No internet connection!");
-            alert.setTitle("Fail");
-            alert.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    // continue with delete
-                }
-            });
-            alert.show();
+        if(!stateOfConnection.isOnline(alert))
             return;
-        }
 
 
         alert.setMessage("-----");
