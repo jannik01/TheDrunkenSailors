@@ -40,9 +40,9 @@ public class SearchPlaceActivityTest extends ActivityInstrumentationTestCase2<Fr
     }
 
     public void testTextInput() throws InterruptedException {
-        mySolo.enterText(1,"name");
-        mySolo.enterText(2,"8020");
-        mySolo.enterText(3,"place");
+        mySolo.enterText(0,"name");
+        mySolo.enterText(1,"8020");
+        mySolo.enterText(2,"place");
         mySolo.clickOnButton("Find");
         mySolo.sleep(1000);
 

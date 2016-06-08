@@ -7,6 +7,7 @@ import com.robotium.solo.Solo;
 
 import junit.framework.TestCase;
 
+import at.tugraz.thedrunksailor.Globals;
 import at.tugraz.thedrunksailor.PersonDetailActivity;
 
 /**
@@ -23,6 +24,8 @@ public class PersonDetailActivityTest extends ActivityInstrumentationTestCase2<P
 
     public void setUp() throws Exception {
         super.setUp();
+        Globals.pers_id=79;
+        Globals.uid=17;
         mySolo = new Solo(getInstrumentation(), getActivity());
     }
 
