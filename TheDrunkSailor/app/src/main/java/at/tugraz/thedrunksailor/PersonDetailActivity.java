@@ -276,7 +276,9 @@ public class PersonDetailActivity extends AppCompatActivity {
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
+
     }
+
 
     class DoTaskDoIFollow extends AsyncTask<String, String, Boolean> {
 
