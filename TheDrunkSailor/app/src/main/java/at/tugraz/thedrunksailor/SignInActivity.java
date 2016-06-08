@@ -20,14 +20,15 @@ public class SignInActivity extends AppCompatActivity
 {
     EditText mEdit;
     EditText mPassword;
-
-
+    CheckConnection stateOfConnection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_in);
+
+        stateOfConnection = new CheckConnection(this);
     }
 
     public void signInLogic(View view)
@@ -41,6 +42,20 @@ public class SignInActivity extends AppCompatActivity
         Integer userid=0;
 
         AlertDialog.Builder alert = new AlertDialog.Builder(SignInActivity.this);
+
+        if(!stateOfConnection.isOnline())
+        {
+            alert.setMessage("No internet connection!");
+            alert.setTitle("Fail");
+            alert.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // continue with delete
+                }
+            });
+            alert.show();
+            return;
+        }
+
 
         alert.setMessage("-----");
         alert.setIcon(android.R.drawable.ic_dialog_alert);
@@ -89,9 +104,5 @@ public class SignInActivity extends AppCompatActivity
 
             return user_id;
         }
-
-
-
-
     }
 }
