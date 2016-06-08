@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TheDrunkSailor</string>
+    <string name="app_name">Plubble</string>
     <string name="logout">Logout</string>
     <string-array name="Sectors">
         <item>Restaurant</item>
