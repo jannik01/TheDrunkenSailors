@@ -13,9 +13,9 @@ class getLast extends AsyncTask<String, String, String[][]> {
         Integer pers_int = Integer.parseInt(args[0]);
         JSONArray places = DatabaseInterface.startPagePlaces(pers_int);
         Integer places_length;
-        places_length = places.length();
-        if (places_length==0)
+        if(Globals.new_user==true)
                 return null;
+        places_length = places.length();
         if (places_length>5)
             places_length=5;
         String[][] places_list = new String[places_length][4];
