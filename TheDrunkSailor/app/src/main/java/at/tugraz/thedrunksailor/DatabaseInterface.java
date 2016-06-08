@@ -29,6 +29,11 @@ public class DatabaseInterface {
     private static String url_search_person = "http://drunkensailors.robert-thomann.at/search_person.php";
     private static String url_search_persons_id_is_following = "http://drunkensailors.robert-thomann.at/url_search_persons_id_is_following.php";
     private static String url_get_person_data = "http://drunkensailors.robert-thomann.at/get_person.php";
+
+    private static String url_follow_person = "http://drunkensailors.robert-thomann.at/follow_person.php";
+    private static String url_do_i_follow_person = "http://drunkensailors.robert-thomann.at/do_i_follow_person.php";
+    private static String url_unfollow_person = "http://drunkensailors.robert-thomann.at/unfollow_person.php";
+
     private static String url_get_place_list = "http://drunkensailors.robert-thomann.at/search_place_for_maps.php";
     private static String url_search_friends_at_place = "http://drunkensailors.robert-thomann.at/search_friends_at_place.php";
 
@@ -268,7 +273,7 @@ public class DatabaseInterface {
                         Globals.c_use=0.0;
                     }
                     else
-                    Globals.c_use=result.getJSONArray("c_use").getJSONObject(0).getDouble("current_use");
+                        Globals.c_use=result.getJSONArray("c_use").getJSONObject(0).getDouble("current_use");
                 }
 
             } catch (JSONException e) {
@@ -393,4 +398,77 @@ public class DatabaseInterface {
     public static void logout() {
         Globals.uid=0;
     }
+
+
+    public static Boolean followPerson(Integer pers_id) {
+
+        JSONParser jsonParser = new JSONParser();
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("leader_id", Integer.toString(pers_id)));
+        params.add(new BasicNameValuePair("follower_id", Integer.toString(Globals.uid)));
+        JSONObject json = jsonParser.makeHttpRequest(url_follow_person,
+                "POST", params);
+
+        try {
+            int success = json.getInt(TAG_SUCCESS);
+
+            if (success == 1) {
+                return true;
+            }
+            return false;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return false;
+
+    }
+
+    public static Boolean doIFollowPerson(Integer pers_id) {
+
+        JSONParser jsonParser = new JSONParser();
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("leader_id", Integer.toString(pers_id)));
+        params.add(new BasicNameValuePair("follower_id", Integer.toString(Globals.uid)));
+        JSONObject json = jsonParser.makeHttpRequest(url_do_i_follow_person,
+                "POST", params);
+
+        try {
+            int success = json.getInt(TAG_SUCCESS);
+
+            if (success == 1) {
+                return true;
+            }
+            return false;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return false;
+
+    }
+
+    public static Boolean unfollowPerson(Integer pers_id) {
+
+        JSONParser jsonParser = new JSONParser();
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("leader_id", Integer.toString(pers_id)));
+        params.add(new BasicNameValuePair("follower_id", Integer.toString(Globals.uid)));
+        JSONObject json = jsonParser.makeHttpRequest(url_unfollow_person,
+                "POST", params);
+
+        try {
+            int success = json.getInt(TAG_SUCCESS);
+
+            if (success == 1) {
+                return true;
+            }
+            return false;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return false;
+
+    }
+
+
+
 }
