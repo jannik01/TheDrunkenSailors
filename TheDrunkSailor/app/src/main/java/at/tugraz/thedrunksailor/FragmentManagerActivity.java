@@ -58,6 +58,9 @@ public class FragmentManagerActivity extends FragmentActivity
             case 4:
                 objFragment = new Map_Fragment();
                 break;
+            case 5:
+                objFragment = new FriendList_Fragment();
+                break;
         }
         // update the main content by replacing fragments
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
@@ -82,6 +85,9 @@ public class FragmentManagerActivity extends FragmentActivity
                 break;
             case 5:
                 mTitle = getString(R.string.title_section5);
+                break;
+            case 6:
+                mTitle = getString(R.string.title_section6);
                 break;
         }
     }

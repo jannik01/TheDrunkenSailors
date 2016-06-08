@@ -175,6 +175,8 @@ public class PersonDetailActivity extends AppCompatActivity {
             Boolean unfollowing_success = new DoTaskUnFollowPerson().execute(params).get();
 
             if(unfollowing_success){
+                Toast.makeText(PersonDetailActivity.this, "You are unsubscribed", Toast.LENGTH_LONG).show();
+
                 assert button != null;
                 button.setText("follow");
                 return true;
@@ -250,13 +252,11 @@ public class PersonDetailActivity extends AppCompatActivity {
         protected String[][] doInBackground(String... args) {
             Integer pers_int = Integer.parseInt(args[0]);
             JSONArray persons = DatabaseInterface.searchPersonsIdIsFollowing(pers_int);
-            try {
-                if(persons.getJSONObject(0).getString("name")=="null")
-                    return null;
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+
+
             int persons_length = persons.length();
+            if(persons_length==0)
+                return null;
             String[][] it_follows = new String[persons_length][4];
             for (Integer i = 0; persons.length() > i; i++) {
                 try {

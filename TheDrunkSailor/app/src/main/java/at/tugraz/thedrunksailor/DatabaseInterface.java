@@ -171,12 +171,35 @@ public class DatabaseInterface {
         else
             params.add(new BasicNameValuePair("max_rating", max_rating.toString()));
         JSONArray places = new JSONArray();
+        JSONArray true_use = new JSONArray();
         JSONObject json = jsonParser.makeHttpRequest(url_search_place, "POST", params);
         if(json != null) {
             try {
                 int success = json.getInt(TAG_SUCCESS);
                 if(success == 1) {
                     places = json.getJSONArray("place_string");
+                    true_use=json.getJSONArray("current_use");
+                    int places_length=places.length();
+                    int curr_length=true_use.length();
+
+                    for (int i=0;places_length>i;i++)
+                    {
+                        places.getJSONObject(i).put("current_use","0.0000");
+                        for (int j=0;curr_length>j;j++)
+                        {
+                            int place_int= places.getJSONObject(i).getInt("place_ID");
+                            int use_int=true_use.getJSONObject(j).getInt("place_ID");
+
+
+
+                            if(place_int==use_int)
+                            {
+                                String use=true_use.getJSONObject(j).getString("current_use");
+                                places.getJSONObject(i).put("current_use",use);
+                            }
+                        }
+
+                    }
                 }
 
             } catch (JSONException e) {
@@ -324,6 +347,7 @@ public class DatabaseInterface {
             try {
                 int success = response.getInt(TAG_SUCCESS);
                 if (success == 1) {
+
                     person_list = response.getJSONArray("person_list");
                 }
             } catch (JSONException e) {

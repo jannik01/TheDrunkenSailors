@@ -18,6 +18,8 @@
     <string name="title_section3">Add Place</string>
     <string name="title_section4">Search Person</string>
     <string name="title_section5">Map</string>
+    <string name="title_section6">Friend List</string>
+
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

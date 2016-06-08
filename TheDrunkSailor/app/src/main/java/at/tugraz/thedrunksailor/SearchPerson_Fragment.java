@@ -133,9 +133,6 @@ public class SearchPerson_Fragment extends Fragment implements AdapterView.OnIte
                 Globals.person_list = persons;
                 return true;
             }
-
         }
-
-
     }
 }
