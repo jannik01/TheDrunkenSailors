@@ -423,30 +423,10 @@ public class Map_Fragment extends Fragment implements
                 for (int i = 0; i < json_array.length(); i++) {
                     try {
                         places_list_2[i][0] = json_array.getJSONObject(i).getString("place_ID");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    try {
                         places_list_2[i][1] = json_array.getJSONObject(i).getString("name");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    try {
                         places_list_2[i][2] = json_array.getJSONObject(i).getString("sector_ID");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    try {
                         places_list_2[i][3] = json_array.getJSONObject(i).getString("address");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    try {
                         places_list_2[i][4] = json_array.getJSONObject(i).getString("zipcode");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    try {
                         places_list_2[i][5] = json_array.getJSONObject(i).getString("town");
                     } catch (JSONException e) {
                         e.printStackTrace();

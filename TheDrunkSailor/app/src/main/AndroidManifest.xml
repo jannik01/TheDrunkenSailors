@@ -47,9 +47,6 @@
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
         </activity>
 
-        <activity android:name=".MapActivity"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-        </activity>
 
         <activity
             android:name=".FragmentUtilActivity"

@@ -34,8 +34,7 @@ public class SearchPlaceActivityTest extends ActivityInstrumentationTestCase2<Fr
     public void testButtons() throws InterruptedException {
 
         mySolo.clickOnButton("Find");
-        mySolo.sleep(1000);
-        // TODO testDropdownList - Sector
+
 
     }
 
@@ -44,21 +43,19 @@ public class SearchPlaceActivityTest extends ActivityInstrumentationTestCase2<Fr
         mySolo.enterText(1,"8020");
         mySolo.enterText(2,"place");
         mySolo.clickOnButton("Find");
-        mySolo.sleep(1000);
-
     }
 
     public void testRatingBars() throws InterruptedException {
         mySolo.setProgressBar(0, 1);
-        mySolo.sleep(1000);
+        mySolo.sleep(500);
         mySolo.setProgressBar(1, 2);
-        mySolo.sleep(1000);
+        mySolo.sleep(500);
         mySolo.setProgressBar(2, 5);
-        mySolo.sleep(1000);
+        mySolo.sleep(500);
         mySolo.setProgressBar(3, 4);
-        mySolo.sleep(1000);
+        mySolo.sleep(500);
         mySolo.clickOnButton("Find");
-        mySolo.sleep(1000);
+        mySolo.sleep(500);
     }
 
 }

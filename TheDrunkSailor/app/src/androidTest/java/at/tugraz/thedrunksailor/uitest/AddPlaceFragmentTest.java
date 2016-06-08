@@ -14,22 +14,22 @@ import at.tugraz.thedrunksailor.R;
 
 public class AddPlaceFragmentTest extends ActivityInstrumentationTestCase2<FragmentUtilActivity> {
 
-    private Solo mySolo;
-    private AddPlace_Fragment addPlace_Fragment;
+        private Solo mySolo;
+        private AddPlace_Fragment addPlace_Fragment;
 
-    public AddPlaceFragmentTest() {
-        super("at.tugraz.thedrunksailor", FragmentUtilActivity.class);
-    }
+        public AddPlaceFragmentTest() {
+            super("at.tugraz.thedrunksailor", FragmentUtilActivity.class);
+        }
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        addPlace_Fragment = new AddPlace_Fragment();
-        getActivity().addFragment(addPlace_Fragment, AddPlace_Fragment.class.getSimpleName());
-        getInstrumentation().waitForIdleSync();
-        mySolo = new Solo(getInstrumentation(), getActivity());
+        @Override
+        protected void setUp() throws Exception {
+            super.setUp();
+            addPlace_Fragment = new AddPlace_Fragment();
+            getActivity().addFragment(addPlace_Fragment, AddPlace_Fragment.class.getSimpleName());
+            getInstrumentation().waitForIdleSync();
+            mySolo = new Solo(getInstrumentation(), getActivity());
 
-    }
+        }
 
     public void testTextInput() throws InterruptedException {
         mySolo.enterText(0,"Franz");
@@ -39,7 +39,6 @@ public class AddPlaceFragmentTest extends ActivityInstrumentationTestCase2<Fragm
         mySolo.enterText(4,"Country");
         mySolo.enterText(5,"Description...");
         mySolo.clickOnButton("Plus");
-        mySolo.sleep(2000);
     }
 }
 
