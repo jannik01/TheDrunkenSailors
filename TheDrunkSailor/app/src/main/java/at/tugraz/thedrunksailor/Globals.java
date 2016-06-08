@@ -13,4 +13,6 @@ public class Globals {
     public static JSONArray person_list;
     public static boolean new_user=false;
     public static JSONArray ratings;
+    public static Double c_use;
+
 }

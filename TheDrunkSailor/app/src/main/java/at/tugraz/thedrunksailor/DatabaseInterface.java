@@ -30,6 +30,8 @@ public class DatabaseInterface {
     private static String url_search_persons_id_is_following = "http://drunkensailors.robert-thomann.at/url_search_persons_id_is_following.php";
     private static String url_get_person_data = "http://drunkensailors.robert-thomann.at/get_person.php";
     private static String url_get_place_list = "http://drunkensailors.robert-thomann.at/search_place_for_maps.php";
+    private static String url_search_friends_at_place = "http://drunkensailors.robert-thomann.at/search_friends_at_place.php";
+
 
 
     public static Integer login(String user_name, String password) {
@@ -261,6 +263,12 @@ public class DatabaseInterface {
                 int success = result.getInt(TAG_SUCCESS);
                 if (success == 1) {
                     place_data = result.getJSONArray("place_data");
+                    if(result.getJSONArray("c_use").getJSONObject(0).getString("current_use").equals("null"))
+                    {
+                        Globals.c_use=0.0;
+                    }
+                    else
+                    Globals.c_use=result.getJSONArray("c_use").getJSONObject(0).getDouble("current_use");
                 }
 
             } catch (JSONException e) {
@@ -315,6 +323,27 @@ public class DatabaseInterface {
             }
         }
         return (person_list);
+    }
+    public static JSONArray searchFriendsAtPlace(Integer user_id, Integer pid) {
+        JSONParser jsonParser = new JSONParser();
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("user_id", Integer.toString(user_id)));
+        params.add(new BasicNameValuePair("place_id", Integer.toString(pid)));
+
+        JSONObject json = jsonParser.makeHttpRequest(url_search_friends_at_place,
+                "POST", params);
+        //Log.d("Create Response", json.toString());
+        try {
+            int success = json.getInt(TAG_SUCCESS);
+            if (success == 1) {
+                JSONArray person_list = json.getJSONArray("person_list");
+                return (person_list);
+            }
+            return null;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static JSONArray getPersonData(Integer pers_id) {

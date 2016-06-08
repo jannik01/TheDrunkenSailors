@@ -28,12 +28,12 @@ public class PersonDetailActivity extends AppCompatActivity {
         TextView age = (TextView)findViewById(R.id.age);
         TextView sex = (TextView)findViewById(R.id.sex);
         TextView job = (TextView)findViewById(R.id.job);
-        //TextView lastly_visited = (TextView)findViewById(R.id.lastly_visited);
-        //TextView friends = (TextView)findViewById(R.id.friends);
         String []details =getDetails();
         String [][]last_places=getLastPlaces();
+        final ListView listviewfriends = (ListView) findViewById(R.id.listviewfriends);
         final ListView listview = (ListView) findViewById(R.id.listview);
         final String [][] places_list=getLastPlaces();
+        final String [][] persons_list=getFriendos();
         if (places_list!=null) {
             if (listview != null) {
                 listview.setAdapter(new PlaceItemAdapter(this, places_list));
@@ -54,6 +54,27 @@ public class PersonDetailActivity extends AppCompatActivity {
             };
             if (listview != null) {
                 listview.setAdapter(new PlaceItemAdapter(this, no_places));
+            }
+        }if (persons_list!=null) {
+            if (listviewfriends != null) {
+                listviewfriends.setAdapter(new PlaceItemAdapter(this, persons_list));
+                listviewfriends.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    public void onItemClick(AdapterView<?> parent, View view,
+                                            int position, long id) {
+                        Globals.pers_id = Integer.parseInt(persons_list[position][0]);
+                        Intent intent = new Intent(PersonDetailActivity.this, PersonDetailActivity.class);
+                        startActivity(intent);
+                    }
+                });
+            }
+        }
+        else
+        {
+            String[][] no_friends = {
+                    {"1", "No Friends", ":(", ":("},
+            };
+            if (listviewfriends != null) {
+                listviewfriends.setAdapter(new PlaceItemAdapter(this, no_friends));
             }
         }
         name.setText(details[0]);
@@ -78,7 +99,6 @@ public class PersonDetailActivity extends AppCompatActivity {
 
     public String[][] getLastPlaces() {
         String[] params = new String[]{Integer.toString(Globals.pers_id)};
-        new getData().execute(params);
         String[][] detail_list = new String[0][];
         try {
             detail_list = new getLast().execute(params).get();
@@ -88,6 +108,18 @@ public class PersonDetailActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return detail_list;
+    }
+    public String[][] getFriendos() {
+        String[] params = new String[]{Integer.toString(Globals.pers_id)};
+        String[][] friend_list = new String[0][];
+        try {
+            friend_list = new getFriends().execute(params).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return friend_list;
     }
 
     private class MySeekListener implements SeekBar.OnSeekBarChangeListener {
@@ -145,6 +177,44 @@ public class PersonDetailActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             return detailslist;
+        }
+    }
+    class getFriends extends AsyncTask<String, String, String[][]> {
+        protected String[][] doInBackground(String... args) {
+            Integer pers_int = Integer.parseInt(args[0]);
+            JSONArray persons = DatabaseInterface.searchPersonsIdIsFollowing(pers_int);
+            try {
+                if(persons.getJSONObject(0).getString("name")=="null")
+                    return null;
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            int persons_length = persons.length();
+            String[][] it_follows = new String[persons_length][4];
+            for (Integer i = 0; persons.length() > i; i++) {
+                try {
+                    it_follows[i][0] = persons.getJSONObject(i).getString("user_id");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    it_follows[i][1] = persons.getJSONObject(i).getString("name");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    it_follows[i][2] = persons.getJSONObject(i).getString("age");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    it_follows[i][3] = persons.getJSONObject(i).getString("sex");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            return it_follows;
         }
     }
 }
