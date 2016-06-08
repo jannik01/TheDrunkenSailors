@@ -6,6 +6,6 @@
     android:divider="@android:color/transparent"
     android:dividerHeight="0dp"
     android:listSelector="#ffd550"
-    android:background="#cccc"
     tools:listitem="@layout/mr_media_route_list_item"
-    tools:context=".NavigationDrawerFragment" />
+    tools:context=".NavigationDrawerFragment"
+    android:background="#a5a2a2" />

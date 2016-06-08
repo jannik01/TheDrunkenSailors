@@ -101,7 +101,7 @@ public class NavigationDrawerFragment extends Fragment {
                         Color.parseColor("#ffd550"));
                 if (save != -1 && save != position) {
                     parent.getChildAt(save).setBackgroundColor(
-                            Color.parseColor("#cccccc"));
+                            Color.parseColor("#a5a2a2"));
                 }
                 selectItem(position);
                 save = position;
