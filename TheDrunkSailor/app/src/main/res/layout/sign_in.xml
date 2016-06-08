@@ -62,7 +62,8 @@
         android:src="@drawable/sign"
         android:adjustViewBounds="true"
         android:height="1dp"
-        android:layout_above="@+id/text_user_name" />
+        android:layout_above="@+id/text_user_name"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
