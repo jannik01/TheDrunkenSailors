@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import org.json.JSONArray;
@@ -18,6 +20,8 @@ public class PlaceDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_detail_place);
         TextView name = (TextView)findViewById(R.id.name);
         TextView address = (TextView)findViewById(R.id.Address);
@@ -27,6 +31,8 @@ public class PlaceDetailActivity extends AppCompatActivity {
         TextView description = (TextView)findViewById(R.id.description);
         TextView current_use = (TextView)findViewById(R.id.db_current_use);
         TextView rating = (TextView)findViewById(R.id.db_rating);
+        final ListView listviewfriends = (ListView) findViewById(R.id.listviewfriends);
+        final String [][] persons_list=getFriendos();
         String []details =getDetails();
         name.setText(details[0]);
         address.setText(details[1]);
@@ -55,6 +61,28 @@ public class PlaceDetailActivity extends AppCompatActivity {
             use.setMax(4);
             use.setProgress(2);
         }
+        if (persons_list!=null) {
+            if (listviewfriends != null) {
+                listviewfriends.setAdapter(new PlaceItemAdapter(this, persons_list));
+                listviewfriends.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    public void onItemClick(AdapterView<?> parent, View view,
+                                            int position, long id) {
+                        Globals.pers_id = Integer.parseInt(persons_list[position][0]);
+                        Intent intent = new Intent(PlaceDetailActivity.this, PersonDetailActivity.class);
+                        startActivity(intent);
+                    }
+                });
+            }
+        }
+        else
+        {
+            String[][] no_friends = {
+                    {"1", "No Friends were there recently", ":(", ":("},
+            };
+            if (listviewfriends != null) {
+                listviewfriends.setAdapter(new PlaceItemAdapter(this, no_friends));
+            }
+        }
     }
 
     public void buttonOnClick(View v) {
@@ -66,7 +94,7 @@ public class PlaceDetailActivity extends AppCompatActivity {
         String[] params = new String[]{rating, current_use_};
         try {
             if (new doTask().execute(params).get()) {
-                Intent intent = new Intent(this, FragmentManagerActivity.class);
+                Intent intent = new Intent(this, PlaceDetailActivity.class);
                 startActivity(intent);
             }
         } catch (InterruptedException e) {
@@ -87,6 +115,18 @@ public class PlaceDetailActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return detail_list;
+    }
+    public String[][] getFriendos() {
+        String[] params = new String[]{Integer.toString(Globals.uid),Integer.toString(Globals.pid)};
+        String[][] friend_list = new String[0][];
+        try {
+            friend_list = new getFriends().execute(params).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return friend_list;
     }
 
     private class MySeekListener implements SeekBar.OnSeekBarChangeListener {
@@ -149,14 +189,12 @@ public class PlaceDetailActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            try {if(details.getJSONObject(0).getString("current_use")==null){
-                detailslist[5]="0";
+            if(Globals.c_use==0.0){
+                detailslist[5]="-";
             }
             else
-                detailslist[5] = details.getJSONObject(0).getString("current_use");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+                detailslist[5] = Globals.c_use.toString();
+
             try {
                 if(details.getJSONObject(0).getString("rating")==null){
                     detailslist[6]="0";
@@ -173,6 +211,45 @@ public class PlaceDetailActivity extends AppCompatActivity {
             }
             Log.e("Error",detailslist[7]);
             return detailslist;
+        }
+    }
+    class getFriends extends AsyncTask<String, String, String[][]> {
+        protected String[][] doInBackground(String... args) {
+            Integer pers_int = Integer.parseInt(args[0]);
+            Integer pid_int = Integer.parseInt(args[1]);
+
+
+            JSONArray persons = DatabaseInterface.searchFriendsAtPlace(pers_int,pid_int);
+
+                if(persons==null)
+                    return null;
+
+            int persons_length = persons.length();
+            String[][] it_follows = new String[persons_length][4];
+            for (Integer i = 0; persons.length() > i; i++) {
+                try {
+                    it_follows[i][0] = persons.getJSONObject(i).getString("user_id");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    it_follows[i][1] = persons.getJSONObject(i).getString("name");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    it_follows[i][2] = persons.getJSONObject(i).getString("age");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    it_follows[i][3] = persons.getJSONObject(i).getString("sex");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            return it_follows;
         }
     }
 }

@@ -168,6 +168,13 @@
                     android:id="@+id/textView22"
                     android:layout_column="26"
                     android:textColor="#000000" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button2"
+                    android:layout_column="37"
+                    android:layout_marginLeft="140dp"/>
             </TableRow>
 
             <TableRow
@@ -227,7 +234,7 @@
                     android:id="@+id/listview"
                     android:layout_width="fill_parent"
                     android:layout_marginTop="30dp"
-                    android:layout_height="249dp" >
+                    android:layout_height="170dp" >
                 </ListView>
             </FrameLayout>
 
