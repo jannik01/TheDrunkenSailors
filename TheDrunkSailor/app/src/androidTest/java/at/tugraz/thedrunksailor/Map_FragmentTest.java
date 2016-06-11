@@ -39,6 +39,6 @@ public class Map_FragmentTest extends ActivityInstrumentationTestCase2<FragmentU
     }
 
     public void testMap_Fregment(){
-        mySolo.sleep(100000);
+        mySolo.sleep(2000);
     }
 }
