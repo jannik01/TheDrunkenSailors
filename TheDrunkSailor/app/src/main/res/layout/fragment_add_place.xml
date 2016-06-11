@@ -89,7 +89,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_weight="1"
-                        android:maxLength="18"
+                        android:maxLength="50"
                         android:maxLines="1" />
                 </TableRow>
 
@@ -169,6 +169,8 @@
                         android:id="@+id/txtTown"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:maxLength="30"
+                        android:maxLines="1"
                         android:layout_marginLeft="20dp"
                         android:layout_weight="1"
                         android:ems="10" />
