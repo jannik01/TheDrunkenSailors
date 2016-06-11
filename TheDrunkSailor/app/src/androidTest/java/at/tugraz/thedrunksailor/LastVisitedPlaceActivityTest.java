@@ -35,7 +35,7 @@ public class LastVisitedPlaceActivityTest extends ActivityInstrumentationTestCas
     @Test
     public void testCreateUser(){
         int user_id = DatabaseInterface.login("pope","habemus");
-        assertTrue("User 'pope already exists' ", 0 == user_id);
+        assertTrue("Test precondition not met: User 'pope already exists' ", 0 == user_id);
 
         boolean success = DatabaseInterface.createUser("pope", "habemus", "John Dope", "m", 69, "Pope");
         assertEquals("Cant create user 'pope'", true,success);
@@ -50,7 +50,7 @@ public class LastVisitedPlaceActivityTest extends ActivityInstrumentationTestCas
         assertEquals("can't delete user", success,true);
 
         user_id = DatabaseInterface.login("pope","habemus");
-        assertTrue("Sucessful login after delete user ", 0 == user_id);
+        assertTrue("Successful login after delete user ", 0 == user_id);
     }
 
     @Test
@@ -58,13 +58,13 @@ public class LastVisitedPlaceActivityTest extends ActivityInstrumentationTestCas
         boolean success =  DatabaseInterface.createUser("worldsuck", "dftba", "World Suck", "m", 66, "Evildoer");
 
         int user_id = DatabaseInterface.login("worldsuck", "dftba");
-        assertTrue("Failure login ", 0 != user_id);
+        assertTrue("Test precondition not met: Failure login ", 0 != user_id);
 
         success = DatabaseInterface.deleteUser("worldsuck","dftba");
         assertEquals("can't delete user", true,success);
 
         user_id = DatabaseInterface.login("worldsuck","dftba");
-        assertTrue("sucess login after user deletion ", 0 == user_id);
+        assertTrue("successful login after user deletion ", 0 == user_id);
     }
 
 
