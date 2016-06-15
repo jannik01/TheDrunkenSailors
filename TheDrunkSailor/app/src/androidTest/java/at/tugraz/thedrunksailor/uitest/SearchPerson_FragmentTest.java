@@ -1,4 +1,5 @@
-package at.tugraz.thedrunksailor;
+package at.tugraz.thedrunksailor.uitest;
+
 
 import android.test.ActivityInstrumentationTestCase2;
 
@@ -6,6 +7,10 @@ import com.robotium.solo.Solo;
 
 import org.junit.After;
 import org.junit.Before;
+
+import at.tugraz.thedrunksailor.FragmentUtilActivity;
+import at.tugraz.thedrunksailor.Globals;
+import at.tugraz.thedrunksailor.SearchPerson_Fragment;
 
 import static org.junit.Assert.*;
 
@@ -35,6 +40,15 @@ public class SearchPerson_FragmentTest extends ActivityInstrumentationTestCase2<
     }
 
     public void testSearchPerson_Fragment(){
+        mySolo.sleep(2000);
+    }
+
+    public void testPersonSearchDisplayActivity()
+    {
+        mySolo.clickOnButton("Find");
+        mySolo.sleep(2000);
+        assertTrue("Error Search Display Activity ", Globals.person_list != null);
+        mySolo.clickInList(0);
         mySolo.sleep(2000);
     }
 }

@@ -44,6 +44,7 @@ public class SignInActivityTest extends ActivityInstrumentationTestCase2<SignInA
     public void testInput()
     {
        // mySolo.clickOnText("UserName");
+        mySolo.sleep(1000);
         mySolo.enterText(1, "testuser1");
 
         mySolo.enterText(0, "pass");

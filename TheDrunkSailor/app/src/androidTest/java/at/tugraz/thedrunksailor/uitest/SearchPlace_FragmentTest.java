@@ -1,18 +1,23 @@
-package at.tugraz.thedrunksailor;
+package at.tugraz.thedrunksailor.uitest;
+
 
 import android.test.ActivityInstrumentationTestCase2;
 
 import org.junit.Test;
 import com.robotium.solo.Solo;
 
+import at.tugraz.thedrunksailor.FragmentUtilActivity;
+import at.tugraz.thedrunksailor.Globals;
+import at.tugraz.thedrunksailor.SearchPlace_Fragment;
+
 /**
  * Created by robert on 20.04.2016.
  */
-public class SearchPlaceActivityTest extends ActivityInstrumentationTestCase2<FragmentUtilActivity> {
+public class SearchPlace_FragmentTest extends ActivityInstrumentationTestCase2<FragmentUtilActivity> {
 
     private Solo mySolo;
     private SearchPlace_Fragment searchPlace_Fragment;
-    public SearchPlaceActivityTest() {
+    public SearchPlace_FragmentTest() {
         super("at.tugraz.thedrunksailor", FragmentUtilActivity.class);
     }
 
@@ -32,10 +37,7 @@ public class SearchPlaceActivityTest extends ActivityInstrumentationTestCase2<Fr
 
     @Test
     public void testButtons() throws InterruptedException {
-
         mySolo.clickOnButton("Find");
-
-
     }
 
     public void testTextInput() throws InterruptedException {
@@ -56,6 +58,16 @@ public class SearchPlaceActivityTest extends ActivityInstrumentationTestCase2<Fr
         mySolo.sleep(500);
         mySolo.clickOnButton("Find");
         mySolo.sleep(500);
+    }
+
+    public void testSearchDisplayActivity()
+    {
+        mySolo.enterText(1,"8010");
+        mySolo.clickOnButton("Find");
+        mySolo.sleep(2000);
+        assertTrue("Error Search Display Activity ", Globals.place_list != null);
+        mySolo.clickInList(0);
+        mySolo.sleep(2000);
     }
 
 }

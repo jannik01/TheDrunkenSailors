@@ -88,7 +88,13 @@ public class LastVisitedPlaceActivityTest extends ActivityInstrumentationTestCas
         int user_id = DatabaseInterface.login("god","ThereBeLight");
         assertTrue("Failure login user exists ", 0 == user_id);
     }
-
+    /*
+    @Test
+    public void testCreatePlace(){
+        boolean success = DatabaseInterface.createPlace("pizza adads","big sad",2,"das 123","asdsda dd","8f8","asads");
+        assertEquals("create Place failed",true, success);
+    }
+    */
     @Test
     public void testSearchPlace() throws JSONException {
         JSONArray success = DatabaseInterface.searchPlace("","1","","","","","","");
@@ -97,11 +103,11 @@ public class LastVisitedPlaceActivityTest extends ActivityInstrumentationTestCas
             assertEquals("test of sector id","1", success.getJSONObject(i).getString("sector_ID"));
         }
 
-        JSONArray success2 = DatabaseInterface.searchPlace("Pail","1","","","","","","");
+        JSONArray success2 = DatabaseInterface.searchPlace("Franz","1","","","","","","");
         System.out.println(success2);
         for (int i=0; i < success2.length();i++){
-            if(success.getJSONObject(i).getString("name").equals("Pail"))
-                assertEquals("name search","Pail", success2.getJSONObject(i).getString("name"));
+            if(success.getJSONObject(i).getString("name").equals("Franz"))
+                assertEquals("name search","Franz", success2.getJSONObject(i).getString("name"));
         }
 
         success2 = DatabaseInterface.searchPlace("Test","1","","","","","5.0","");
