@@ -112,11 +112,7 @@ public class FragmentManagerActivity extends FragmentActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.settings_menu_bar) {
-            Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
-            return true;
-        }
+
         if(id == R.id.logout_menu_bar) {
             DatabaseInterface.logout();
             Intent intent = new Intent(FragmentManagerActivity.this, SignInActivity.class);
