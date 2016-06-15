@@ -7,4 +7,4 @@
     android:dividerHeight="0dp"
     tools:listitem="@layout/mr_media_route_list_item"
     tools:context=".NavigationDrawerFragment"
-    android:background="#a5a2a2" />
+    android:background="#dddd" />
