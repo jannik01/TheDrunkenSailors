@@ -173,7 +173,6 @@
                         android:maxLines="1"
                         android:layout_marginLeft="20dp"
                         android:layout_weight="1"
-                        android:maxLength="20"
                         android:ems="10" />
                 </TableRow>
 
