@@ -63,7 +63,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_weight="1"
-                        android:maxLength="18"
+                        android:maxLength="30"
                         android:maxLines="1" />
 
                 </TableRow>
@@ -134,19 +134,18 @@
                         android:text="Sector*"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="#000000"
-                        android:textSize="16dp"
-                        android:layout_weight="1" />
+                        android:textSize="16dp" />
 
                     <Spinner
                         android:id="@+id/static_spinner"
-                        android:layout_width="fill_parent"
+                        android:layout_width="0dp"
                         android:layout_height="50dp"
                         android:layout_marginBottom="0dp"
                         android:layout_column="1"
+                        android:layout_weight="1"
                         style = "@style/Base.Widget.AppCompat.Spinner.Underlined"
                         android:layout_marginTop="5dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_weight="1" />
+                        android:layout_marginLeft="20dp" />
                 </TableRow>
 
 
@@ -174,6 +173,7 @@
                         android:maxLines="1"
                         android:layout_marginLeft="20dp"
                         android:layout_weight="1"
+                        android:maxLength="20"
                         android:ems="10" />
                 </TableRow>
 
@@ -198,7 +198,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_weight="1"
-                        android:maxLength="18"
+                        android:maxLength="25"
                         android:maxLines="1" />
                 </TableRow>
 
@@ -227,6 +227,7 @@
                         android:inputType="textMultiLine"
                         android:maxLines="2"
                         android:minLines="2"
+                        android:maxLength="200"
                         android:nestedScrollingEnabled="true" />
 
                 </TableRow>
