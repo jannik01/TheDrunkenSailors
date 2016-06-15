@@ -405,7 +405,9 @@ public class DatabaseInterface {
     public static JSONArray getPlacesByPostal(String zip_code) {
         JSONParser jsonParser = new JSONParser();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("zipcode", zip_code));
+        if(false) {
+            params.add(new BasicNameValuePair("zipcode", zip_code));
+        }
         JSONObject response = jsonParser.makeHttpRequest(url_get_place_list,"POST", params);
         JSONArray places = new JSONArray();
         if(response != null){
