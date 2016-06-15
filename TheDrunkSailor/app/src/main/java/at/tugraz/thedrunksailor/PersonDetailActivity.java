@@ -61,7 +61,7 @@ public class PersonDetailActivity extends AppCompatActivity {
             if (listview != null) {
                 listview.setAdapter(new PlaceItemAdapter(this, no_places));
             }
-        }if (persons_list.length == 0) {
+        }if (persons_list.length != 0) {
             if (listviewfriends != null) {
                 listviewfriends.setAdapter(new PlaceItemAdapter(this, persons_list));
                 listviewfriends.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -255,8 +255,9 @@ public class PersonDetailActivity extends AppCompatActivity {
 
 
             int persons_length = persons.length();
-            if(persons_length==0)
-                return null;
+
+            if(persons_length==0) { return(new String[0][]); }
+
             String[][] it_follows = new String[persons_length][4];
             for (Integer i = 0; persons.length() > i; i++) {
                 try {
