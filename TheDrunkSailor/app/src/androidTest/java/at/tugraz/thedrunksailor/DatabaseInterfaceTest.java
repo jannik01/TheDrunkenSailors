@@ -35,7 +35,7 @@ public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<Frag
     }
 
     @Test
-    public void testCreateUser(){
+    public void testCreateUser() throws JSONException {
         int user_id = DatabaseInterface.login("pope","habemus");
         assertTrue("User 'pope already exists' ", 0 == user_id);
 
@@ -56,7 +56,7 @@ public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<Frag
     }
 
     @Test
-    public void testDeleteUser(){
+    public void testDeleteUser() throws JSONException {
         boolean success =  DatabaseInterface.createUser("worldsuck", "dftba", "World Suck", "m", 66, "Evildoer");
 
         int user_id = DatabaseInterface.login("worldsuck", "dftba");
@@ -71,7 +71,7 @@ public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<Frag
 
 
     @Test
-    public void testLoginUser(){
+    public void testLoginUser() throws JSONException {
         //success =
         DatabaseInterface.createUser("testuser1", "password", "John Doe", "m", 14, "Coder");
 
@@ -94,7 +94,7 @@ public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<Frag
         assertTrue("Failure login user exists ", 0 == user_id);
     }
     @Test
-    public void testPlaceAlreadyExists(){
+    public void testPlaceAlreadyExists() throws JSONException {
         DatabaseInterface.createPlace("pizza hut","big sad",2,"das 123","asdsda dd","8010","asads");
         boolean success = DatabaseInterface.createPlace("pizza hut","big sad",2,"das 123","asdsda dd","8010","asads");
         assertEquals("create Place failed",false, success);

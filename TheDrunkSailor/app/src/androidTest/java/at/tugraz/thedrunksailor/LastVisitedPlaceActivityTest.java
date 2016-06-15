@@ -33,7 +33,7 @@ public class LastVisitedPlaceActivityTest extends ActivityInstrumentationTestCas
     }
 
     @Test
-    public void testCreateUser(){
+    public void testCreateUser() throws JSONException {
         int user_id = DatabaseInterface.login("pope","habemus");
         assertTrue("Test precondition not met: User 'pope already exists' ", 0 == user_id);
 
@@ -54,7 +54,7 @@ public class LastVisitedPlaceActivityTest extends ActivityInstrumentationTestCas
     }
 
     @Test
-    public void testDeleteUser(){
+    public void testDeleteUser() throws JSONException {
         boolean success =  DatabaseInterface.createUser("worldsuck", "dftba", "World Suck", "m", 66, "Evildoer");
 
         int user_id = DatabaseInterface.login("worldsuck", "dftba");
@@ -69,7 +69,7 @@ public class LastVisitedPlaceActivityTest extends ActivityInstrumentationTestCas
 
 
     @Test
-    public void testLoginUser(){
+    public void testLoginUser() throws JSONException {
         //success =
         DatabaseInterface.createUser("testuser1", "password", "John Doe", "m", 14, "Coder");
 

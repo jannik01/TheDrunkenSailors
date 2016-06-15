@@ -61,7 +61,7 @@ public class PersonDetailActivity extends AppCompatActivity {
             if (listview != null) {
                 listview.setAdapter(new PlaceItemAdapter(this, no_places));
             }
-        }if (persons_list.length != 0) {
+        }if (persons_list!=null) {
             if (listviewfriends != null) {
                 listviewfriends.setAdapter(new PlaceItemAdapter(this, persons_list));
                 listviewfriends.setOnItemClickListener(new AdapterView.OnItemClickListener() {

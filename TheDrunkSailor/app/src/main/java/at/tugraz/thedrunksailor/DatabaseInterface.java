@@ -87,8 +87,8 @@ public class DatabaseInterface {
         boolean success = false;
 
         if (json != null) {
-            Globals.message=json.getString("message");
             try {
+                Globals.message=json.getString("message");
                 success = (1 == json.getInt(TAG_SUCCESS));
 
             } catch (JSONException e) {
