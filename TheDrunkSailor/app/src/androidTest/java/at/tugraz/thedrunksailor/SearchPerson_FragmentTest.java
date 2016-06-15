@@ -37,4 +37,13 @@ public class SearchPerson_FragmentTest extends ActivityInstrumentationTestCase2<
     public void testSearchPerson_Fragment(){
         mySolo.sleep(2000);
     }
+
+    public void testPersonSearchDisplayActivity()
+    {
+        mySolo.clickOnButton("Find");
+        mySolo.sleep(2000);
+        assertTrue("Error Search Display Activity ", Globals.person_list != null);
+        mySolo.clickInList(Globals.person_list.length() -1);
+        mySolo.sleep(2000);
+    }
 }

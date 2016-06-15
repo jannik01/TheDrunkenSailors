@@ -32,10 +32,7 @@ public class SearchPlaceActivityTest extends ActivityInstrumentationTestCase2<Fr
 
     @Test
     public void testButtons() throws InterruptedException {
-
         mySolo.clickOnButton("Find");
-
-
     }
 
     public void testTextInput() throws InterruptedException {
@@ -56,6 +53,16 @@ public class SearchPlaceActivityTest extends ActivityInstrumentationTestCase2<Fr
         mySolo.sleep(500);
         mySolo.clickOnButton("Find");
         mySolo.sleep(500);
+    }
+
+    public void testSearchDisplayActivity()
+    {
+        mySolo.enterText(1,"8010");
+        mySolo.clickOnButton("Find");
+        mySolo.sleep(2000);
+        assertTrue("Error Search Display Activity ", Globals.place_list != null);
+        mySolo.clickInList(Globals.place_list.length() -1);
+        mySolo.sleep(2000);
     }
 
 }
