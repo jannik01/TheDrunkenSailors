@@ -43,7 +43,7 @@ public class SearchPerson_FragmentTest extends ActivityInstrumentationTestCase2<
         mySolo.clickOnButton("Find");
         mySolo.sleep(2000);
         assertTrue("Error Search Display Activity ", Globals.person_list != null);
-        mySolo.clickInList(Globals.person_list.length() -1);
+        mySolo.clickInList(0);
         mySolo.sleep(2000);
     }
 }

@@ -61,7 +61,7 @@ public class SearchPlaceActivityTest extends ActivityInstrumentationTestCase2<Fr
         mySolo.clickOnButton("Find");
         mySolo.sleep(2000);
         assertTrue("Error Search Display Activity ", Globals.place_list != null);
-        mySolo.clickInList(Globals.place_list.length() -1);
+        mySolo.clickInList(0);
         mySolo.sleep(2000);
     }
 
