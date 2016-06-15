@@ -37,7 +37,7 @@ public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<Frag
     @Test
     public void testCreateUser() throws JSONException {
         int user_id = DatabaseInterface.login("pope","habemus");
-        assertTrue("User 'pope already exists' ", 0 == user_id);
+        assertTrue("Test precondition not met: User 'pope already exists' ", 0 == user_id);
 
         boolean success = DatabaseInterface.createUser("pope", "habemus", "John Dope", "m", 69, "Pope");
         assertEquals("Cant create user 'pope'", true,success);
@@ -52,7 +52,7 @@ public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<Frag
         assertEquals("can't delete user", success,true);
 
         user_id = DatabaseInterface.login("pope","habemus");
-        assertTrue("Sucessful login after delete user ", 0 == user_id);
+        assertTrue("Successful login after delete user ", 0 == user_id);
     }
 
     @Test
@@ -165,10 +165,7 @@ public class DatabaseInterfaceTest extends ActivityInstrumentationTestCase2<Frag
 
     }
 
-    public void testGetPlacesByPostal_no_Places() {
-        JSONArray extensive_place_list = DatabaseInterface.getPlacesByPostal("H666");
-        assertEquals("FAIL: Received places for non exisiting zip code.",extensive_place_list, new JSONArray() );
-    }
+
 
     public void testGetPlacesByPostal() {
         JSONArray extensive_place_list = DatabaseInterface.getPlacesByPostal("8010");
