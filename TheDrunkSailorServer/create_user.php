@@ -9,11 +9,19 @@ if (isset($_POST["user_name"],$_POST["password"], $_POST["name"],$_POST["sex"],$
     $db_connection = $db_object->connection;
  
     $user_name = mysqli_real_escape_string($db_connection, $_POST['user_name']);
+            $user_name=utf8_encode($user_name);
+
     $password = $_POST['password'];
     $name = mysqli_real_escape_string($db_connection, $_POST['name']);
+            $name=utf8_encode($name);
+
     $sex = mysqli_real_escape_string($db_connection, $_POST['sex']);
+            $sex=utf8_encode($sex);
+
     $age = mysqli_real_escape_string($db_connection, $_POST['age']);
     $job = mysqli_real_escape_string($db_connection, $_POST['job']);
+            $job=utf8_encode($job);
+
 
  
 
@@ -29,6 +37,8 @@ if (isset($_POST["user_name"],$_POST["password"], $_POST["name"],$_POST["sex"],$
 
         echo json_encode($response);
     }
+    else
+    {
 	
 	$password_hash = password_hash($password , PASSWORD_BCRYPT );
 	
@@ -49,6 +59,7 @@ if (isset($_POST["user_name"],$_POST["password"], $_POST["name"],$_POST["sex"],$
 
         echo json_encode($response);
     }
+}
 } else {
 
     $response["success"] = "0";
