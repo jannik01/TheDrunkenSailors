@@ -6,9 +6,15 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ContextThemeWrapper;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
+
+import org.json.JSONException;
+
 import java.util.concurrent.ExecutionException;
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -119,6 +125,13 @@ public class RegistrationActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, SignInActivity.class);
                 startActivity(intent);
             }
+            else
+            {
+                Toast toast = Toast.makeText(RegistrationActivity.this, Globals.message, Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.TOP, 0,1500);
+                toast.show();
+            }
+
         }
         else{
             alert.setMessage(ErrorMsg);
@@ -158,7 +171,12 @@ public class RegistrationActivity extends AppCompatActivity {
             {
                 age = Integer.parseInt(args[4]);
             }
-            boolean success = DatabaseInterface.createUser(args[0],args[1],args[2],args[3],age,args[5]);
+            boolean success = false;
+            try {
+                success = DatabaseInterface.createUser(args[0],args[1],args[2],args[3],age,args[5]);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             return success;
         }
     }

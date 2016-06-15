@@ -256,7 +256,7 @@ public class PersonDetailActivity extends AppCompatActivity {
 
             int persons_length = persons.length();
 
-            if(persons_length==0) { return(new String[0][]); }
+            if(persons_length==0) { return null; }
 
             String[][] it_follows = new String[persons_length][4];
             for (Integer i = 0; persons.length() > i; i++) {

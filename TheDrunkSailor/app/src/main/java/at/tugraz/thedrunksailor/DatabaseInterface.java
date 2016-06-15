@@ -72,7 +72,7 @@ public class DatabaseInterface {
         return (userid);
     }
 
-    public static boolean createUser(String user_name, String password, String name, String sex, Integer age, String job) {
+    public static boolean createUser(String user_name, String password, String name, String sex, Integer age, String job) throws JSONException {
         JSONParser jsonParser = new JSONParser();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("user_name", user_name));
@@ -87,6 +87,7 @@ public class DatabaseInterface {
         boolean success = false;
 
         if (json != null) {
+            Globals.message=json.getString("message");
             try {
                 success = (1 == json.getInt(TAG_SUCCESS));
 
@@ -98,7 +99,7 @@ public class DatabaseInterface {
         return (success);
     }
 
-    public static boolean createPlace(String place_name, String description, Integer sector_id, String address, String country, String zipcode, String town) {
+    public static boolean createPlace(String place_name, String description, Integer sector_id, String address, String country, String zipcode, String town) throws JSONException {
         JSONParser jsonParser = new JSONParser();
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("place_name", place_name));
@@ -114,6 +115,7 @@ public class DatabaseInterface {
                 "POST", params);
 
         if(json != null) {
+
             //Log.d("Create Response", json.toString());
             try {
                 if (1 == json.getInt(TAG_SUCCESS)){
