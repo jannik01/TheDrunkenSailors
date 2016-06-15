@@ -118,6 +118,7 @@ public class DatabaseInterface {
 
             //Log.d("Create Response", json.toString());
             try {
+                Globals.message=json.getString("message");
                 if (1 == json.getInt(TAG_SUCCESS)){
                     success = true;
                 }

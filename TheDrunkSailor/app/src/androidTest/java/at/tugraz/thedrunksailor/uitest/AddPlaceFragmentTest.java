@@ -34,8 +34,8 @@ public class AddPlaceFragmentTest extends ActivityInstrumentationTestCase2<Fragm
     public void testTextInput() throws InterruptedException {
         mySolo.enterText(0,"Franz");
         mySolo.enterText(1,"Wienerstraße");
-        mySolo.enterText(2,"Graz");
-        mySolo.enterText(3,"80200");
+        mySolo.enterText(2,"8010");
+        mySolo.enterText(3,"Graz");
         mySolo.enterText(4,"Country");
         mySolo.enterText(5,"Description...");
         mySolo.clickOnButton("Add Place");

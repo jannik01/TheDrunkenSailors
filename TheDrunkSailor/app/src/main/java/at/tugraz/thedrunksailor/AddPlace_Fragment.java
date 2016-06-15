@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.view.ContextThemeWrapper;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.content.DialogInterface;
@@ -80,6 +81,12 @@ public class AddPlace_Fragment extends Fragment implements AdapterView.OnItemSel
                 if (new doTask().execute(params).get()) {
                    Intent intent = new Intent(getActivity(), FragmentManagerActivity.class);
                    startActivity(intent);
+                }
+                else
+                {
+                    Toast toast = Toast.makeText(getActivity(), Globals.message, Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.TOP, 0,1500);
+                    toast.show();
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
