@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".FragmentManagerActivity">
+
+    <item android:id="@+id/logout_menu_bar"
+        android:title="@string/logout_settings_bar"
+        app:showAsAction="never" />
+</menu>

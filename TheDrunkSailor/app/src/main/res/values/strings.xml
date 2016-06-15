@@ -1,4 +1,28 @@
 <resources>
-    <string name="app_name">TheDrunkSailor</string>
+    <string name="app_name">Plubble</string>
     <string name="logout">Logout</string>
+    <string-array name="Sectors">
+        <item>Restaurant</item>
+        <item>Opera</item>
+        <item>Theater</item>
+        <item>Cinema</item>
+        <item>Museum</item>
+        <item>Bar</item>
+        <item>Club</item>
+
+    </string-array>
+
+
+    <string name="title_section1">Last visited Places</string>
+    <string name="title_section2">Search Place</string>
+    <string name="title_section3">Add Place</string>
+    <string name="title_section4">Search Person</string>
+    <string name="title_section5">Map</string>
+    <string name="title_section6">Friend List</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="logout_settings_bar">Logout</string>
+
 </resources>

@@ -4,31 +4,36 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.BoolRes;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.support.v7.view.ContextThemeWrapper;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONException;
 
 import java.util.concurrent.ExecutionException;
 
 public class RegistrationActivity extends AppCompatActivity {
-
     public static String TAG = "REGISTRATION_ACTIVITY";
-
+    EditText mEdit;
+    EditText mPassword;
+    CheckConnection stateOfConnection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-        
+        stateOfConnection = new CheckConnection(this);
     }
 
     public void doRegistration(View v) {
-
+        AlertDialog.Builder alert = new AlertDialog.Builder(RegistrationActivity.this);
+        if(!stateOfConnection.isOnline(alert))
+            return;
         EditText usernameText = (EditText) findViewById(R.id.txtUsername);
         EditText passwordText = (EditText) findViewById(R.id.txtPassword);
         EditText passwordReText = (EditText) findViewById(R.id.txtPasswordRe);
@@ -44,29 +49,66 @@ public class RegistrationActivity extends AppCompatActivity {
         String gender;
         int age = 0;
         Boolean isAllAlright = true;
-
+        String ErrorMsg = "";
         RadioButton female = (RadioButton) findViewById(R.id.radioFemale);
         if (female.isSelected())
             gender = "f";
         else
             gender = "m";
-
-
         if (!ageText.getText().toString().equals(""))
             age = Integer.parseInt(ageText.getText().toString());
-
         if (!password.equals(passwordRe) || password.equals("") || passwordRe.equals(""))
         {
-            showAlert("Password Failure", "Password not matching or empty");
+            ErrorMsg= ErrorMsg +"Password not matching or empty\n";
             isAllAlright=false;
         }
-
         if (username.equals("") || name.equals(""))
         {
-            showAlert("Empty Fields", "Not all required Fields are entered");
+            ErrorMsg= ErrorMsg +"Not all required Fields are entered\n";
             isAllAlright=false;
         }
+        mEdit = (EditText)findViewById(R.id.txtUsername);
+        mPassword = (EditText)findViewById(R.id.txtPassword);
 
+        alert.setMessage("-----");
+        alert.setIcon(android.R.drawable.ic_dialog_alert);
+
+        String UserName = mEdit.getText().toString();
+        String Password = mPassword.getText().toString();
+        if (UserName.length() > 25 || UserName.length() < 5)
+        {
+            ErrorMsg= ErrorMsg +"Please use a username between 5 & 25 characters!\n";
+            isAllAlright=false;
+        }
+        if (Password.length() > 25 || Password.length() < 8)
+        {
+            ErrorMsg= ErrorMsg +"Please use a password between 8 & 25 characters!\n";
+            isAllAlright=false;
+        }
+        int count_underscore = 0;
+        int ascii = -1;
+        for (int i = 0; i < UserName.length(); i++) {
+            ascii = UserName.charAt(i);
+            if(ascii == 95)
+            {
+                if (count_underscore > 0)
+                {
+                    ErrorMsg= ErrorMsg +"Please just use one underscore!\n";
+                    isAllAlright=false;
+                }
+                if (i == 0 || i == UserName.length()-1)
+                {
+                    ErrorMsg= ErrorMsg +"Please use underscore not at the beginning or end!\n";
+                    isAllAlright=false;
+                }
+                count_underscore++;
+            }
+            if (((ascii > 64 && ascii < 91) || (ascii > 96 && ascii < 123) || (ascii > 47 && ascii < 58) || ascii == 95) == false)
+            {
+                ErrorMsg= ErrorMsg +"Please just use letters, numbers and underscore!\n";
+                isAllAlright=false;
+            }
+        }
         if(isAllAlright)
         {
             boolean success=false;
@@ -80,11 +122,27 @@ public class RegistrationActivity extends AppCompatActivity {
             }
             if (success==true)
             {
-                Intent intent = new Intent(this, MainActivity.class);
+                Intent intent = new Intent(this, SignInActivity.class);
                 startActivity(intent);
             }
-        }
+            else
+            {
+                Toast toast = Toast.makeText(RegistrationActivity.this, Globals.message, Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.TOP, 0,1500);
+                toast.show();
+            }
 
+        }
+        else{
+            alert.setMessage(ErrorMsg);
+            alert.setTitle("Fail");
+            alert.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // continue with delete
+                }
+            });
+            alert.show();
+        }
     }
 
     private void showAlert(String title, String messaage) {
@@ -92,11 +150,11 @@ public class RegistrationActivity extends AppCompatActivity {
         alertDialog.setTitle(title);
         alertDialog.setMessage(messaage);
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
+            new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
         alertDialog.show();
     }
 
@@ -105,23 +163,21 @@ public class RegistrationActivity extends AppCompatActivity {
         Intent intent = new Intent(RegistrationActivity.this, SignInActivity.class);
         startActivity(intent);
     }
+
     class doTask extends AsyncTask<String, String, Boolean> {
-
-
-
-
-
         protected Boolean doInBackground(String... args) {
-            boolean success = DatabaseInterface.createUser(args[0],args[1],args[2],args[3],Integer.parseInt(args[4]),args[5]);
-
-
+            int age = 0;
+            if (!args[4].isEmpty())
+            {
+                age = Integer.parseInt(args[4]);
+            }
+            boolean success = false;
+            try {
+                success = DatabaseInterface.createUser(args[0],args[1],args[2],args[3],age,args[5]);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             return success;
         }
-
-
-
-
     }
-
-
 }

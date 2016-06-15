@@ -9,18 +9,19 @@ $response = array();
  
 
 
-        $check ="SELECT * FROM ".DB_DATABASE.".Sector";
+        $check ="SELECT name FROM ".DB_DATABASE.".Sector GROUP BY sector_ID ASC";
    
+        $db_connection->set_charset("utf8");
 
             $checksql=mysqli_query($db_connection,$check);
 
     if (mysqli_query($db_connection,$check)) {
         while($row = mysqli_fetch_assoc($checksql))
         $test[] = $row;
-       
         $response["success"] = 1;
         $response["message"] = "Sector aquisition.";
         $response["sector_name"] = $test;
+
  
 
         echo json_encode($response);

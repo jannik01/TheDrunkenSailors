@@ -1,7 +1,7 @@
 package at.tugraz.thedrunksailor;
 
 /**
- * Created by Sami on 18/04/2016.
+ * Created by Sami on 18/05/2016.
  */
 public class Place {
     private String name;
@@ -22,13 +22,5 @@ public class Place {
 
     public String getName() {
         return name;
-    }
-
-    public double getCurrent_capacity() {
-        return current_capacity;
-    }
-
-    public double getUser_note() {
-        return user_note;
     }
 }
