@@ -38,7 +38,7 @@ public class AddPlaceFragmentTest extends ActivityInstrumentationTestCase2<Fragm
         mySolo.enterText(3,"80200");
         mySolo.enterText(4,"Country");
         mySolo.enterText(5,"Description...");
-        mySolo.clickOnButton("Plus");
+        mySolo.clickOnButton("Add Place");
     }
 }
 

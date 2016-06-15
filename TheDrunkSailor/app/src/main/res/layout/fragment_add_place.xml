@@ -259,7 +259,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|top"
                     android:nestedScrollingEnabled="false"
-                    android:text="Plus"
+                    android:text="Add Place"
                     android:onClick="buttonOnClick"
                     android:textSize="26dp" />
 
