@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -191,27 +190,8 @@ public class PersonDetailActivity extends AppCompatActivity {
 
     }
 
-    private class MySeekListener implements SeekBar.OnSeekBarChangeListener {
-        private int uiID = 0;
-        public MySeekListener(int uid) {
-            uiID = uid;
-        }
 
-        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            Log.d("DEBUG", "Progress is: " + progress);
-            TextView view = (TextView) findViewById(uiID);
-            if (view != null) {
-                String text = progress+1 + "/" + (MAX+1);
-                view.setText( text);
-            }
-        }
 
-        public void onStartTrackingTouch(SeekBar seekBar) {
-        }
-
-        public void onStopTrackingTouch(SeekBar seekBar) {
-        }
-    }
 
     class doTask extends AsyncTask<String, String, Boolean> {
         protected Boolean doInBackground(String... args) {
