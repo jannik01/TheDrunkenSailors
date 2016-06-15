@@ -8,10 +8,18 @@ $response = array();
     $db_connection = $db_object->connection;
  
     $name = mysqli_real_escape_string($db_connection, $_POST['name']);
+            $name=utf8_encode($name);
+
     $age = mysqli_real_escape_string($db_connection, $_POST['age']);
     $sex = mysqli_real_escape_string($db_connection, $_POST['sex']);
+            $sex=utf8_encode($sex);
+
     $job = mysqli_real_escape_string($db_connection, $_POST['job']);
+            $job=utf8_encode($job);
+
     $lastly_visited = mysqli_real_escape_string($db_connection, $_POST['lastly_visited']);
+            $lastly_visited=utf8_encode($lastly_visited);
+
     
 
      $db_connection->set_charset("utf8");
